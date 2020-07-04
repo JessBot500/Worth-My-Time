@@ -40,14 +40,14 @@
           <div class="product-feature-section-inner"> 
             <div class="product-feature-section-feature top-left">
               <i class="fa fa-shield" aria-hidden="true"></i>
-              <div>
+              <div class="button" data-toggle="song-search">
                 <p class="feature-title">Do you know the lyric or song, but want to find the movie?</p>
                 <p class="feature-desc">Give us a beat!</p>
               </div>
             </div>     
             <div class="product-feature-section-feature top-right">
               <i class="fa fa-heart" aria-hidden="true"></i>
-              <div>
+              <div class="button" data-toggle="movie-search">
                 <p class="feature-title">Do you know the movie, but are looking for the song?</p>
                 <p class="feature-desc">Tell us what you saw!</p>
               </div>
@@ -55,6 +55,15 @@
           </div>
         </div>
       </section>   
+      
+      <form class="dropdown-pane hero-search-filter-form" id="movie-search" action="">
+        <label for="findtext">Find</label>
+        <input id="findtext" class="hero-search-filter-form-find" type="text" />
+        <div class="divider">&nbsp;</div>
+        <label for="findlocate">Near</label>
+        <input id="findlocate" class="hero-search-filter-form-near" type="text" />
+        <button class="button"><i class="fa fa-search"></i></button>
+      </form>
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>    
 </body>
 </html>
