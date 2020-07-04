@@ -9,6 +9,8 @@ function movie(){
     .then(function(response) {return response.json()})
     .then(function(response) {
     
+        console.log(response);
+    
 
     var id = (response.results[0].id);
     console.log(id);
@@ -19,9 +21,13 @@ function movie(){
     + "?api_key="
     + API )
 
-    .then(details => details.json())
-    .then(console.log);
+    .then(function(detail) {return detail.json()})
+    .then(function(detail) {
 
+        console.log(detail);
 
+        var title = (detail.title)
+        console.log(title);
+    })
     })
 }
