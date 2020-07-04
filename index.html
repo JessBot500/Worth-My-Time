@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/app.css?rev=@@hash">
     <!-- <link rel="stylesheet" href="../building-block/app.css?rev=@@hash"> -->
-    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">
+    <!--<link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">--->
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
@@ -41,19 +41,39 @@
             <div class="product-feature-section-feature top-left">
               <i class="fa fa-shield" aria-hidden="true"></i>
               <div>
-                <p class="feature-title">Do you know the lyric or song, but want to find the movie?</p>
-                <p class="feature-desc">Give us a beat!</p>
+                <p class="feature-title">Do you know the song, but want to find the movie?</p>
+                <br>
+                <!--- <p class="feature-desc">Give us a beat!</p> --->
+                  <form>
+                    <div class="row columns">
+                      <label>
+                        <input type="text" value="" placeholder="Song Title">
+                      </label>
+                    </div>
+                 </form>
               </div>
             </div>     
             <div class="product-feature-section-feature top-right">
               <i class="fa fa-heart" aria-hidden="true"></i>
               <div>
                 <p class="feature-title">Do you know the movie, but are looking for the song?</p>
-                <p class="feature-desc">Tell us what you saw!</p>
+                <br>
+                  <form>
+                    <div class="row columns"></div>
+                      <label>
+                        <input type="text" id="movie-title" value="" placeholder="Movie Title">
+                        <button type="button"  onclick="movie()">Click me</button>
+                      </label>
+                    </div>
+                 </form>
+                </div>
+                <!--- <p class="feature-desc">Tell us what you saw!</p> --->
               </div>
             </div>     
           </div>
         </div>
+        
+        
       </section>   
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>  
       <script src = "assets/js/script.js"></script>
