@@ -33,6 +33,24 @@ function movie(){
         var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
         poster.src = ""
         poster.src = imgUrl
+
+        var imdbID = (detail.imdb_id)
+
+
+        fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+	    "method": "GET",
+	    "headers": {
+		"x-rapidapi-host": "imdb8.p.rapidapi.com",
+		"x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+	    }
+        })
+
+        .then(function(tagline) {return tagline.json()})
+        .then(function(tagline) {
+
+            console.log(tagline)
+        })
+
     })
     })
 }
