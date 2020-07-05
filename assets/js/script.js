@@ -3,6 +3,7 @@ function movie(){
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
     var title = document.querySelector('#movie-title').value;
+    var poster = document.querySelector('#poster');
 
     fetch ("https://api.themoviedb.org/3/search/movie?api_key="
     + API + "&query=" + title)
@@ -28,6 +29,10 @@ function movie(){
 
         var title = (detail.title)
         console.log(title);
+
+        var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
+        poster.src = ""
+        poster.src = imgUrl
     })
     })
 }
