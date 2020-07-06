@@ -378,6 +378,11 @@
   .hero-full-screen .top-bar .menu {
     background: transparent;
   }
+
+  .formValue{
+      display: inline-block;
+      color: #87bdde;
+  }
   
   .hero-full-screen .top-bar .menu-text {
     color: #fefefe;
