@@ -9,6 +9,8 @@
     <!-- <link rel="stylesheet" href="../building-block/app.css?rev=@@hash"> -->
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/layout.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
 </head>
@@ -23,47 +25,71 @@
         <div id="topbar-responsive" class="topbar-responsive-links">
           <div class="top-bar-right">
             <ul class="menu simple vertical medium-horizontal">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="#">Explore</a></li>
               <li>
-                <button type="button" class="button hollow topbar-responsive-button">Categories</button>
+                <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
               </li>
             </ul>
           </div>
         </div>
         </nav>
-      <section class="product-feature-section">
-        <div class="product-feature-section-outer">
-          <h4 class="product-feature-section-headline">Eyes & Ears!! Our project is so KEWL!</h4>    
-          <div class="product-feature-section-inner"> 
-            <div class="product-feature-section-feature top-left">
-              <i class="fa fa-shield" aria-hidden="true"></i>
-              <div class="button" data-toggle="song-search">
-                <p class="feature-title">Do you know the lyric or song, but want to find the movie?</p>
-                <p class="feature-desc">Give us a beat!</p>
-              </div>
-            </div>     
-            <div class="product-feature-section-feature top-right">
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <div class="button" data-toggle="movie-search">
-                <p class="feature-title">Do you know the movie, but are looking for the song?</p>
-                <p class="feature-desc">Tell us what you saw!</p>
-              </div>
-            </div>     
-          </div>
+        <div class="hero-background">
+            <div class="row">
+                <div class="columns small-12 medium-8">
+                    Translucent form overlay style!!
+                </div>
+                <div class="columns small-12 medium-4">
+                    <div class="translucent-form-overlay">                   
+                        <form>
+                        <h3>Search for Something Worth My Time</h3>
+                        <div class="row columns">
+                            <legend>Type: </legend>
+                                <input id="movieType" type="checkbox"><label for="movieType">Movie</label>
+                                <input id="showType" type="checkbox"><label for="showType">Show</label>
+                        </div>
+                        <div class="row columns">
+                            <label>Property Status
+                            <select name="status" type="text">
+                                <option>Any</option>
+                                <option value="rent">Rent</option>
+                                <option value="buy">Buy</option>
+                            </select>
+                            </label>
+                        </div>
+                        <div class="row columns">
+                            <label>Property Type
+                            <select name="status" type="text">
+                                <option>Any</option>
+                                <option value="office">Office</option>
+                                <option value="building">Building</option>
+                            </select>
+                            </label>
+                        </div>
+                        <div class="row columns">
+                            <label>Location
+                            <input type="text" name="location" placeholder="Any">
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="columns small-12">Price</label>
+                            <div class="columns small-6">
+                            <input type="number" min="0" name="min" placeholder="Min">
+                            </div>
+                            <div class="columns small-6">
+                            <input type="number" min="0" name="max" placeholder="Max">
+                            </div>
+                        </div>
+                        <button type="button" class="primary button expanded search-button">
+                            Search
+                        </button>
+                    </form>
+                </div>
+             </div>
         </div>
-      </section>   
-      
-      <form class="dropdown-pane hero-search-filter-form" id="movie-search" action="">
-        <label for="findtext">Find</label>
-        <input id="findtext" class="hero-search-filter-form-find" type="text" />
-        <div class="divider">&nbsp;</div>
-        <label for="findlocate">Near</label>
-        <input id="findlocate" class="hero-search-filter-form-near" type="text" />
-        <button class="button"><i class="fa fa-search"></i></button>
-      </form>
-      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>    
+    </div>
+        
+          
+      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
+      <script src="../building-block/translucent-form-overlay/translucent-form-overlay.js"></script> 
 </body>
 </html>
