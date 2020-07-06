@@ -43,10 +43,10 @@
                         <form>
                         <h3>Search for Something Worth My Time</h3>
                         <div class="row columns">
-                            <fieldset class="fieldset" aria-required="true">
+                            <fieldset class="fieldset">
                                 <legend class="form-legend">Type: </legend>
-                                <input id="movieType" type="checkbox"><label for="movieType">Movie</label>
-                                <input id="showType" type="checkbox"><label for="showType">Show</label>
+                                <input id="movieType" name="type" type="checkbox" required><label for="movieType">Movie</label>
+                                <input id="showType" name="type" type="checkbox" required><label for="showType">Show</label>
                             </fieldset>
                         </div>
                         <div class="row columns">
@@ -102,5 +102,6 @@
           
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
       <script src="../building-block/translucent-form-overlay/translucent-form-overlay.js"></script> 
+      <script src="./assets/js/script.js"></script>
 </body>
 </html>
