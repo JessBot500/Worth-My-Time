@@ -410,3 +410,7 @@
       margin-bottom: auto;
       width: 95%
   }
+
+  .hero-full-screen .top-bar{
+    background: rgba(54, 54, 54, 0.8);
+  }
