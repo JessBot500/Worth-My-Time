@@ -333,4 +333,6 @@
   }
   
   
-  
+  .top-bar::after, .top-bar::before{
+    content: none;
+  }
