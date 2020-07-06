@@ -77,6 +77,21 @@ function movie(){
 
 function topFive (){
 
+    var API = "2215e66d3770fa7ff283fdf766c88f8c"
 
+    fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+    API +
+    "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
+
+    .then(function(top) {return top.json()})
+    .then(function(top) {
+
+        
+        result = Math.floor(Math.random() * 10)
+
+        console.log(top.results[result])
+    })
     
 }
+
+topFive();
