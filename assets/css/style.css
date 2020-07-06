@@ -414,3 +414,15 @@
   .hero-full-screen .top-bar{
     background: rgba(54, 54, 54, 0.8);
   }
+
+  .prevSearchContainer{
+      padding-left: 35px;
+      background: rgba(19, 19, 19);
+      color: white;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border: white solid;
+      box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);;
+  }
