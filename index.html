@@ -70,25 +70,28 @@
                             <input type="text" name="actor" placeholder="Actor/Actress">
                             </label>
                         </div>
-                        <div class="row columns">
-                            <label>Minimum Rotten Tomatoes Rating
-                            <input type="number" name="location" placeholder="Any">
-                            </label>
-                        </div>
                         <div class="row">
                             <label class="columns small-12">Running Time</label>
                             <div class="columns small-3">
                             <input type="number" min="0" name="min" placeholder="Min">
                             </div>
-                            <div class="columns small-3">
-                                <label class="text-left middle" for="min">minutes</label>
+                            <div class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle" for="min">minutes</label>
                             </div>
                             <div class="columns small-3">
                             <input type="number" min="0" name="max" placeholder="Max">
                             </div>
-                            <divl class="columns small-3">
-                                <label class="text-left middle" for="max">minutes</label>
+                            <divl class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle " for="max">minutes</label>
                             </divl>
+                        </div>
+                        <div class="row columns small-6">
+                            <label>Minimum Rotten Tomatoes Rating
+                                <div class="input-group">
+                                <input type="number" class="input-group-field" name="rating" max="100" min="0" placeholder="Rating%">
+                                    <span class="input-group-label">%</span>
+                                </div>                           
+                            </label>
                         </div>
                         <button type="button" class="primary button expanded search-button">
                             Search

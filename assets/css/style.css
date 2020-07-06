@@ -302,6 +302,14 @@
       background: transparent;
   }
   
+
+  .input-group-label {
+      height: auto;
+  }
+
+  .runningTimeLabel {
+    padding-left: 2px;
+  }
   
   
   
