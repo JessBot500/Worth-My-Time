@@ -297,6 +297,10 @@
   .translucent-form-overlay input::placeholder {
     color: #8a8a8a;
   }
+
+ .fieldset legend{
+      background: transparent;
+  }
   
   
   

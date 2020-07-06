@@ -35,49 +35,60 @@
         </nav>
         <div class="hero-background">
             <div class="row">
-                <div class="columns small-12 medium-8">
+                <div class="columns small-12 medium-7">
                     Translucent form overlay style!!
                 </div>
-                <div class="columns small-12 medium-4">
+                <div class="columns small-12 medium-5">
                     <div class="translucent-form-overlay">                   
                         <form>
                         <h3>Search for Something Worth My Time</h3>
                         <div class="row columns">
-                            <legend>Type: </legend>
+                            <fieldset class="fieldset" aria-required="true">
+                                <legend class="form-legend">Type: </legend>
                                 <input id="movieType" type="checkbox"><label for="movieType">Movie</label>
                                 <input id="showType" type="checkbox"><label for="showType">Show</label>
+                            </fieldset>
                         </div>
                         <div class="row columns">
-                            <label>Property Status
-                            <select name="status" type="text">
+                            <label>Genre
+                            <select name="genre" type="text">
                                 <option>Any</option>
-                                <option value="rent">Rent</option>
-                                <option value="buy">Buy</option>
+                                <option value="action">Action</option>
+                                <option value="drama">Drama</option>
+                                <option value="comdey">Comedy</option>
+                                <option value="family">Family</option>
+                                <option value="sci-fi">Science Fiction</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="romance">Romance</option>
+                                <option value="horror">Horror</option>
                             </select>
                             </label>
                         </div>
                         <div class="row columns">
-                            <label>Property Type
-                            <select name="status" type="text">
-                                <option>Any</option>
-                                <option value="office">Office</option>
-                                <option value="building">Building</option>
-                            </select>
+                            <label>Actor/Actress
+                            <input type="text" name="actor" placeholder="Actor/Actress">
                             </label>
                         </div>
                         <div class="row columns">
-                            <label>Location
-                            <input type="text" name="location" placeholder="Any">
+                            <label>Minimum Rotten Tomatoes Rating
+                            <input type="number" name="location" placeholder="Any">
                             </label>
                         </div>
                         <div class="row">
-                            <label class="columns small-12">Price</label>
-                            <div class="columns small-6">
+                            <label class="columns small-12">Running Time</label>
+                            <div class="columns small-3">
                             <input type="number" min="0" name="min" placeholder="Min">
                             </div>
-                            <div class="columns small-6">
+                            <div class="columns small-3">
+                                <label class="text-left middle" for="min">minutes</label>
+                            </div>
+                            <div class="columns small-3">
                             <input type="number" min="0" name="max" placeholder="Max">
                             </div>
+                            <divl class="columns small-3">
+                                <label class="text-left middle" for="max">minutes</label>
+                            </divl>
                         </div>
                         <button type="button" class="primary button expanded search-button">
                             Search
