@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/app.css?rev=@@hash">
     <!-- <link rel="stylesheet" href="../building-block/app.css?rev=@@hash"> -->
-    <!--<link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">--->
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/layout.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
 </head>
@@ -23,62 +25,86 @@
         <div id="topbar-responsive" class="topbar-responsive-links">
           <div class="top-bar-right">
             <ul class="menu simple vertical medium-horizontal">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="#">Explore</a></li>
               <li>
-                <button type="button" class="button hollow topbar-responsive-button">Categories</button>
+                <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
               </li>
             </ul>
           </div>
         </div>
         </nav>
-      <section class="product-feature-section">
-        <div class="product-feature-section-outer">
-          <h4 class="product-feature-section-headline">Eyes & Ears!! Our project is so KEWL!</h4>    
-          <div class="product-feature-section-inner"> 
-            <div class="product-feature-section-feature top-left">
-              <i class="fa fa-shield" aria-hidden="true"></i>
-              <div>
-                <p class="feature-title">Do you know the song, but want to find the movie?</p>
-                <br>
-                <!--- <p class="feature-desc">Give us a beat!</p> --->
-                  <form>
-                    <div class="row columns">
-                      <label>
-                        <input type="text" value="" placeholder="Song Title">
-                      </label>
-                    </div>
-                 </form>
-              </div>
-            </div>     
-            <div class="product-feature-section-feature top-right">
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <div>
-                <p class="feature-title">Do you know the movie, but are looking for the song?</p>
-                <br>
-                  <form>
-                    <div class="row columns"></div>
-                      <label>
-                        <input type="text" id="movie-title" value="" placeholder="Movie Title">
-                        <button type="button"  onclick="movie()">Click me</button>
-                      </label>
-                    </div>
-                 </form>
+        <div class="hero-background">
+            <div class="row">
+                <div class="columns small-12 medium-7">
+                    Translucent form overlay style!!
                 </div>
-                <!--- <p class="feature-desc">Tell us what you saw!</p> --->
-              </div>
-            </div>
-            
-            <img id="poster">
-
-          </div>
+                <div class="columns small-12 medium-5">
+                    <div class="translucent-form-overlay">                   
+                        <form>
+                        <h3>Search for Something Worth My Time</h3>
+                        <div class="row columns">
+                            <fieldset class="fieldset">
+                                <legend class="form-legend">Type: </legend>
+                                <input id="movieType" name="type" type="checkbox" required><label for="movieType">Movie</label>
+                                <input id="showType" name="type" type="checkbox" required><label for="showType">Show</label>
+                            </fieldset>
+                        </div>
+                        <div class="row columns">
+                            <label>Genre
+                            <select name="genre" type="text">
+                                <option>Any</option>
+                                <option value="action">Action</option>
+                                <option value="drama">Drama</option>
+                                <option value="comdey">Comedy</option>
+                                <option value="family">Family</option>
+                                <option value="sci-fi">Science Fiction</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="romance">Romance</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                            </label>
+                        </div>
+                        <div class="row columns">
+                            <label>Actor/Actress
+                            <input type="text" name="actor" placeholder="Actor/Actress">
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="columns small-12">Running Time</label>
+                            <div class="columns small-3">
+                            <input type="number" min="0" name="min" placeholder="Min">
+                            </div>
+                            <div class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle" for="min">minutes</label>
+                            </div>
+                            <div class="columns small-3">
+                            <input type="number" min="0" name="max" placeholder="Max">
+                            </div>
+                            <divl class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle " for="max">minutes</label>
+                            </divl>
+                        </div>
+                        <div class="row columns small-6">
+                            <label>Minimum Rotten Tomatoes Rating
+                                <div class="input-group">
+                                <input type="number" class="input-group-field" name="rating" max="100" min="0" placeholder="Rating%">
+                                    <span class="input-group-label">%</span>
+                                </div>                           
+                            </label>
+                        </div>
+                        <button type="button" class="primary button expanded search-button">
+                            Search
+                        </button>
+                    </form>
+                </div>
+             </div>
         </div>
+    </div>
         
-        
-      </section>   
-      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>  
-      <script src = "assets/js/script.js"></script>
+          
+      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
+      <script src="../building-block/translucent-form-overlay/translucent-form-overlay.js"></script> 
+      <script src="./assets/js/script.js"></script>
 </body>
 </html>
