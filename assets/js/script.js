@@ -87,9 +87,21 @@ function topFive (){
     .then(function(top) {
 
         
-        result = Math.floor(Math.random() * 10)
+        var posterArray = []
 
-        console.log(top.results[result])
+        
+        for (i=0; i < 5; i++) {
+            result = Math.floor(Math.random() * 20)
+            console.log([top.results[result].poster_path]);
+
+            var posterPath = (top.results[result].poster_path)
+            
+            posterArray.push(posterPath);
+            
+        }
+
+        console.log(posterArray);
+
     })
     
 }
