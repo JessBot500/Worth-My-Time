@@ -35,5 +35,23 @@ function requiredChecbox(){
     });
 }
 
+
+// function searchExpand(){
+//   $('.search')
+//     .bind('click', function(event) {
+//         console.log("We clicked the search button");
+//       $(".search-field").toggleClass("expand-search");
+
+//       // if the search field is expanded, focus on it
+//       if ($(".search-field").hasClass("expand-search")) {
+//           console.log("Here is the sitch where the expand-class is already applied");
+//         $(".search-field").focus();
+//       }
+//     })
+// };
+
+
+
 requiredChecbox();
 loadPrevSearch();
+// searchExpand();
