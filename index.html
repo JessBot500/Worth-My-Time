@@ -16,29 +16,30 @@
 </head>
 <body>
     <div class="hero-full-screen">
-    <nav class="top-bar topbar-responsive">
-        <div class="top-bar-title">
-          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
-            <button class="menu-icon" type="button" data-toggle></button>
-          </span>
-          <a class="topbar-responsive-logo" href="#"><h3><strong>W<i class="fa fa-clock-o" aria-hidden="true"></i>rth My Time</strong></h3></a>
-        </div>
-        <div id="topbar-responsive" class="topbar-responsive-links">
-          <div class="top-bar-right">
-            <ul class="menu simple vertical medium-horizontal">
-                <li><input type="search" class="search-field" placeholder="Search">
-                <button type="button" class="button search">Search</button></li>
-              <li>
-                <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <nav class="top-bar topbar-responsive">
+            <div class="top-bar-title">
+            <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+            </span>
+            <a class="topbar-responsive-logo" href="#"><h3><strong>W<i class="fa fa-clock-o" aria-hidden="true"></i>rth My Time</strong></h3></a>
+            </div>
+            <div id="topbar-responsive" class="topbar-responsive-links">
+            <div class="top-bar-right">
+                <ul class="menu simple vertical medium-horizontal">
+                    <li><input type="search" class="search-field" placeholder="Search">
+                    <button type="button" class="button search" onclick="switchSingleView()" >Search</button></li>
+                <li>
+                    <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
+                </li>
+                </ul>
+            </div>
+            </div>
         </nav>
-        <!-- <div class="hero-background"> -->
+           <!-- Main container for the area beneath the navbar-->
             <div class="row row-container">
-                <div class="columns small-12 medium-7 row-container">
-                    <div class="app-feature-section medium-6 prevSearchContainer">
+                <!-- Left hand panel side container: Prev Search-->
+                <div class="columns small-12 medium-7 row-container" id="leftView">
+                    <div class="app-feature-section medium-6 prevSearchContainer" >
                         <div class="row align-middle row-container">
                             <h4 class="app-feature-section-main-header">Previous Search</h4>
                             <!-- <img class="hide-for-medium" src="https://placehold.it/640x320" alt="" /> -->
@@ -65,7 +66,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="columns small-12 medium-5">
+                <!-- Right hand panel side container: Form-->
+                <div class="columns small-12 medium-5" id="rightView">
                     <div class="translucent-form-overlay">                   
                         <form>
                         <h3>Search for Something Worth My Time</h3>
@@ -125,9 +127,29 @@
                         </button>
                     </form>
                 </div>
-             </div>
-        <!-- </div> -->
-    </div>
+                </div>
+                <div id="singleView" class="columns small-12 medium-12">
+                    <div class="card-user-profile">
+                        <img class="card-user-profile-img" id="moviePoster" src="https://images.pexels.com/photos/5439/earth-space.jpg?h=350&auto=compress&cs=tinysrgb" alt="picture of space" />
+                        <div class="card-user-profile-content card-section">
+                          <div class="card-user-profile-avatar">
+                            <h4 id="singleRating">94%</h4>
+                          </div>
+                          <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p>
+                          <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
+                          <p class="card-user-profile-info" id="synopsis">The Yeti, once better known as the Abominable Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.</p>
+                        </div>
+                      
+                        <div class="card-user-profile-actions">
+                          <a href="#" class="card-user-profile-button button hollow">Watch Trailer</a>
+                          <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                </div>
+            </div>
     </div>
         
           
