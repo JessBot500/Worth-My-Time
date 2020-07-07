@@ -123,9 +123,36 @@ function topFive (){
 
 function search() {
     console.log("you clicked search")
+    var option = document.getElementById("genre-select")
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
-    genre = 28
+    if (option.value="action") {
+        genre = 28
+    }
+    if (option.value="drama") {
+        genre = 18
+    }
+    if (option.value="comedy") {
+        genre = 35
+    }
+    if (option.value="family") {
+        genre = 10751
+    }
+    if (option.value="sci-fi") {
+        genre = 878
+    }
+    if (option.value="thriller") {
+        genre = 53
+    }
+    if (option.value="adventure") {
+        genre = 12
+    }
+    if (option.value="romance") {
+        genre = 10749
+    }
+    if (option.value="horror") {
+        genre = 27
+    }
 
     fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
     API +
