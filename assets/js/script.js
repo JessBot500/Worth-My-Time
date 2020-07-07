@@ -92,11 +92,11 @@ function topFive (){
         
         for (i=0; i < 5; i++) {
             
-            result = Math.floor(Math.random() * 20)
-            console.log(result)
-            console.log([top.results[result].poster_path]);
+            randomNum = Math.floor(Math.random() * 20)
+            console.log(randomNum)
+            console.log([top.results[randomNum].poster_path]);
 
-            var posterPath = (top.results[result].poster_path)
+            var posterPath = (top.results[randomNum].poster_path)
 
             if (posterArray.includes(posterPath)) {
                 
@@ -120,6 +120,26 @@ function topFive (){
     })
     
 }
+
+function search() {
+    console.log("you clicked search")
+
+    var API = "2215e66d3770fa7ff283fdf766c88f8c"
+    genre = 28
+
+    fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+    API +
+    "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+    genre +
+    "&page=1")
+    .then(function(movieSearch) {return movieSearch.json()})
+    .then(function(movieSearch) {
+    
+        console.log(movieSearch)
+        
+
+
+})}
 
 topFive();
 
