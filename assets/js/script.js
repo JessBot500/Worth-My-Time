@@ -86,17 +86,23 @@ function topFive (){
     .then(function(top) {return top.json()})
     .then(function(top) {
 
-        
+        console.log(top);
         var posterArray = []
 
         
         for (i=0; i < 5; i++) {
+            
             result = Math.floor(Math.random() * 20)
+            console.log(result)
             console.log([top.results[result].poster_path]);
 
             var posterPath = (top.results[result].poster_path)
+
+            if (posterArray.includes(posterPath)) {
+                
+            }
+            else {posterArray.push("https://image.tmdb.org/t/p/w185//" + posterPath);}
             
-            posterArray.push("https://image.tmdb.org/t/p/w185//" + posterPath);
             
         }
 
@@ -107,6 +113,7 @@ function topFive (){
         $("#poster5").attr("src", posterArray[4])
 
         console.log(posterArray);
+
 
         
 
