@@ -127,40 +127,66 @@ var searchSubmitHandler = function(event) {
 searchBar.addEventListener("submit", searchSubmitHandler);
 
 function movie(){
+
+    $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#singleView").css("display", "block");
+
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
     var title = document.querySelector('#movie-title').value;
-    var poster = document.querySelector('#poster');
+    console.log("Title is read as ",title);
+    var poster = document.querySelector('#moviePoster');
+
     fetch ("https://api.themoviedb.org/3/search/movie?api_key="
     + API + "&query=" + title)
     .then(function(response) {return response.json()})
     .then(function(response) {
+    
         console.log(response);
+    
+
     var id = (response.results[0].id);
-    console.log(id);
+    console.log("id is :",id);
+
+    
     fetch ("https://api.themoviedb.org/3/movie/"
     + id
     + "?api_key="
     + API )
+
     .then(function(detail) {return detail.json()})
     .then(function(detail) {
-        console.log(detail);
+
+        console.log("Detail info ",detail);
+
         var title = (detail.title)
+        document.getElementById("movieTitle").innerHTML = title;
+        document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
+        document.getElementById("synopsis").innerHTML = detail.overview;
+        //document.getElementById("singleRating").innerHTML = detail.
         console.log(title);
-        // var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
-        // poster.src = ""
-        // poster.src = imgUrl
-    //    var imdbID = (detail.imdb_id)
-    //     fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
-    //     "method": "GET",
-    //     "headers": {
-    //     "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    //     "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
-    //     }
-    //     })
-    //     .then(function(tagline) {return tagline.json()})
-    //     .then(function(tagline) {
-    //        console.log(tagline)
-    //     })
+
+        var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
+        poster.src = ""
+        poster.src = imgUrl
+
+        var imdbID = (detail.imdb_id)
+
+
+        fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+	    "method": "GET",
+	    "headers": {
+		"x-rapidapi-host": "imdb8.p.rapidapi.com",
+		"x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+	    }
+        })
+
+        .then(function(tagline) {return tagline.json()})
+        .then(function(tagline) {
+
+            console.log(tagline)
+        })
+
     })
     })
 }
