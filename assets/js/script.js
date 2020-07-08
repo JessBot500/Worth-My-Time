@@ -112,7 +112,7 @@ function requiredChecbox(){
 
 
 // youtube search api
-var youtubeSearch = function(searchWord) {
+/*var youtubeSearch = function(searchWord) {
     fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
 	"method": "GET",
 	"headers": {
@@ -146,7 +146,7 @@ var youtubeSearch = function(searchWord) {
         console.log(error);
     })
 };
-
+*/
 // search function to link to api
 var searchSubmitHandler = function(event) {
     event.preventDefault();
