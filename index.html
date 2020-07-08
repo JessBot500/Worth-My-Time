@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +26,11 @@
             <div id="topbar-responsive" class="topbar-responsive-links">
             <div class="top-bar-right">
                 <ul class="menu simple vertical medium-horizontal">
-                    <li><input type="search" class="search-field" id="movie-title" placeholder="Search">
-                    <button type="button" class="button search" onclick="movie()" >Search</button></li>
+                    <form id = "search-form">
+                        <li><input type="search" class="search-field" placeholder="Search" id="movie-title">
+                        <button type="submit" class="button search" onclick="movie()">Search</button></li>
+                    </form>
+                   
                 <li>
                     <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
                 </li>
@@ -142,7 +144,7 @@
                         </div>
                       
                         <div class="card-user-profile-actions">
-                          <a href="#" class="card-user-profile-button button hollow">Watch Trailer</a>
+                          <a href="#" id = "watch-trailer" class="card-user-profile-button button hollow" onclick="youtubeSearch()">Watch Trailer</a>
                           <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
                         </div>
                       </div>
@@ -156,6 +158,7 @@
           
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
       <script src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script> 
+      <script src ="assets/js/youtube.js"></script>
       <script src="./assets/js/script.js"></script>
 </body>
 </html>
