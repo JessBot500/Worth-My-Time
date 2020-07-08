@@ -109,15 +109,15 @@ function movie(){
         console.log("Detail info ",detail);
 
         var title = (detail.title)
-        document.getElementById("movieTitle").innerHTML = title;
-        document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
-        document.getElementById("synopsis").innerHTML = detail.overview;
+        // document.getElementById("movieTitle").innerHTML = title;
+        // document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
+        // document.getElementById("synopsis").innerHTML = detail.overview;
         //document.getElementById("singleRating").innerHTML = detail.
         console.log(title);
 
         var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
-        poster.src = ""
-        poster.src = imgUrl
+       // poster.src = ""
+       // poster.src = imgUrl
 
         var imdbID = (detail.imdb_id)
 
@@ -238,32 +238,33 @@ function search() {
 
 topFive();
 
+
 var slideIndex = 1;
-showSlides(slideIndex);
+//showSlides(slideIndex);
 
 // Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+// // Thumbnail image controls
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
+// function showSlides(n) {
+//   var i;
+//   var slides = document.getElementsByClassName("mySlides");
+//   var dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//       slides[i].style.display = "none";
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//       dots[i].className = dots[i].className.replace(" active", "");
+//   }
+//   slides[slideIndex-1].style.display = "block";
+//   dots[slideIndex-1].className += " active";
+// }
 

@@ -734,3 +734,80 @@ translucent-form-overlay {
 }
 
 
+.ecommerce-product-slider .orbit-previous,
+.ecommerce-product-slider .orbit-next {
+  color: #cacaca;
+}
+
+.ecommerce-product-slider .orbit-bullets button {
+  height: 0.65rem;
+  width: 0.65rem;
+}
+
+.ecommerce-product-slider .product-card {
+  background-color: #fefefe;
+  border: 1px solid #e6e6e6;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ecommerce-product-slider .product-card-thumbnail {
+  display: block;
+  position: relative;
+}
+
+.ecommerce-product-slider .product-card-title {
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.ecommerce-product-slider .product-card-desc {
+  color: #8a8a8a;
+  display: block;
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.85rem;
+}
+
+.ecommerce-product-slider .product-card-price {
+  color: #3e3e3e;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
+
+.ecommerce-product-slider .product-card-sale {
+  color: #cacaca;
+  display: inline-block;
+  font-size: 0.85rem;
+  margin-left: 0.3rem;
+  text-decoration: line-through;
+}
+
+.ecommerce-product-slider .product-card-colors {
+  display: block;
+  margin-top: 0.8rem;
+}
+
+.ecommerce-product-slider .product-card-color-option {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+}
+
+.orbit-cont{
+    position: relative;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+
+#movie-slider{
+    height: auto;
+}
