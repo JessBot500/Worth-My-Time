@@ -120,37 +120,39 @@ function topFive (){
     })
     
 }
-
 function search() {
     console.log("you clicked search")
-    var option = document.getElementById("genre-select")
+    var genreSelector = document.querySelector('#genre-select'); 
+      
+    var output = genreSelector.value; 
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
-    if (option.value="action") {
+    var genre = 0
+    if (output="action") {
         genre = 28
     }
-    if (option.value="drama") {
+    else if (output="drama") {
         genre = 18
     }
-    if (option.value="comedy") {
+    else if (output="comedy") {
         genre = 35
     }
-    if (option.value="family") {
+    else if (output="family") {
         genre = 10751
     }
-    if (option.value="sci-fi") {
+    else if (output="sci-fi") {
         genre = 878
     }
-    if (option.value="thriller") {
+    else if (output="thriller") {
         genre = 53
     }
-    if (option.value="adventure") {
+    else if (output="adventure") {
         genre = 12
     }
-    if (option.value="romance") {
+    else if (output="romance") {
         genre = 10749
     }
-    if (option.value="horror") {
+    else if (output="horror") {
         genre = 27
     }
 
