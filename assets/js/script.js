@@ -123,31 +123,30 @@ function movie(){
         var title = (detail.title)
         console.log(title);
 
-        var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
-        poster.src = ""
-        poster.src = imgUrl
+        //var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
+        //poster.src = ""
+        //poster.src = imgUrl
 
-        var imdbID = (detail.imdb_id)
+       // var imdbID = (detail.imdb_id)
 
 
-        fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
-	    "method": "GET",
-	    "headers": {
-		"x-rapidapi-host": "imdb8.p.rapidapi.com",
-		"x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
-	    }
-        })
+        //fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+	    //"method": "GET",
+	    //"headers": {
+		//"x-rapidapi-host": "imdb8.p.rapidapi.com",
+		//"x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+	    //}
+        //})
 
-        .then(function(tagline) {return tagline.json()})
-        .then(function(tagline) {
+        //.then(function(tagline) {return tagline.json()})
+        //.then(function(tagline) {
 
-            console.log(tagline)
-        })
+        //    console.log(tagline)
+        //})
 
     })
     })
 }
-
 
 function topFive (){
 
@@ -166,7 +165,7 @@ function topFive (){
         
         for (i=0; i < 5; i++) {
             
-            randomNum = Math.floor(Math.random() * 20)
+            var randomNum = Math.floor(Math.random() * 20)
             console.log(randomNum)
             console.log([top.results[randomNum].poster_path]);
 
