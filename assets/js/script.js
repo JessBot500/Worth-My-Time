@@ -67,7 +67,7 @@ function switchSingleView(){
 }
 
 
-requiredChecbox();
+//requiredChecbox();
 loadPrevSearch();
 // searchExpand();
 
@@ -77,9 +77,14 @@ loadPrevSearch();
 
 function movie(){
 
+    $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#singleView").css("display", "block");
+
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
     var title = document.querySelector('#movie-title').value;
-    var poster = document.querySelector('#poster');
+    console.log("Title is read as ",title);
+    var poster = document.querySelector('#moviePoster');
 
     fetch ("https://api.themoviedb.org/3/search/movie?api_key="
     + API + "&query=" + title)
@@ -90,7 +95,7 @@ function movie(){
     
 
     var id = (response.results[0].id);
-    console.log(id);
+    console.log("id is :",id);
 
     
     fetch ("https://api.themoviedb.org/3/movie/"
@@ -101,7 +106,7 @@ function movie(){
     .then(function(detail) {return detail.json()})
     .then(function(detail) {
 
-        console.log(detail);
+        console.log("Detail info ",detail);
 
         var title = (detail.title)
         console.log(title);
@@ -188,10 +193,10 @@ function search() {
     if (output === "action") {
         genre = 28
     }
-    else if (output ==== "drama") {
+    else if (output === "drama") {
         genre = 18
     }
-    else if (output ==== "comedy") {
+    else if (output === "comedy") {
         genre = 35
     }
     else if (output==="family") {
