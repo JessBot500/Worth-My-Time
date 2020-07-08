@@ -1,3 +1,5 @@
+var searchBar = document.querySelector("#search-form")
+
 //static previous search from user data
 var prevSearchObj = {
     Type: "Both",
@@ -65,6 +67,46 @@ function switchSingleView(){
     }
 
 }
+
+
+// youtube search api
+var youtubeSearch = function(searchWord) {
+    fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "youtube-search1.p.rapidapi.com",
+		"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+	}
+    })
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data);
+            })
+        }
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+};
+
+var searchInputEl = document.querySelector(".search-field")
+
+// search function to link to api
+var searchSubmitHandler = function(event) {
+    event.preventDefault();
+
+    // get input value
+    var searchWord = searchInputEl.value.trim();
+    if (searchWord) {
+        youtubeSearch(searchWord)
+        searchInputEl.value = "";
+    }
+}
+
+// search bar submit
+searchBar.addEventListener("click", searchSubmitHandler);
+
 
 
 requiredChecbox();
