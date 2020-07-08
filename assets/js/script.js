@@ -206,7 +206,7 @@ function movie(){
         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
         console.log(title);
 
-        var imgUrl = "https://image.tmdb.org/t/p/w500//" + (detail.poster_path)
+        var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
         poster.src = ""
         poster.src = imgUrl
 
