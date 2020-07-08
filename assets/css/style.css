@@ -340,11 +340,12 @@
   }
 }
  .translucent-form-overlay {
-    max-width: 500px;
     width: 100%;
     background-color: rgba(54, 54, 54, 0.8);
-    padding: 20px;
     color: #fefefe;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .translucent-form-overlay .columns.row {
@@ -386,7 +387,7 @@
 
 
 .hero-full-screen {
-    height: 100vh;
+    height: 100%;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -402,6 +403,8 @@
             background: url("../images/movie-poster2.jpg") center center no-repeat;
     /*background: url("https://images.pexels.com/photos/378273/pexels-photo-378273.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb") center center no-repeat;*/
     background-size: cover;
+    background-repeat: inherit;
+    object-fit: cover;
   }
   
   .hero-full-screen .middle-content-section {
@@ -465,7 +468,9 @@
   .row-container{
       margin-top: auto;
       margin-bottom: auto;
-      width: 95%
+      width: 100%;
+      display: contents;
+
   }
 
   .hero-full-screen .top-bar{
@@ -473,11 +478,12 @@
   }
 
   .prevSearchContainer{
-      padding-left: 35px;
+      padding-left: 10px;
+      padding-right: 10px;
       background: rgba(19, 19, 19);
       color: white;
-      margin-left: auto;
-      margin-right: auto;
+      margin-left: center;
+      margin-right: center;
       padding-top: 5px;
       padding-bottom: 5px;
       border: white solid;
@@ -694,6 +700,8 @@ translucent-form-overlay {
   background-color: rgba(54, 54, 54, 0.8);
   padding: 20px;
   color: #fefefe;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .translucent-form-overlay .columns.row {
