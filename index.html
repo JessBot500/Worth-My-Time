@@ -1,84 +1,74 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Worth My Time</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/app.css?rev=@@hash">
-    <!-- <link rel="stylesheet" href="../building-block/app.css?rev=@@hash"> -->
-    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">
+    <!-- <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash"> -->
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/layout.css?rev=@@hash">
-    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">    
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
-    <script src="jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <nav class="top-bar topbar-responsive">
-        <div class="top-bar-title">
-          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
-            <button class="menu-icon" type="button" data-toggle></button>
-          </span>
-          <a class="topbar-responsive-logo" href="#"><strong>Site Title</strong></a>
-        </div>
-        <div id="topbar-responsive" class="topbar-responsive-links">
-          <div class="top-bar-right">
-            <ul class="menu simple vertical medium-horizontal">
-              <li><a href="#">Explore</a></li>
-              <li>
-                <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+    <div class="hero-full-screen">
+        <nav class="top-bar topbar-responsive">
+            <div class="top-bar-title">
+            <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+            </span>
+            <a class="topbar-responsive-logo" href="#"><h3><strong>W<i class="fa fa-clock-o" aria-hidden="true"></i>rth My Time</strong></h3></a>
+            </div>
+            <div id="topbar-responsive" class="topbar-responsive-links">
+            <div class="top-bar-right">
+                <ul class="menu simple vertical medium-horizontal">
+                    <li><input type="search" class="search-field" placeholder="Search">
+                    <button type="button" class="button search" onclick="switchSingleView()" >Search</button></li>
+                <li>
+                    <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
+                </li>
+                </ul>
+            </div>
+            </div>
         </nav>
-        <div class="hero-background">
-            <div class="row">
-                <div class="columns small-12 medium-7">
-                 
-                    <!-- Slideshow container -->
-                    <div class="slideshow-container">
-
-                        <!-- Full-width images with number and caption text -->
-                        <div class="mySlides fade">
-                            <img id="poster1" src="">
+           <!-- Main container for the area beneath the navbar-->
+            <div class="row row-container">
+                <!-- Left hand panel side container: Prev Search-->
+                <div class="columns small-12 medium-7 row-container" id="leftView">
+                    <div class="app-feature-section medium-6 prevSearchContainer" >
+                        <div class="row align-middle row-container">
+                            <h4 class="app-feature-section-main-header">Previous Search</h4>
+                            <!-- <img class="hide-for-medium" src="https://placehold.it/640x320" alt="" /> -->
+                            <div class="app-feature-section-features">
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-film" aria-hidden="true"></i> <span><strong>Type: </strong></span><p id="prevType" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-th-list" aria-hidden="true"></i> <span><strong>Genre: </strong></span><p id="prevGenre" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> <span><strong>Actor/Actress: </strong></span><p id="prevActor" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-fast-forward" aria-hidden="true"></i> <span><strong>Running Time: </strong></span><p id="prevTime" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-percent" aria-hidden="true"></i> <span><strong>Rating: </strong></span><p id="prevRating" class="formValue"></p>
+                                </div>
+                            </div>
+                            <button type="button" class="primary button expanded search-button">
+                                Repeat Previous Search
+                            </button>
                         </div>
-
-                        <div class="mySlides fade">
-                            <img id="poster2" src="">
-                        </div>
-
-                        <div class="mySlides fade">
-                            <img id="poster3" src="">
-                        </div>
-
-                        <div class="mySlides fade">
-                            <img id="poster4" src="">
-                        </div>
-
-                        <div class="mySlides fade">
-                            <img id="poster5" src="">
-                        </div>
-
-                        <!-- Next and previous buttons -->
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     </div>
-                    <br>
-
-                    <!-- The dots/circles -->
-                    <div style="text-align:center">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                        <span class="dot" onclick="currentSlide(4)"></span>
-                        <span class="dot" onclick="currentSlide(5)"></span>
-                    </div>
-                      
                 </div>
-                <div class="columns small-12 medium-5">
+                <!-- Right hand panel side container: Form-->
+                <div class="columns small-12 medium-5" id="rightView">
                     <div class="translucent-form-overlay">                   
                         <form>
                         <h3>Search for Something Worth My Time</h3>
@@ -138,13 +128,34 @@
                         </button>
                     </form>
                 </div>
-             </div>
-        </div>
+                </div>
+                <div id="singleView" class="columns small-12 medium-12">
+                    <div class="card-user-profile">
+                        <img class="card-user-profile-img" id="moviePoster" src="https://images.pexels.com/photos/5439/earth-space.jpg?h=350&auto=compress&cs=tinysrgb" alt="picture of space" />
+                        <div class="card-user-profile-content card-section">
+                          <div class="card-user-profile-avatar">
+                            <h4 id="singleRating">94%</h4>
+                          </div>
+                          <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p>
+                          <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
+                          <p class="card-user-profile-info" id="synopsis">The Yeti, once better known as the Abominable Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.</p>
+                        </div>
+                      
+                        <div class="card-user-profile-actions">
+                          <a href="#" class="card-user-profile-button button hollow">Watch Trailer</a>
+                          <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                </div>
+            </div>
     </div>
         
           
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
-      <script src="../building-block/translucent-form-overlay/translucent-form-overlay.js"></script> 
+      <script src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script> 
       <script src="./assets/js/script.js"></script>
 </body>
 </html>
