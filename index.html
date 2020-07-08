@@ -3,58 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Worth My Time</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/app.css?rev=@@hash">
-    <!-- <link rel="stylesheet" href="../building-block/app.css?rev=@@hash"> -->
-    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash">
+    <!-- <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/layout.css?rev=@@hash"> -->
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/layout.css?rev=@@hash">
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">    
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
 </head>
 <body>
-    <nav class="top-bar topbar-responsive">
-        <div class="top-bar-title">
-          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
-            <button class="menu-icon" type="button" data-toggle></button>
-          </span>
-          <a class="topbar-responsive-logo" href="#"><strong>Site Title</strong></a>
-        </div>
-        <div id="topbar-responsive" class="topbar-responsive-links">
-          <div class="top-bar-right">
-            <ul class="menu simple vertical medium-horizontal">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
-              <li>
-                <button type="button" class="button hollow topbar-responsive-button">Categories</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+    <div class="hero-full-screen">
+        <nav class="top-bar topbar-responsive">
+            <div class="top-bar-title">
+            <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+            </span>
+            <a class="topbar-responsive-logo" href="#"><h3><strong>W<i class="fa fa-clock-o" aria-hidden="true"></i>rth My Time</strong></h3></a>
+            </div>
+            <div id="topbar-responsive" class="topbar-responsive-links">
+            <div class="top-bar-right">
+                <ul class="menu simple vertical medium-horizontal">
+                    <li><input type="search" class="search-field" placeholder="Search">
+                    <button type="button" class="button search" onclick="switchSingleView()" >Search</button></li>
+                <li>
+                    <button type="button" class="button hollow topbar-responsive-button">My Watched List</button>
+                </li>
+                </ul>
+            </div>
+            </div>
         </nav>
-      <section class="product-feature-section">
-        <div class="product-feature-section-outer">
-          <h4 class="product-feature-section-headline">Eyes & Ears!! Our project is so KEWL!</h4>    
-          <div class="product-feature-section-inner"> 
-            <div class="product-feature-section-feature top-left">
-              <i class="fa fa-shield" aria-hidden="true"></i>
-              <div>
-                <p class="feature-title">Do you know the lyric or song, but want to find the movie?</p>
-                <p class="feature-desc">Give us a beat!</p>
-              </div>
-            </div>     
-            <div class="product-feature-section-feature top-right">
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <div>
-                <p class="feature-title">Do you know the movie, but are looking for the song?</p>
-                <p class="feature-desc">Tell us what you saw!</p>
-              </div>
-            </div>     
-          </div>
-        </div>
-      </section>   
-      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>    
+           <!-- Main container for the area beneath the navbar-->
+            <div class="row row-container">
+                <!-- Left hand panel side container: Prev Search-->
+                <div class="columns small-12 medium-7 row-container" id="leftView">
+                    <div class="app-feature-section medium-6 prevSearchContainer" >
+                        <div class="row align-middle row-container">
+                            <h4 class="app-feature-section-main-header">Previous Search</h4>
+                            <!-- <img class="hide-for-medium" src="https://placehold.it/640x320" alt="" /> -->
+                            <div class="app-feature-section-features">
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-film" aria-hidden="true"></i> <span><strong>Type: </strong></span><p id="prevType" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-th-list" aria-hidden="true"></i> <span><strong>Genre: </strong></span><p id="prevGenre" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> <span><strong>Actor/Actress: </strong></span><p id="prevActor" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-fast-forward" aria-hidden="true"></i> <span><strong>Running Time: </strong></span><p id="prevTime" class="formValue"></p>
+                                </div>
+                                <div class="app-feature-section-features-block">
+                                <i class="fa fa-percent" aria-hidden="true"></i> <span><strong>Rating: </strong></span><p id="prevRating" class="formValue"></p>
+                                </div>
+                            </div>
+                            <button type="button" class="primary button expanded search-button">
+                                Repeat Previous Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right hand panel side container: Form-->
+                <div class="columns small-12 medium-5" id="rightView">
+                    <div class="translucent-form-overlay">                   
+                        <form>
+                        <h3>Search for Something Worth My Time</h3>
+                        <div class="row columns">
+                            <fieldset class="fieldset">
+                                <legend class="form-legend">Type: </legend>
+                                <input id="movieType" name="type" type="checkbox" required><label for="movieType">Movie</label>
+                                <input id="showType" name="type" type="checkbox" required><label for="showType">Show</label>
+                            </fieldset>
+                        </div>
+                        <div class="row columns">
+                            <label>Genre
+                            <select name="genre" type="text">
+                                <option>Any</option>
+                                <option value="action">Action</option>
+                                <option value="drama">Drama</option>
+                                <option value="comdey">Comedy</option>
+                                <option value="family">Family</option>
+                                <option value="sci-fi">Science Fiction</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="romance">Romance</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                            </label>
+                        </div>
+                        <div class="row columns">
+                            <label>Actor/Actress
+                            <input type="text" name="actor" placeholder="Actor/Actress">
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="columns small-12">Running Time</label>
+                            <div class="columns small-3">
+                            <input type="number" min="0" name="min" placeholder="Min">
+                            </div>
+                            <div class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle" for="min">minutes</label>
+                            </div>
+                            <div class="columns small-3">
+                            <input type="number" min="0" name="max" placeholder="Max">
+                            </div>
+                            <divl class="columns small-3 runningTimeLabel">
+                                <label class=" text-left middle " for="max">minutes</label>
+                            </divl>
+                        </div>
+                        <div class="row columns small-6">
+                            <label>Minimum Rotten Tomatoes Rating
+                                <div class="input-group">
+                                <input type="number" class="input-group-field" name="rating" max="100" min="0" placeholder="Rating%">
+                                    <span class="input-group-label">%</span>
+                                </div>                           
+                            </label>
+                        </div>
+                        <button type="button" class="primary button expanded search-button">
+                            Search
+                        </button>
+                    </form>
+                </div>
+                </div>
+                <div id="singleView" class="columns small-12 medium-12">
+                    <div class="card-user-profile">
+                        <img class="card-user-profile-img" id="moviePoster" src="https://images.pexels.com/photos/5439/earth-space.jpg?h=350&auto=compress&cs=tinysrgb" alt="picture of space" />
+                        <div class="card-user-profile-content card-section">
+                          <div class="card-user-profile-avatar">
+                            <h4 id="singleRating">94%</h4>
+                          </div>
+                          <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p>
+                          <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
+                          <p class="card-user-profile-info" id="synopsis">The Yeti, once better known as the Abominable Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.</p>
+                        </div>
+                      
+                        <div class="card-user-profile-actions">
+                          <a href="#" class="card-user-profile-button button hollow">Watch Trailer</a>
+                          <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                </div>
+            </div>
+    </div>
+        
+          
+      <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
+      <script src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script> 
+      <script src="./assets/js/script.js"></script>
 </body>
 </html>
