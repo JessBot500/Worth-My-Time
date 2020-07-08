@@ -87,7 +87,7 @@ var youtubeSearch = function(searchWord) {
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                // console.log(data);
 
                 // display trailer
                 watchTrailerEl.addEventListener("click", function(event) {
@@ -95,7 +95,8 @@ var youtubeSearch = function(searchWord) {
 
                     for (var i = 0; i < data.items.length; i++) {
                         var trailerUrl = data.items[0].url
-                        console.log(trailerUrl);
+                        open(trailerUrl, "_blank");
+                        // console.log(trailerUrl);
 
                     }
                 });
