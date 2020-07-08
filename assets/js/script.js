@@ -1,3 +1,4 @@
+//static previous search from user data
 var prevSearchObj = {
     Type: "Both",
     Genre: "Action",
@@ -5,6 +6,8 @@ var prevSearchObj = {
     RunningTime: 120,
     Rating: 75
 }
+
+// static movie selection data object
 var currentMovie = {
     title: "Shrek",
     type: "Movie",
@@ -45,19 +48,7 @@ function requiredChecbox(){
 }
 
 
-// function searchExpand(){
-//   $('.search')
-//     .bind('click', function(event) {
-//         console.log("We clicked the search button");
-//       $(".search-field").toggleClass("expand-search");
 
-//       // if the search field is expanded, focus on it
-//       if ($(".search-field").hasClass("expand-search")) {
-//           console.log("Here is the sitch where the expand-class is already applied");
-//         $(".search-field").focus();
-//       }
-//     })
-// };
 
 function switchSingleView(){
     console.log("we clicked the button");
@@ -66,6 +57,7 @@ function switchSingleView(){
         $("#rightView").css("display", "none");
         $("#singleView").css("display", "block");
         $("#moviePoster").attr('src', currentMovie.posterURL);
+        if (current)
         document.getElementById("singleRating").innerHTML = currentMovie.rating;
         document.getElementById("movieTitle").innerHTML = currentMovie.title;
         document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
