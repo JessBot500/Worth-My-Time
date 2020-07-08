@@ -199,34 +199,35 @@ function search() {
     var genreSelector = document.querySelector('#genre-select'); 
       
     var output = genreSelector.value; 
+    console.log(output)
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
     var genre = 0
-    if (output="action") {
+    if (output === "action") {
         genre = 28
     }
-    else if (output="drama") {
+    if (output === "drama") {
         genre = 18
     }
-    else if (output="comedy") {
+    if (output === "comedy") {
         genre = 35
     }
-    else if (output="family") {
+    if (output === "family") {
         genre = 10751
     }
-    else if (output="sci-fi") {
+    if (output === "sci-fi") {
         genre = 878
     }
-    else if (output="thriller") {
+    if (output === "thriller") {
         genre = 53
     }
-    else if (output="adventure") {
+    if (output === "adventure") {
         genre = 12
     }
-    else if (output="romance") {
+    if (output === "romance") {
         genre = 10749
     }
-    else if (output="horror") {
+    if (output === "horror") {
         genre = 27
     }
 
