@@ -811,3 +811,7 @@ translucent-form-overlay {
 #movie-slider{
     height: auto;
 }
+
+.orb {
+    position: relative;
+}

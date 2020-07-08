@@ -17,6 +17,10 @@
         href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
     <link rel="stylesheet"
         href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+<!-- Insert this within your head tag and after foundation.css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+
     <!-- <link rel="stylesheet"
         href="https://get.foundation/building-blocks/building-block/ecommerce-product-slider/layout.css?rev=@@hash"> -->
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -231,8 +235,8 @@
                           <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
                         </div>
                     </div> -->
-                <div class="ecommerce-product-slider orbit" role="region" aria-label="Favorite Space Pictures">
-                    <ul class="orbit-cont" id="movie-slider" data-orbit data-options="animation_speed:9000; timer_speed: 9000;">
+                <div class="ecommerce-product-slider orb" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animation_speed:400; timer_speed: 400;">
+                    <ul class="orbit-cont" id="movie-slider" >
                         <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
                         <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
                         <li class="is-active orbit-slide">
@@ -464,9 +468,14 @@
         </div>
     </div>
 
-
-    <script src="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>    <script
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>    
+    
+    <script
         src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/js/foundation.orbit.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
