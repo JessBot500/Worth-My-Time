@@ -18,11 +18,11 @@ var currentMovie = {
     rating: "56%"
 }
 
-function loadPrevSearch(){
-    if(prevSearchObj.Type === "Both"){
+function loadPrevSearch() {
+    if (prevSearchObj.Type === "Both") {
         document.getElementById("prevType").innerHTML = "Movie / Show";
     }
-    else{
+    else {
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
     }
     document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
@@ -31,13 +31,13 @@ function loadPrevSearch(){
     document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
 }
 
-function requiredChecbox(){
+function requiredChecbox() {
 
     var requiredCheckboxes = $(':checkbox[required]');
 
-    requiredCheckboxes.change(function(){
+    requiredCheckboxes.change(function () {
 
-        if(requiredCheckboxes.is(':checked')) {
+        if (requiredCheckboxes.is(':checked')) {
             requiredCheckboxes.removeAttr('required');
         }
 
@@ -50,15 +50,15 @@ function requiredChecbox(){
 
 
 
-function switchSingleView(){
+function switchSingleView() {
     console.log("we clicked the button");
-    if($("#leftView").css("display") != "none"){
+    if ($("#leftView").css("display") != "none") {
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
         $("#singleView").css("display", "block");
         $("#moviePoster").attr('src', currentMovie.posterURL);
         if (current)
-        document.getElementById("singleRating").innerHTML = currentMovie.rating;
+            document.getElementById("singleRating").innerHTML = currentMovie.rating;
         document.getElementById("movieTitle").innerHTML = currentMovie.title;
         document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
         document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
