@@ -557,6 +557,8 @@
     box-shadow: none;
     overflow: hidden;
     color: #0a0a0a;
+    margin-right: auto;
+    margin-left: auto;
   }
   
   .card-user-profile > :last-child {
