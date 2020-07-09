@@ -160,7 +160,7 @@ function saveWatchedMovie(){
     // });
 
 
-    function testClick(movieDiv){
+    function switchSingleView(movieDiv){
         console.log("clicked on a specific movie");
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
         var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
@@ -191,23 +191,7 @@ function saveWatchedMovie(){
 
 
 
-    function switchSingleView(movieDiv) {
-        console.log("we clicked on a movie option");
-        console.log( "Here is our predicted image poster URL: ", movieDiv);
-        if ($("#leftView").css("display") != "none") {
-            $("#leftView").css("display", "none");
-            $("#rightView").css("display", "none");
-            $("#viewWatchedList").css("display", "none");
-            $("#singleView").css("display", "block");
-            $("#moviePoster").attr('src', this.querySelector('#movie-poster').attr("src"));
 
-            document.getElementById("singleRating").innerHTML = currentMovie.rating;
-            document.getElementById("movieTitle").innerHTML = currentMovie.title;
-            document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
-            document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
-        }
-
-    }
 
     // function switchSingleView(current){
     //     console.log(current)
@@ -428,7 +412,7 @@ function saveWatchedMovie(){
                             }
 
                             
-                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="testClick(this)">'
+                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
                             + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+posterURL+'"></div><div class="about-people-author">'
                             + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
@@ -452,6 +436,32 @@ function saveWatchedMovie(){
             })
     }
     
+    function listWatchedMovies(){
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "block");
+
+        var innerResultString = "";
+        var movieListEl = document.getElementById("movieList");
+        for(var i = 0; i< watchedMovies.length; i++){
+            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+                            + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                            + ' src="'+watchedMovies[i].posterURL+'"></div><div class="about-people-author">'
+                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
+                            + watchedMovies[i].rating + '%</p></span>'
+                            +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
+                            + '<p class="author-location movie-runTime">'+watchedMovies[i].runtime+' mins</p>'
+                            + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>'
+                            + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
+                            +  '<button class="button primary small">Watch Trailer</button>'
+                            +  '<button class="button secondary small">'+"I'll Watch This!</button>"
+                            +  '</div></div>';
+        }
+                        movieListEl.innerHTML = innerResultString;
+
+    }
 
     function topFive() {
 
