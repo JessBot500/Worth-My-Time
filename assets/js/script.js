@@ -369,17 +369,22 @@ function saveWatchedMovie(){
 
                         var title = (detail.title)
                         var posterURL = detail.poster_path;
+                        var reportedRuntime = detail.runtime;
                         if(posterURL === null){
                             posterURL = "https://placehold.it/75";
                         }
                         else{
                             posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
                         }
+                        if(reportedRuntime === null || reportedRuntime === 0){
+                            reportedRuntime = "No Runtime Recorded";
+                        }
+
                             
                         innerResultString += '<div class="small-12 medium-6 columns about-people"><div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+posterURL+'"></div><div class="about-people-author">'
                             + '<p class="author-name movie-title">'+title+'</p>'
-                            + '<p class="author-location movie-runTime">'+detail.runtime+' mins</p>'
+                            + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
                             + '<div class="small-12 medium-6 columns add-friend"><div class="add-friend-action">'
                             +  '<button class="button primary small">Watch Trailer</button>'
