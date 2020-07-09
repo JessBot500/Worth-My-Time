@@ -138,28 +138,6 @@ function saveWatchedMovie(){
     // searchExpand();
 
 
-    // function requiredChecbox(){
-
-    //     var requiredCheckboxes = $(':checkbox[required]');
-
-    //     requiredCheckboxes.change(function(){
-
-    //         if(requiredCheckboxes.is(':checked')) {
-    //             requiredCheckboxes.removeAttr('required');
-    //         }
-
-    //         else {
-    //             requiredCheckboxes.attr('required', 'required');
-    //         }
-    //     });
-    // }
-
-    // $('.movieItem').on("click", "div",function(event) {
-    //     event.preventDefault;
-    //     console.log("You've clicked on a movie item: ", $(this));
-    // });
-
-
     function switchSingleView(movieDiv){
         console.log("clicked on a specific movie");
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
@@ -188,27 +166,6 @@ function saveWatchedMovie(){
             document.getElementById("genre").innerHTML = genresVal;
         }
     }
-
-
-
-
-
-    // function switchSingleView(current){
-    //     console.log(current)
-    //     console.log("we clicked the button");
-    //     if($("#leftView").css("display") != "none"){
-    //         $("#leftView").css("display", "none");
-    //         $("#rightView").css("display", "none");
-    //         $("#singleView").css("display", "block");
-    //         $("#moviePoster").attr('src', currentMovie.posterURL);
-    //         if (current)
-    //         document.getElementById("singleRating").innerHTML = currentMovie.rating;
-    //         document.getElementById("movieTitle").innerHTML = currentMovie.title;
-    //         document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
-    //         document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
-    //     }
-
-    // }
 
 
     // youtube search api
@@ -263,7 +220,6 @@ function saveWatchedMovie(){
 
     }
 
-    requiredChecbox();
 
     searchBar.addEventListener("submit", searchSubmitHandler);
 
