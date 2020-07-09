@@ -2,14 +2,6 @@ var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
 
-//static previous search from user data
-var prevSearchObj = {
-    Type: "Both",
-    Genre: "Action",
-    Actor: "None",
-    RunningTime: 120,
-    Rating: 75
-}
 
 // static movie selection data object
 var currentMovie = {
@@ -306,7 +298,16 @@ function loadPrevSearch() {
         var genreSelect = document.getElementById("genre-select").value;
         var actorSelect = document.getElementById("actor").value;
         var runningTselect = document.getElementById("maxMins").value;
-        var ratingSelect = document.getElementById("rating").value
+        var ratingSelect = document.getElementById("rating").value;
+        document.getElementById("movieType").checked = false;
+        document.getElementById("showType").checked = false;
+        document.getElementById("genre-select").value = "Any";
+        document.getElementById("actor").value = "";
+        document.getElementById("maxMins").value = "";
+        document.getElementById("minMins").value = "";
+        document.getElementById("rating").value = "";
+
+
         var upper = genreSelect.charAt(0).toUpperCase();
         genreSelect = genreSelect.slice(1);
         genreSelect = upper + genreSelect;
@@ -344,6 +345,8 @@ function loadPrevSearch() {
     function search() {
         console.log("you clicked search")
         saveNewSearch();
+        loadPrevSearch();
+
         var genreSelector = document.querySelector('#genre-select');
 
         var output = genreSelector.value;
