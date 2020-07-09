@@ -1,3 +1,8 @@
+var searchBar = document.querySelector("#search-form");
+var searchInputEl = document.querySelector(".search-field");
+var watchTrailerEl = document.querySelector("#watch-trailer");
+
+
 //static previous search from user data
 var prevSearchObj = {
     Type: "Both",
@@ -30,6 +35,47 @@ function loadPrevSearch(){
     document.getElementById("prevTime").innerHTML = prevSearchObj.RunningTime + " mins";
     document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
 }
+
+function requiredChecbox(){
+
+    var requiredCheckboxes = $(':checkbox[required]');
+
+    requiredCheckboxes.change(function(){
+
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        }
+
+        else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+}
+
+
+
+
+function switchSingleView(){
+    console.log("we clicked the button");
+    if($("#leftView").css("display") != "none"){
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#singleView").css("display", "block");
+        $("#moviePoster").attr('src', currentMovie.posterURL);
+        if (current)
+        document.getElementById("singleRating").innerHTML = currentMovie.rating;
+        document.getElementById("movieTitle").innerHTML = currentMovie.title;
+        document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
+        document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
+    }
+
+}
+
+
+requiredChecbox();
+loadPrevSearch();
+// searchExpand();
+
 
 // function requiredChecbox(){
 
@@ -66,14 +112,78 @@ function switchSingleView(){
 
 }
 
+// function switchSingleView(current){
+//     console.log(current)
+//     console.log("we clicked the button");
+//     if($("#leftView").css("display") != "none"){
+//         $("#leftView").css("display", "none");
+//         $("#rightView").css("display", "none");
+//         $("#singleView").css("display", "block");
+//         $("#moviePoster").attr('src', currentMovie.posterURL);
+//         if (current)
+//         document.getElementById("singleRating").innerHTML = currentMovie.rating;
+//         document.getElementById("movieTitle").innerHTML = currentMovie.title;
+//         document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
+//         document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
+//     }
 
-//requiredChecbox();
-loadPrevSearch();
-// searchExpand();
+// }
 
 
-//requiredChecbox();
+// youtube search api
+/*var youtubeSearch = function(searchWord) {
+    fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
+	"method": "GET",
+	"headers": {
+        "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
+        // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+        
+        // tester alt key
+        "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+	}
+    })
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                // console.log(data);
 
+                // display trailer
+                watchTrailerEl.addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    for (var i = 0; i < data.items.length; i++) {
+                        var trailerUrl = data.items[0].url
+                        open(trailerUrl, "_blank");
+                        // console.log(trailerUrl);
+
+                    }
+                });
+            })
+        }
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+};
+*/
+// search function to link to api
+var searchSubmitHandler = function(event) {
+    event.preventDefault();
+
+    // get input value
+    var searchWord = searchInputEl.value.trim();
+    if (searchWord) {
+        youtubeSearch(searchWord)
+        movie(searchWord)
+        // switchSingleView(searchWord);
+        searchInputEl.value = "";
+    }
+    
+}
+
+requiredChecbox();
+
+searchBar.addEventListener("submit", searchSubmitHandler);
 
 function movie(){
 
@@ -112,10 +222,10 @@ function movie(){
         document.getElementById("movieTitle").innerHTML = title;
         document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
         document.getElementById("synopsis").innerHTML = detail.overview;
-        //document.getElementById("singleRating").innerHTML = detail.
+        document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
         console.log(title);
 
-        var imgUrl = "https://image.tmdb.org/t/p/w185//" + (detail.poster_path)
+        var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
         poster.src = ""
         poster.src = imgUrl
 
@@ -140,7 +250,6 @@ function movie(){
     })
 }
 
-
 function topFive (){
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
@@ -158,7 +267,7 @@ function topFive (){
         
         for (i=0; i < 5; i++) {
             
-            randomNum = Math.floor(Math.random() * 20)
+            var randomNum = Math.floor(Math.random() * 20)
             console.log(randomNum)
             console.log([top.results[randomNum].poster_path]);
 
@@ -191,34 +300,35 @@ function search() {
     var genreSelector = document.querySelector('#genre-select'); 
       
     var output = genreSelector.value; 
+    console.log(output)
 
     var API = "2215e66d3770fa7ff283fdf766c88f8c"
     var genre = 0
     if (output === "action") {
         genre = 28
     }
-    else if (output === "drama") {
+    if (output === "drama") {
         genre = 18
     }
-    else if (output === "comedy") {
+    if (output === "comedy") {
         genre = 35
     }
-    else if (output==="family") {
+    if (output === "family") {
         genre = 10751
     }
-    else if (output==="sci-fi") {
+    if (output === "sci-fi") {
         genre = 878
     }
-    else if (output==="thriller") {
+    if (output === "thriller") {
         genre = 53
     }
-    else if (output==="adventure") {
+    if (output === "adventure") {
         genre = 12
     }
-    else if (output==="romance") {
+    if (output === "romance") {
         genre = 10749
     }
-    else if (output==="horror") {
+    if (output === "horror") {
         genre = 27
     }
 
@@ -237,33 +347,3 @@ function search() {
 })}
 
 topFive();
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-
