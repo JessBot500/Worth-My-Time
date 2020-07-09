@@ -64,20 +64,36 @@ function loadWatchedMovies(){
 }
 
 function saveWatchedMovie(){
-    var newMovie = {
-        title: document.getElementById("movieTitle").innerHTML,
-        type: document.getElementById("type").innerHTML,
-        genre: document.getElementById("genre").innerHTML,
-        synopsis: document.getElementById("synopsis").innerHTML,
-        runningTime: document.getElementById("runningTime").innerHTML,
-        posterURL: $("#moviePoster").attr("src"),
-        rating: document.getElementById("singleRating").innerHTML
+    var newTitle = document.getElementById("movieTitle").innerHTML;
+    var exists = false;
+    for(var i =0; i < watchedMovies.length; i++){
+        if(watchedMovies[i].title === newTitle){
+            exists = true;
+            break;
+        }
     }
 
-    console.log(newMovie);
+    if(!exists){
+        console.log("This movie doesn't exist yet in our watched list!")
+        var newMovie = {
+            title: newTitle,
+            type: document.getElementById("type").innerHTML,
+            genre: document.getElementById("genre").innerHTML,
+            synopsis: document.getElementById("synopsis").innerHTML,
+            runningTime: document.getElementById("runningTime").innerHTML,
+            posterURL: $("#moviePoster").attr("src"),
+            rating: document.getElementById("singleRating").innerHTML
+        }
     
-    watchedMovies.push(newMovie);
-    localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
+        console.log(newMovie);
+        
+        watchedMovies.push(newMovie);
+        localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
+    }
+    else{
+        console.log("ahhh, we already watched this one!")
+    }
+    
     loadWatchedMovies();
 }
 
@@ -234,6 +250,7 @@ function saveWatchedMovie(){
 
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "block");
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
