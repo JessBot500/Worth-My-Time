@@ -1,6 +1,8 @@
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
+var listViewTrailer = document.querySelector("#listview-trailer")
+
 var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [{
     title: "Shrek",
     type: "Movie",
@@ -31,7 +33,7 @@ function loadPrevSearch() {
             RunningTime: 120,
             Rating: 75
         };
-        console.log("currentprevSearch is: ", prevSearchObj);
+        //console.log("currentprevSearch is: ", prevSearchObj);
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
         document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
         document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
@@ -42,7 +44,7 @@ function loadPrevSearch() {
 
 function loadWatchedMovies(){
     
-    console.log("loading watched movie list");
+    //console.log("loading watched movie list");
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
@@ -53,7 +55,7 @@ function loadWatchedMovies(){
         $("#viewWatchedList").css("display", "block");
     }
     var latest = watchedMovies.length -1;
-    console.group(watchedMovies[0]);
+    //console.group(watchedMovies[0]);
     $("#watchedPoster").attr("src",watchedMovies[latest].posterURL);
     document.getElementById("watchedTitle").innerHTML = watchedMovies[latest].title;
     document.getElementById("watchedType").innerHTML = watchedMovies[latest].type;
@@ -74,7 +76,7 @@ function saveWatchedMovie(){
     }
 
     if(!exists){
-        console.log("This movie doesn't exist yet in our watched list!")
+        //console.log("This movie doesn't exist yet in our watched list!")
         var newMovie = {
             title: newTitle,
             type: document.getElementById("type").innerHTML,
@@ -85,13 +87,13 @@ function saveWatchedMovie(){
             rating: document.getElementById("singleRating").innerHTML
         }
     
-        console.log(newMovie);
+        //console.log(newMovie);
         
         watchedMovies.push(newMovie);
         localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
     }
     else{
-        console.log("ahhh, we already watched this one!")
+        //console.log("ahhh, we already watched this one!")
     }
     
     loadWatchedMovies();
@@ -138,7 +140,7 @@ function saveWatchedMovie(){
             }
         
             if(!exists){
-                console.log("This movie doesn't exist yet in our watched list!")
+                //console.log("This movie doesn't exist yet in our watched list!")
                 var newMovie = {
                     title: titleVal,
                     type: "Movie",
@@ -149,17 +151,17 @@ function saveWatchedMovie(){
                     rating: ratingVal
                 }
             
-                console.log(newMovie);
+                //console.log(newMovie);
                 
                 watchedMovies.push(newMovie);
                 localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
             }
             else{
-                console.log("ahhh, we already watched this one!")
+                //console.log("ahhh, we already watched this one!")
             }
             
             if ($("#resultListView").css("display") != "none") {
-                console.log("Going throught these changes");
+               //console.log("Going throught these changes");
                 $("#leftView").css("display", "block");
                 $("#rightView").css("display", "block");
                 $("#viewWatchedList").css("display", "none");
@@ -171,7 +173,7 @@ function saveWatchedMovie(){
     }
 
     function switchSingleView(movieDiv){
-        console.log("clicked on a specific movie");
+        //onsole.log("clicked on a specific movie");
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
         var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
         var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
@@ -201,22 +203,25 @@ function saveWatchedMovie(){
 
 
     // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
+    var youtubeSearch = function(title, listTitle) {
+        fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+            //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
             
             // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+            //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+
+            // extra tester
+            //"x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
         }
         })
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    // console.log(data);
-    
+                    console.log(data);
+                    console.log(listTitle);
                     // display trailer
                     watchTrailerEl.addEventListener("click", function(event) {
                         event.preventDefault();
@@ -224,10 +229,20 @@ function saveWatchedMovie(){
                         for (var i = 0; i < data.items.length; i++) {
                             var trailerUrl = data.items[0].url
                             open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
+                             console.log(trailerUrl);
     
                         }
                     });
+                    // listViewTrailer.addEventListener("click", function(event){
+                    //     event.preventDefault();
+                    //     console.log("watch trailer clicked")
+                    //     for (var i = 0; i < data.items.length; i++) {
+                    //         var trailerUrl = data.items[0].url
+                    //         open(trailerUrl, "_blank");
+                    //          console.log(trailerUrl);
+    
+                    //     }
+                    // });
                 })
             }
         })
@@ -235,7 +250,7 @@ function saveWatchedMovie(){
             console.log(error);
         })
     };
-    */
+    
     // search function to link to api
     var searchSubmitHandler = function (event) {
         event.preventDefault();
@@ -264,7 +279,7 @@ function saveWatchedMovie(){
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
-        console.log("Title is read as ", title);
+        //console.log("Title is read as ", title);
         var poster = document.querySelector('#moviePoster');
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
@@ -274,10 +289,10 @@ function saveWatchedMovie(){
 
                 console.log(response);
 
-                console.log("Total number of related results is: ", response.results.length);
+                //console.log("Total number of related results is: ", response.results.length);
 
                 var id = (response.results[0].id);
-                console.log("id is :", id);
+                //console.log("id is :", id);
 
 
                 fetch("https://api.themoviedb.org/3/movie/"
@@ -288,7 +303,7 @@ function saveWatchedMovie(){
                     .then(function (detail) { return detail.json() })
                     .then(function (detail) {
 
-                        console.log("Detail info ", detail);
+                       // console.log("Detail info ", detail);
 
                         var title = (detail.title)
                         var genreEl = document.getElementById("genre");
@@ -297,7 +312,7 @@ function saveWatchedMovie(){
                         document.getElementById("synopsis").innerHTML = detail.overview;
                         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
                         document.getElementById("type").innerHTML = "Movie";
-                        console.log(detail.genres);
+                        //console.log(detail.genres);
                         var genreList = detail.genres;
                         var innerGenreList = '';
                         for(var i = 0; i < genreList.length; i++){
@@ -308,6 +323,8 @@ function saveWatchedMovie(){
 
                         genreEl.innerHTML = innerGenreList;
                         console.log(title);
+
+                        //youtubeSearch(title);
 
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
                         poster.src = ""
@@ -423,7 +440,8 @@ function saveWatchedMovie(){
                                 +  '<button class="button primary small">Watch Trailer</button>'
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
-
+                                 
+                                youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -619,172 +637,134 @@ function saveWatchedMovie(){
     // searchExpand();
 
 
+    // // search function to link to api
+    // var searchSubmitHandler = function (event) {
+    //     event.preventDefault();
 
-    // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-            // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    // console.log(data);
-    
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
-    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
-    
-                        }
-                    });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
-    // search function to link to api
-    var searchSubmitHandler = function (event) {
-        event.preventDefault();
+    //     // get input value
+    //     var searchWord = searchInputEl.value.trim();
+    //     if (searchWord) {
+    //         youtubeSearch(searchWord)
+    //         movie(searchWord)
+    //         // switchSingleView(searchWord);
+    //         searchInputEl.value = "";
+    //     }
 
-        // get input value
-        var searchWord = searchInputEl.value.trim();
-        if (searchWord) {
-            youtubeSearch(searchWord)
-            movie(searchWord)
-            // switchSingleView(searchWord);
-            searchInputEl.value = "";
-        }
-
-    }
-
-requiredChecbox();
-
-    searchBar.addEventListener("submit", searchSubmitHandler);
-
-    function movie() {
-
-        $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
-        $("#singleView").css("display", "block");
-
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        var title = document.querySelector('#movie-title').value;
-        console.log("Title is read as ", title);
-        var poster = document.querySelector('#moviePoster');
-
-        fetch("https://api.themoviedb.org/3/search/movie?api_key="
-            + API + "&query=" + title)
-            .then(function (response) { return response.json() })
-            .then(function (response) {
-
-                console.log(response);
+    // }
 
 
-                var id = (response.results[0].id);
-                console.log("id is :", id);
+    // searchBar.addEventListener("submit", searchSubmitHandler);
+
+    // function movie() {
+
+    //     $("#leftView").css("display", "none");
+    //     $("#rightView").css("display", "none");
+    //     $("#singleView").css("display", "block");
+
+    //     var API = "2215e66d3770fa7ff283fdf766c88f8c"
+    //     var title = document.querySelector('#movie-title').value;
+    //     console.log("Title is read as ", title);
+    //     var poster = document.querySelector('#moviePoster');
+
+    //     fetch("https://api.themoviedb.org/3/search/movie?api_key="
+    //         + API + "&query=" + title)
+    //         .then(function (response) { return response.json() })
+    //         .then(function (response) {
+
+    //             console.log(response);
 
 
-                fetch("https://api.themoviedb.org/3/movie/"
-                    + id
-                    + "?api_key="
-                    + API)
-
-                    .then(function (detail) { return detail.json() })
-                    .then(function (detail) {
-
-                        console.log("Detail info ", detail);
-
-                        var title = (detail.title)
-                        document.getElementById("movieTitle").innerHTML = title;
-                        document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
-                        document.getElementById("synopsis").innerHTML = detail.overview;
-                        document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
-                        console.log(title);
-
-                        var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
-                        poster.src = ""
-                        poster.src = imgUrl
-
-                        var imdbID = (detail.imdb_id)
+    //             var id = (response.results[0].id);
+    //             console.log("id is :", id);
 
 
-                        // fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
-                        //     "method": "GET",
-                        //     "headers": {
-                        //         "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                        //         "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
-                        //     }
-                        // })
+    //             fetch("https://api.themoviedb.org/3/movie/"
+    //                 + id
+    //                 + "?api_key="
+    //                 + API)
 
-                        //     .then(function (tagline) { return tagline.json() })
-                        //     .then(function (tagline) {
+    //                 .then(function (detail) { return detail.json() })
+    //                 .then(function (detail) {
 
-                        //         console.log(tagline)
-                        //     })
+    //                     console.log("Detail info ", detail);
 
-                    })
-            })
-    }
+    //                     var title = (detail.title)
+    //                     document.getElementById("movieTitle").innerHTML = title;
+    //                     document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
+    //                     document.getElementById("synopsis").innerHTML = detail.overview;
+    //                     document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
+    //                     console.log(title);
 
-    function topFive() {
+    //                     var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
+    //                     poster.src = ""
+    //                     poster.src = imgUrl
 
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-
-        fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-            API +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
-
-            .then(function (top) { return top.json() })
-            .then(function (top) {
-
-                console.log(top);
-                var posterArray = []
+    //                     var imdbID = (detail.imdb_id)
 
 
-                for (i = 0; i < 5; i++) {
+    //                     // fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+    //                     //     "method": "GET",
+    //                     //     "headers": {
+    //                     //         "x-rapidapi-host": "imdb8.p.rapidapi.com",
+    //                     //         "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+    //                     //     }
+    //                     // })
 
-                    var randomNum = Math.floor(Math.random() * 20)
-                    console.log(randomNum)
-                    console.log([top.results[randomNum].poster_path]);
+    //                     //     .then(function (tagline) { return tagline.json() })
+    //                     //     .then(function (tagline) {
 
-                    var posterPath = (top.results[randomNum].poster_path)
+    //                     //         console.log(tagline)
+    //                     //     })
 
-                    if (posterArray.includes(posterPath)) {
+    //                 })
+    //         })
+    // }
 
-                    }
-                    else { posterArray.push("https://image.tmdb.org/t/p/w185//" + posterPath); }
+    // function topFive() {
+
+    //     var API = "2215e66d3770fa7ff283fdf766c88f8c"
+
+    //     fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+    //         API +
+    //         "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
+
+    //         .then(function (top) { return top.json() })
+    //         .then(function (top) {
+
+    //             console.log(top);
+    //             var posterArray = []
 
 
-                }
+    //             for (i = 0; i < 5; i++) {
 
-                $("#poster1").attr("src", posterArray[0])
-                $("#poster2").attr("src", posterArray[1])
-                $("#poster3").attr("src", posterArray[2])
-                $("#poster4").attr("src", posterArray[3])
-                $("#poster5").attr("src", posterArray[4])
+    //                 var randomNum = Math.floor(Math.random() * 20)
+    //                 console.log(randomNum)
+    //                 console.log([top.results[randomNum].poster_path]);
 
-                console.log(posterArray);
+    //                 var posterPath = (top.results[randomNum].poster_path)
+
+    //                 if (posterArray.includes(posterPath)) {
+
+    //                 }
+    //                 else { posterArray.push("https://image.tmdb.org/t/p/w185//" + posterPath); }
+
+
+    //             }
+
+    //             $("#poster1").attr("src", posterArray[0])
+    //             $("#poster2").attr("src", posterArray[1])
+    //             $("#poster3").attr("src", posterArray[2])
+    //             $("#poster4").attr("src", posterArray[3])
+    //             $("#poster5").attr("src", posterArray[4])
+
+    //             console.log(posterArray);
 
 
 
 
-            })
+    //         })
 
-    }
+    // }
 
    /* function saveNewSearch() {
         var checkType = "";
@@ -801,12 +781,9 @@ requiredChecbox();
         document.getElementById("maxMins").value = "";
         document.getElementById("minMins").value = "";
         document.getElementById("rating").value = "";
-
-
         var upper = genreSelect.charAt(0).toUpperCase();
         genreSelect = genreSelect.slice(1);
         genreSelect = upper + genreSelect;
-
         if (movieCheck && showCheck) {
             checkType = "Movie / Show"
         }
@@ -832,77 +809,76 @@ requiredChecbox();
             RunningTime: runningTselect,
             Rating: ratingSelect
         }
-
         console.log("recent search is: ", prevSearchObj);
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 */
-    function search() {
-        console.log("you clicked search")
-        //saveNewSearch();
-       // loadPrevSearch();
+    // function search() {
+    //     console.log("you clicked search")
+    //     //saveNewSearch();
+    //    // loadPrevSearch();
 
-        var genreSelector = document.querySelector('#genre-select');
+    //     var genreSelector = document.querySelector('#genre-select');
 
-        var output = genreSelector.value;
-        console.log(output)
+    //     var output = genreSelector.value;
+    //     console.log(output)
 
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        var genre = 0
-        if (output === "action") {
-            genre = 28
-        }
-        if (output === "drama") {
-            genre = 18
-        }
-        if (output === "comedy") {
-            genre = 35
-        }
-        if (output === "family") {
-            genre = 10751
-        }
-        if (output === "sci-fi") {
-            genre = 878
-        }
-        if (output === "thriller") {
-            genre = 53
-        }
-        if (output === "adventure") {
-            genre = 12
-        }
-        if (output === "romance") {
-            genre = 10749
-        }
-        if (output === "horror") {
-            genre = 27
-        }
-        var rating = document.querySelector("#rating").value
-        var ratingMath = (rating / 10)
-        var minMins = document.querySelector("#minMins").value
-        var maxMins = document.querySelector("#maxMins").value
+    //     var API = "2215e66d3770fa7ff283fdf766c88f8c"
+    //     var genre = 0
+    //     if (output === "action") {
+    //         genre = 28
+    //     }
+    //     if (output === "drama") {
+    //         genre = 18
+    //     }
+    //     if (output === "comedy") {
+    //         genre = 35
+    //     }
+    //     if (output === "family") {
+    //         genre = 10751
+    //     }
+    //     if (output === "sci-fi") {
+    //         genre = 878
+    //     }
+    //     if (output === "thriller") {
+    //         genre = 53
+    //     }
+    //     if (output === "adventure") {
+    //         genre = 12
+    //     }
+    //     if (output === "romance") {
+    //         genre = 10749
+    //     }
+    //     if (output === "horror") {
+    //         genre = 27
+    //     }
+    //     var rating = document.querySelector("#rating").value
+    //     var ratingMath = (rating / 10)
+    //     var minMins = document.querySelector("#minMins").value
+    //     var maxMins = document.querySelector("#maxMins").value
         
-        fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-            API +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-            genre +
-            "&vote_average.gte=" +
-            ratingMath +
-            "&with_runtime.lte=" +
-            maxMins +
-            "&with_runtime.gte=" +
-            minMins +
-            "&page=1")
-            .then(function (movieSearch) { return movieSearch.json() })
-            .then(function (movieSearch) {
+    //     fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+    //         API +
+    //         "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+    //         genre +
+    //         "&vote_average.gte=" +
+    //         ratingMath +
+    //         "&with_runtime.lte=" +
+    //         maxMins +
+    //         "&with_runtime.gte=" +
+    //         minMins +
+    //         "&page=1")
+    //         .then(function (movieSearch) { return movieSearch.json() })
+    //         .then(function (movieSearch) {
                 
-                console.log(movieSearch)
-                console.log(ratingMath)
+    //             console.log(movieSearch)
+    //             console.log(ratingMath)
 
-                console.log(movieSearch)
+    //             console.log(movieSearch)
 
 
-            })
-    }
+    //         })
+    // }
 
     topFive();
     requiredChecbox();
