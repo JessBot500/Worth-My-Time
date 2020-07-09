@@ -235,7 +235,8 @@ function saveWatchedMovie(){
         var searchWord = searchInputEl.value.trim();
         if (searchWord) {
             //youtubeSearch(searchWord)
-            movie(searchWord)
+            multiMovie(searchWord);
+            //movie(searchWord)
             // switchSingleView(searchWord);
             searchInputEl.value = "";
         }
@@ -265,6 +266,7 @@ function saveWatchedMovie(){
 
                 console.log(response);
 
+                console.log("Total number of related results is: ", response.results.length);
 
                 var id = (response.results[0].id);
                 console.log("id is :", id);
@@ -324,6 +326,89 @@ function saveWatchedMovie(){
                     })
             })
     }
+
+    function multiMovie() {
+
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "block");
+
+        var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        var title = document.querySelector('#movie-title').value;
+        console.log("Title is read as ", title);
+        var poster = document.querySelector('#moviePoster');
+        var innerResultString = "";
+        var movieListEl = document.getElementById("movieList");
+
+        fetch("https://api.themoviedb.org/3/search/movie?api_key="
+            + API + "&query=" + title)
+            .then(function (response) { return response.json() })
+            .then(function (response) {
+
+                console.log(response);
+
+                console.log("Total number of related results is: ", response.results.length);
+                
+                for(var i = 0; i < response.results.length; i++){
+                    var id = (response.results[i].id);
+                    console.log("id is :", id);
+
+
+                    fetch("https://api.themoviedb.org/3/movie/"
+                        + id
+                        + "?api_key="
+                        + API)
+
+                        .then(function (detail) { return detail.json() }
+                    )
+                    .then(function (detail) {
+
+                        console.log("Detail info ", detail);
+
+                        var title = (detail.title)
+                        var posterURL = detail.poster_path;
+                        if(posterURL === null){
+                            posterURL = "https://placehold.it/75";
+                        }
+                        else{
+                            posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
+                        }
+                            
+                        innerResultString += '<div class="small-12 medium-6 columns about-people"><div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                            + ' src="'+posterURL+'"></div><div class="about-people-author">'
+                            + '<p class="author-name movie-title">'+title+'</p>'
+                            + '<p class="author-location movie-runTime">'+detail.runtime+' mins</p>'
+                            + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
+                            + '<div class="small-12 medium-6 columns add-friend"><div class="add-friend-action">'
+                            +  '<button class="button primary small">Watch Trailer</button>'
+                            +  '<button class="button secondary small">'+"I'll Watch This!</button>"
+                            +  '</div></div>';
+                            //var genreList = detail.genres;
+                            //var innerGenreList = '';
+                            // for(var i = 0; i < genreList.length; i++){
+                            //     innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                            //     innerGenreList += genreList[i].name;
+                            //     innerGenreList += '</span>';
+                            //     console.log(innerGenreList);
+                            // }
+
+                            // genreEl.innerHTML = innerGenreList;
+                        console.log(title);
+
+                            
+
+                        //console.log("Here is the new innerHTML string: ",innerResultString);
+                        movieListEl.innerHTML = innerResultString;
+                
+                    })
+                }
+                
+                
+            })
+    }
+    
 
     function topFive() {
 
