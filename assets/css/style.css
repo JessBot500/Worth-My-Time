@@ -765,9 +765,10 @@ translucent-form-overlay {
 .people-you-might-know {
     background-color: #fefefe;
     padding: 1rem 0 0;
-    border: 1px solid #cacaca;
-    box-shadow: 0 0 3.125rem rgba(0, 0, 0, 0.18);
-  }
+    border: white solid; 
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); 
+}
+
   
   .people-you-might-know .add-people-header {
     padding: 0 0.9375rem;
