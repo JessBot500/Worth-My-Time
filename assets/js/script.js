@@ -348,6 +348,7 @@ function saveWatchedMovie(){
 
     function multiMovie() {
 
+        document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
@@ -442,6 +443,8 @@ function saveWatchedMovie(){
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
+
+        document.getElementById('listHeaderTitle').innerHTML = "Watched List";
 
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
