@@ -167,7 +167,11 @@ function saveWatchedMovie(){
         var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
         var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
         var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
-        var genresVal = movieDiv.querySelector('.movie-genres').innerHTML;
+        var genresVal = movieDiv.querySelector('.movie-genres');
+        if(genresVal === "" || genresVal === null || genresVal === undefined)
+            genresVal = "";
+        else
+            genresVal = genresVal.innerHTML;
 
         if ($("#leftView").css("display") != "none" || $("#resultListView").css("display") != "none") {
             $("#leftView").css("display", "none");
@@ -181,7 +185,7 @@ function saveWatchedMovie(){
             document.getElementById("runningTime").innerHTML = runtimeVal;
             document.getElementById("synopsis").innerHTML = synopsisVal;
             document.getElementById("type").innerHTML = "Movie";
-            document.getElementById("genres").innerHTML = genresVal;
+            document.getElementById("genre").innerHTML = genresVal;
         }
     }
 
