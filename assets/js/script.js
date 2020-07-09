@@ -379,11 +379,20 @@ function saveWatchedMovie(){
                         if(reportedRuntime === null || reportedRuntime === 0){
                             reportedRuntime = "No Runtime Recorded";
                         }
+                        var genreList = detail.genres;
+                            var innerGenreList = '';
+                            for(var i = 0; i < genreList.length; i++){
+                                innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                                innerGenreList += genreList[i].name;
+                                innerGenreList += '</span>';
+                                console.log(innerGenreList);
+                            }
 
                             
                         innerResultString += '<div class="small-12 medium-6 columns about-people"><div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+posterURL+'"></div><div class="about-people-author">'
                             + '<p class="author-name movie-title">'+title+'</p>'
+                            +  '<span>' + innerGenreList + '</span>'
                             + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
                             + '<div class="small-12 medium-6 columns add-friend"><div class="add-friend-action">'
