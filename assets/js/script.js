@@ -32,7 +32,6 @@ function loadPrevSearch() {
         };
         console.log("currentprevSearch is: ", prevSearchObj);
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
-
         document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
         document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
         document.getElementById("prevTime").innerHTML = prevSearchObj.RunningTime + " mins";
