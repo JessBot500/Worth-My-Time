@@ -410,6 +410,7 @@
     background-size: cover;
     background-repeat: inherit;
     object-fit: cover;
+    overflow: auto;
   }
   
   .hero-full-screen .middle-content-section {
