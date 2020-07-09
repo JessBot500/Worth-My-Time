@@ -161,18 +161,27 @@ function saveWatchedMovie(){
 
 
     function testClick(movieDiv){
+        console.log("clicked on a specific movie");
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
+        var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
+        var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
+        var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
+        var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
+        var genresVal = movieDiv.querySelector('.movie-genres').innerHTML;
 
-        if ($("#leftView").css("display") != "none" || $("#viewWatchedList").css("display") != "none") {
+        if ($("#leftView").css("display") != "none" || $("#resultListView").css("display") != "none") {
             $("#leftView").css("display", "none");
             $("#rightView").css("display", "none");
             $("#viewWatchedList").css("display", "none");
+            $("#resultListView").css("display", "none");
             $("#singleView").css("display", "block");
             $("#moviePoster").attr('src', imgURL);
-            document.getElementById("singleRating").innerHTML = currentMovie.rating;
-            document.getElementById("movieTitle").innerHTML = currentMovie.title;
-            document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
-            document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
+            document.getElementById("singleRating").innerHTML = ratingVal;
+            document.getElementById("movieTitle").innerHTML = titleVal;
+            document.getElementById("runningTime").innerHTML = runtimeVal;
+            document.getElementById("synopsis").innerHTML = synopsisVal;
+            document.getElementById("type").innerHTML = "Movie";
+            document.getElementById("genres").innerHTML = genresVal;
         }
     }
 
@@ -420,7 +429,7 @@ function saveWatchedMovie(){
                             + ' src="'+posterURL+'"></div><div class="about-people-author">'
                             + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
                             + reportedRating + '%</p></span>'
-                            +  '<span>' + innerGenreList + '</span>'
+                            +  '<span class="movie-genres">' + innerGenreList + '</span>'
                             + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
                             + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
