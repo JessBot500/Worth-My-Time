@@ -879,28 +879,46 @@ function saveWatchedMovie(){
         var ratingMath = (rating / 10)
         var minMins = document.querySelector("#minMins").value
         var maxMins = document.querySelector("#maxMins").value
-        
-        fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-            API +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-            genre +
-            "&vote_average.gte=" +
-            ratingMath +
-            "&with_runtime.lte=" +
-            maxMins +
-            "&with_runtime.gte=" +
-            minMins +
-            "&page=1")
-            .then(function (movieSearch) { return movieSearch.json() })
-            .then(function (movieSearch) {
+        var actor = document.querySelector("#actor").value
+        var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        fetch("https://api.themoviedb.org/3/search/person?api_key=" +
+        API +
+        "&search_type=ngram&query=" +
+        actor)
+
+            .then(function (actorSearch) { return actorSearch.json() })
+            .then(function (actorSearch) {
                 
-                console.log(movieSearch)
+                console.log(actorSearch)
+                
+
+           
+
+                var actorId = (actorSearch.results[0].id)
+        
+                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                API +
+                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                genre +
+                "&vote_average.gte=" +
+                ratingMath +
+                "&with_runtime.lte=" +
+                maxMins +
+                "&with_runtime.gte=" +
+                minMins +
+                "&with_people=" +
+                actorId +
+                "&page=1")
+                .then(function (movieSearch) { return movieSearch.json() })
+                .then(function (movieSearch) {
+                
                 console.log(ratingMath)
+                console.log(actorId)
 
                 console.log(movieSearch)
 
 
-            })
+            })})
     }
 
     topFive();
