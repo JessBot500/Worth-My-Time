@@ -1,6 +1,15 @@
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
+var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [{
+    title: "Shrek",
+    type: "Movie",
+    genre: "Animated",
+    synopsis: "It ain't easy bein' green -- especially if you're a likable (albeit smelly) ogre named Shrek. On a mission to retrieve a gorgeous princess from the clutches of a fire-breathing dragon, Shrek teams up with an unlikely compatriot -- a wisecracking donkey.",
+    runningTime: 90,
+    posterURL: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
+    rating: "56%"
+}];
 
 
 // static movie selection data object
@@ -30,6 +39,48 @@ function loadPrevSearch() {
         document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
     }
 
+
+function loadWatchedMovies(){
+    
+    console.log("loading watched movie list");
+    if ($("#singleView").css("display") != "none") {
+        $("#singleView").css("display", "none");
+        $("#viewWatchedList").css("display", "block");
+    }
+    else if($("#leftView").css("display") != "none"){
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "block");
+    }
+    var latest = watchedMovies.length -1;
+    console.group(watchedMovies[0]);
+    $("#watchedPoster").attr("src",watchedMovies[latest].posterURL);
+    document.getElementById("watchedTitle").innerHTML = watchedMovies[latest].title;
+    document.getElementById("watchedType").innerHTML = watchedMovies[latest].type;
+    document.getElementById("watchedGenre").innerHTML = watchedMovies[latest].genre;
+    document.getElementById("watchedRating").innerHTML = watchedMovies[latest].rating;
+    document.getElementById("watchedTime").innerHTML = watchedMovies[latest].runningTime + " mins";
+    document.getElementById("watchedSynopsis").innerHTML = watchedMovies[latest].synopsis;
+}
+
+function saveWatchedMovie(){
+    var newMovie = {
+        title: document.getElementById("movieTitle").innerHTML,
+        type: document.getElementById("type").innerHTML,
+        genre: document.getElementById("genre").innerHTML,
+        synopsis: document.getElementById("synopsis").innerHTML,
+        runningTime: document.getElementById("runningTime").innerHTML,
+        posterURL: $("#moviePoster").attr("src"),
+        rating: document.getElementById("singleRating").innerHTML
+    }
+
+    console.log(newMovie);
+    
+    watchedMovies.push(newMovie);
+    localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
+    loadWatchedMovies();
+}
+
     function requiredChecbox() {
 
         var requiredCheckboxes = $(':checkbox[required]');
@@ -56,12 +107,11 @@ function loadPrevSearch() {
             $("#rightView").css("display", "none");
             $("#singleView").css("display", "block");
             $("#moviePoster").attr('src', currentMovie.posterURL);
-            if (current) {
+            //if (current) 
                 document.getElementById("singleRating").innerHTML = currentMovie.rating;
                 document.getElementById("movieTitle").innerHTML = currentMovie.title;
                 document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
                 document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
-            }
 
         }
     }
@@ -168,7 +218,7 @@ function loadPrevSearch() {
         // get input value
         var searchWord = searchInputEl.value.trim();
         if (searchWord) {
-            youtubeSearch(searchWord)
+            //youtubeSearch(searchWord)
             movie(searchWord)
             // switchSingleView(searchWord);
             searchInputEl.value = "";
@@ -214,10 +264,23 @@ function loadPrevSearch() {
                         console.log("Detail info ", detail);
 
                         var title = (detail.title)
+                        var genreEl = document.getElementById("genre");
                         document.getElementById("movieTitle").innerHTML = title;
                         document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
                         document.getElementById("synopsis").innerHTML = detail.overview;
                         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
+                        document.getElementById("type").innerHTML = "Movie";
+                        console.log(detail.genres);
+                        var genreList = detail.genres;
+                        var innerGenreList = '';
+                        for(var i = 0; i < genreList.length; i++){
+                            innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                            innerGenreList += genreList[i].name;
+                            innerGenreList += '</span>';
+                            console.log(innerGenreList);
+                        }
+
+                        genreEl.innerHTML = innerGenreList;
                         console.log(title);
 
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)

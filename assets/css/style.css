@@ -629,6 +629,7 @@
     margin-bottom: 0;
     font-weight: 300;
     font-size: 1.5rem;
+    /* display: inline; */
   }
   
   .card-user-profile-button {
@@ -647,8 +648,12 @@
     letter-spacing: 1px;
     opacity: 0.8;
   }
+
+  /* .card-user-profile-status{
+      display: inline;
+  } */
   
-#singleView{
+#singleView, #viewWatchedList{
     display: none;
 }  
 
@@ -750,4 +755,8 @@ translucent-form-overlay {
 .singlePosterView {
     border: white solid;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.badge{
+    font-size: .8rem;
 }
