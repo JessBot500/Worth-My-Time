@@ -200,59 +200,6 @@ function saveWatchedMovie(){
     }
 
 
-    // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-            // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    // console.log(data);
-    
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
-    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
-    
-                        }
-                    });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
-    // search function to link to api
-    var searchSubmitHandler = function (event) {
-        event.preventDefault();
-
-        // get input value
-        var searchWord = searchInputEl.value.trim();
-        if (searchWord) {
-            //youtubeSearch(searchWord)
-            multiMovie(searchWord);
-            //movie(searchWord)
-            // switchSingleView(searchWord);
-            searchInputEl.value = "";
-        }
-
-    }
-
-
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
@@ -540,28 +487,6 @@ function saveWatchedMovie(){
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 
-        // function switchSingleView() {
-        //     console.log("we clicked the button");
-        //     if ($("#leftView").css("display") != "none") {
-        //         $("#leftView").css("display", "none");
-        //         $("#rightView").css("display", "none");
-        //         $("#singleView").css("display", "block");
-        //         $("#moviePoster").attr('src', currentMovie.posterURL);
-        //         if (current) {
-        //             document.getElementById("singleRating").innerHTML = currentMovie.rating;
-        //             document.getElementById("movieTitle").innerHTML = currentMovie.title;
-        //             document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
-        //             document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
-        //         }
-
-        //     }
-        // }
-
-
-    // searchExpand();
-
-
-
     // youtube search api
     /*var youtubeSearch = function(searchWord) {
         fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
@@ -616,57 +541,6 @@ function saveWatchedMovie(){
 
     searchBar.addEventListener("submit", searchSubmitHandler);
 
-   /* function saveNewSearch() {
-        var checkType = "";
-        var movieCheck = document.getElementById("movieType").checked;
-        var showCheck = document.getElementById("showType").checked;
-        var genreSelect = document.getElementById("genre-select").value;
-        var actorSelect = document.getElementById("actor").value;
-        var runningTselect = document.getElementById("maxMins").value;
-        var ratingSelect = document.getElementById("rating").value;
-        document.getElementById("movieType").checked = false;
-        document.getElementById("showType").checked = false;
-        document.getElementById("genre-select").value = "Any";
-        document.getElementById("actor").value = "";
-        document.getElementById("maxMins").value = "";
-        document.getElementById("minMins").value = "";
-        document.getElementById("rating").value = "";
-
-
-        var upper = genreSelect.charAt(0).toUpperCase();
-        genreSelect = genreSelect.slice(1);
-        genreSelect = upper + genreSelect;
-
-        if (movieCheck && showCheck) {
-            checkType = "Movie / Show"
-        }
-        else if (movieCheck) {
-            checkType = "Movie"
-        }
-        else {
-            checkType = "Show"
-        }
-        if (actorSelect === "" || actorSelect === undefined) {
-            actorSelect = "None";
-        }
-        if (runningTselect === null || runningTselect === undefined) {
-            runningTselect = 0;
-        }
-        if (ratingSelect === null || ratingSelect === undefined) {
-            ratingSelect = 0;
-        }
-        prevSearchObj = {
-            Type: checkType,
-            Genre: genreSelect,
-            Actor: actorSelect,
-            RunningTime: runningTselect,
-            Rating: ratingSelect
-        }
-
-        console.log("recent search is: ", prevSearchObj);
-        localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
-    }
-*/
     function search() {
         console.log("you clicked search")
         //saveNewSearch();
