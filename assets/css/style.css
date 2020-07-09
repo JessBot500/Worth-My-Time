@@ -228,6 +228,7 @@
 .topbar-responsive {
   background: #2c3840;
   padding: 1rem 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .topbar-responsive .topbar-responsive-logo {
@@ -514,7 +515,7 @@
     width: 0;
     height: 40px;
     margin-left: 1rem;
-    padding: 0;
+    padding: 2;
     border-radius: 3px;
     border: none;
     transition: all 0.5s ease;
