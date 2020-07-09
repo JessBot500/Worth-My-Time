@@ -158,7 +158,15 @@ function saveWatchedMovie(){
                 console.log("ahhh, we already watched this one!")
             }
             
-            loadWatchedMovies();
+            if ($("#resultListView").css("display") != "none") {
+                console.log("Going throught these changes");
+                $("#leftView").css("display", "block");
+                $("#rightView").css("display", "block");
+                $("#viewWatchedList").css("display", "none");
+                $("#resultListView").css("display", "none");
+                $("#singleView").css("display", "none");
+            }
+
         
     }
 
@@ -439,18 +447,14 @@ function saveWatchedMovie(){
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
         for(var i = 0; i< watchedMovies.length; i++){
-            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem" onclick="switchSingleView(this)">'
                             + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+watchedMovies[i].posterURL+'"></div><div class="about-people-author">'
                             + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
                             + watchedMovies[i].rating + '%</p></span>'
                             +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
                             + '<p class="author-location movie-runTime">'+watchedMovies[i].runtime+' mins</p>'
-                            + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>'
-                            + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
-                            +  '<button class="button primary small">Watch Trailer</button>'
-                            +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
-                            +  '</div></div>';
+                            + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>';
         }
                         movieListEl.innerHTML = innerResultString;
 
