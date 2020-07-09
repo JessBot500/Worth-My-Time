@@ -744,3 +744,9 @@ translucent-form-overlay {
 .runningTimeLabel {
   padding-left: 2px;
 }
+
+
+.singlePosterView {
+    border: white solid;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
