@@ -116,7 +116,51 @@ function saveWatchedMovie(){
 
 
     // searchExpand();
-
+    function saveListMovie(movieBtn){
+       var movieDiv = movieBtn.parentElement.parentElement.previousSibling;
+       var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
+        var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
+        var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
+        var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
+        var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
+        var genresVal = movieDiv.querySelector('.movie-genres');
+        if(genresVal === "" || genresVal === null || genresVal === undefined)
+            genresVal = "";
+        else
+            genresVal = genresVal.innerHTML;
+        
+            var exists = false;
+            for(var i =0; i < watchedMovies.length; i++){
+                if(watchedMovies[i].title === titleVal){
+                    exists = true;
+                    break;
+                }
+            }
+        
+            if(!exists){
+                console.log("This movie doesn't exist yet in our watched list!")
+                var newMovie = {
+                    title: titleVal,
+                    type: "Movie",
+                    genre: genresVal,
+                    synopsis: synopsisVal,
+                    runningTime: runtimeVal,
+                    posterURL: imgURL,
+                    rating: ratingVal
+                }
+            
+                console.log(newMovie);
+                
+                watchedMovies.push(newMovie);
+                localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
+            }
+            else{
+                console.log("ahhh, we already watched this one!")
+            }
+            
+            loadWatchedMovies();
+        
+    }
 
     function switchSingleView(movieDiv){
         console.log("clicked on a specific movie");
@@ -369,7 +413,7 @@ function saveWatchedMovie(){
                                 + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
                                 + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
                                 +  '<button class="button primary small">Watch Trailer</button>'
-                                +  '<button class="button secondary small">'+"I'll Watch This!</button>"
+                                +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
 
                                 
@@ -405,7 +449,7 @@ function saveWatchedMovie(){
                             + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>'
                             + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
                             +  '<button class="button primary small">Watch Trailer</button>'
-                            +  '<button class="button secondary small">'+"I'll Watch This!</button>"
+                            +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                             +  '</div></div>';
         }
                         movieListEl.innerHTML = innerResultString;
@@ -673,19 +717,19 @@ function saveWatchedMovie(){
                         var imdbID = (detail.imdb_id)
 
 
-                        fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
-                            "method": "GET",
-                            "headers": {
-                                "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                                "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
-                            }
-                        })
+                        // fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+                        //     "method": "GET",
+                        //     "headers": {
+                        //         "x-rapidapi-host": "imdb8.p.rapidapi.com",
+                        //         "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+                        //     }
+                        // })
 
-                            .then(function (tagline) { return tagline.json() })
-                            .then(function (tagline) {
+                        //     .then(function (tagline) { return tagline.json() })
+                        //     .then(function (tagline) {
 
-                                console.log(tagline)
-                            })
+                        //         console.log(tagline)
+                        //     })
 
                     })
             })
