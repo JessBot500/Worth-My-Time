@@ -355,6 +355,13 @@ function saveWatchedMovie(){
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
 
+        var exists = false;
+        var titleArray = [];
+    for(var i =0; i < watchedMovies.length; i++){
+        titleArray.push(watchedMovies[i].title);
+    }
+
+        console.log("TitleArray is: ", titleArray);
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
         console.log("Title is read as ", title);
@@ -388,48 +395,51 @@ function saveWatchedMovie(){
                         console.log("Detail info ", detail);
 
                         var title = (detail.title)
-                        var posterURL = detail.poster_path;
-                        var reportedRuntime = detail.runtime;
-                        if(posterURL === null){
-                            posterURL = "https://placehold.it/75";
-                        }
-                        else{
-                            posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
-                        }
-                        if(reportedRuntime === null || reportedRuntime === 0){
-                            reportedRuntime = "No Runtime Recorded";
-                        }
-                        var genreList = detail.genres;
-                            var innerGenreList = '';
-                            for(var i = 0; i < genreList.length; i++){
-                                innerGenreList += '<span class="primary badge" id="genre'+i+'">';
-                                innerGenreList += genreList[i].name;
-                                innerGenreList += '</span>';
+                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
+                        if(titleArray.indexOf(title) < 0){                            
+                        
+                            var posterURL = detail.poster_path;
+                            var reportedRuntime = detail.runtime;
+                            if(posterURL === null){
+                                posterURL = "https://placehold.it/75";
                             }
-
-                            var reportedRating = ((detail.vote_average) * 10);
-                            if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
-                                reportedRating = "No Reported Rating";
+                            else{
+                                posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
                             }
+                            if(reportedRuntime === null || reportedRuntime === 0){
+                                reportedRuntime = "No Runtime Recorded";
+                            }
+                            var genreList = detail.genres;
+                                var innerGenreList = '';
+                                for(var i = 0; i < genreList.length; i++){
+                                    innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                                    innerGenreList += genreList[i].name;
+                                    innerGenreList += '</span>';
+                                }
 
-                            
-                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
-                            + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
-                            + ' src="'+posterURL+'"></div><div class="about-people-author">'
-                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
-                            + reportedRating + '%</p></span>'
-                            +  '<span class="movie-genres">' + innerGenreList + '</span>'
-                            + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
-                            + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
-                            + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
-                            +  '<button class="button primary small">Watch Trailer</button>'
-                            +  '<button class="button secondary small">'+"I'll Watch This!</button>"
-                            +  '</div></div>';
+                                var reportedRating = ((detail.vote_average) * 10);
+                                if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
+                                    reportedRating = "No Reported Rating";
+                                }
 
-                            
+                                
+                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                + ' src="'+posterURL+'"></div><div class="about-people-author">'
+                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
+                                + reportedRating + '%</p></span>'
+                                +  '<span class="movie-genres">' + innerGenreList + '</span>'
+                                + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
+                                + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
+                                + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
+                                +  '<button class="button primary small">Watch Trailer</button>'
+                                +  '<button class="button secondary small">'+"I'll Watch This!</button>"
+                                +  '</div></div>';
 
-                        movieListEl.innerHTML = innerResultString;
-                
+                                
+
+                            movieListEl.innerHTML = innerResultString;
+                        }
                     })
                 }
                 
