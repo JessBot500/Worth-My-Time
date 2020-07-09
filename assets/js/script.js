@@ -383,7 +383,7 @@ function saveWatchedMovie(){
                             + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
                             + watchedMovies[i].rating + '%</p></span>'
                             +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
-                            + '<p class="author-location movie-runTime">'+watchedMovies[i].runtime+' mins</p>'
+                            + '<p class="author-location movie-runTime">'+watchedMovies[i].runningTime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>';
         }
                         movieListEl.innerHTML = innerResultString;
