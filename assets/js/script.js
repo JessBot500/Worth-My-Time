@@ -116,21 +116,21 @@ function saveWatchedMovie(){
 
 
 
-    function switchSingleView() {
-        console.log("we clicked the button");
-        if ($("#leftView").css("display") != "none") {
-            $("#leftView").css("display", "none");
-            $("#rightView").css("display", "none");
-            $("#singleView").css("display", "block");
-            $("#moviePoster").attr('src', currentMovie.posterURL);
-            //if (current) 
-                document.getElementById("singleRating").innerHTML = currentMovie.rating;
-                document.getElementById("movieTitle").innerHTML = currentMovie.title;
-                document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
-                document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
+    // function switchSingleView() {
+    //     console.log("we clicked the button");
+    //     if ($("#leftView").css("display") != "none") {
+    //         $("#leftView").css("display", "none");
+    //         $("#rightView").css("display", "none");
+    //         $("#singleView").css("display", "block");
+    //         $("#moviePoster").attr('src', currentMovie.posterURL);
+    //         //if (current) 
+    //             document.getElementById("singleRating").innerHTML = currentMovie.rating;
+    //             document.getElementById("movieTitle").innerHTML = currentMovie.title;
+    //             document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
+    //             document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
 
-        }
-    }
+    //     }
+    // }
 
 
     requiredChecbox();
@@ -154,16 +154,39 @@ function saveWatchedMovie(){
     //     });
     // }
 
+    // $('.movieItem').on("click", "div",function(event) {
+    //     event.preventDefault;
+    //     console.log("You've clicked on a movie item: ", $(this));
+    // });
+
+
+    function testClick(movieDiv){
+        var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
+
+        if ($("#leftView").css("display") != "none" || $("#viewWatchedList").css("display") != "none") {
+            $("#leftView").css("display", "none");
+            $("#rightView").css("display", "none");
+            $("#viewWatchedList").css("display", "none");
+            $("#singleView").css("display", "block");
+            $("#moviePoster").attr('src', imgURL);
+            document.getElementById("singleRating").innerHTML = currentMovie.rating;
+            document.getElementById("movieTitle").innerHTML = currentMovie.title;
+            document.getElementById("runningTime").innerHTML = currentMovie.runningTime + " minutes";
+            document.getElementById("synopsis").innerHTML = currentMovie.synopsis;
+        }
+    }
 
 
 
-    function switchSingleView() {
-        console.log("we clicked the button");
+    function switchSingleView(movieDiv) {
+        console.log("we clicked on a movie option");
+        console.log( "Here is our predicted image poster URL: ", movieDiv);
         if ($("#leftView").css("display") != "none") {
             $("#leftView").css("display", "none");
             $("#rightView").css("display", "none");
+            $("#viewWatchedList").css("display", "none");
             $("#singleView").css("display", "block");
-            $("#moviePoster").attr('src', currentMovie.posterURL);
+            $("#moviePoster").attr('src', this.querySelector('#movie-poster').attr("src"));
 
             document.getElementById("singleRating").innerHTML = currentMovie.rating;
             document.getElementById("movieTitle").innerHTML = currentMovie.title;
@@ -296,7 +319,6 @@ function saveWatchedMovie(){
                             innerGenreList += '<span class="primary badge" id="genre'+i+'">';
                             innerGenreList += genreList[i].name;
                             innerGenreList += '</span>';
-                            console.log(innerGenreList);
                         }
 
                         genreEl.innerHTML = innerGenreList;
@@ -309,21 +331,21 @@ function saveWatchedMovie(){
                         var imdbID = (detail.imdb_id)
 
 
-                        fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
-                            "method": "GET",
-                            "headers": {
-                                "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                                "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
-                            }
-                        })
+                    //     fetch("https://imdb8.p.rapidapi.com/title/get-taglines?tconst=" + imdbID, {
+                    //         "method": "GET",
+                    //         "headers": {
+                    //             "x-rapidapi-host": "imdb8.p.rapidapi.com",
+                    //             "x-rapidapi-key": "5cd2f671a2msh72b310a2732290bp1bff51jsna9b4db70046c"
+                    //         }
+                    //     })
 
-                            .then(function (tagline) { return tagline.json() })
-                            .then(function (tagline) {
+                    //         .then(function (tagline) { return tagline.json() })
+                    //         .then(function (tagline) {
 
-                                console.log(tagline)
-                            })
+                    //             console.log(tagline)
+                    //         })
 
-                    })
+                     })
             })
     }
 
@@ -385,35 +407,29 @@ function saveWatchedMovie(){
                                 innerGenreList += '<span class="primary badge" id="genre'+i+'">';
                                 innerGenreList += genreList[i].name;
                                 innerGenreList += '</span>';
-                                console.log(innerGenreList);
+                            }
+
+                            var reportedRating = ((detail.vote_average) * 10);
+                            if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
+                                reportedRating = "No Reported Rating";
                             }
 
                             
-                        innerResultString += '<div class="small-12 medium-6 columns about-people"><div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="testClick(this)">'
+                            + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+posterURL+'"></div><div class="about-people-author">'
-                            + '<p class="author-name movie-title">'+title+'</p>'
+                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
+                            + reportedRating + '%</p></span>'
                             +  '<span>' + innerGenreList + '</span>'
                             + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
-                            + '<div class="small-12 medium-6 columns add-friend"><div class="add-friend-action">'
+                            + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
                             +  '<button class="button primary small">Watch Trailer</button>'
                             +  '<button class="button secondary small">'+"I'll Watch This!</button>"
                             +  '</div></div>';
-                            //var genreList = detail.genres;
-                            //var innerGenreList = '';
-                            // for(var i = 0; i < genreList.length; i++){
-                            //     innerGenreList += '<span class="primary badge" id="genre'+i+'">';
-                            //     innerGenreList += genreList[i].name;
-                            //     innerGenreList += '</span>';
-                            //     console.log(innerGenreList);
-                            // }
-
-                            // genreEl.innerHTML = innerGenreList;
-                        console.log(title);
 
                             
 
-                        //console.log("Here is the new innerHTML string: ",innerResultString);
                         movieListEl.innerHTML = innerResultString;
                 
                     })
