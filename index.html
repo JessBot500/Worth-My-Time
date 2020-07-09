@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/topbar-responsive/topbar-responsive.css?rev=@@hash">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/layout.css?rev=@@hash">
     <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">    
+    <link rel="stylesheet" href="https://get.foundation/building-blocks/building-block/translucent-form-overlay/translucent-form-overlay.css?rev=@@hash">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta class="foundation-mq">
 </head>
@@ -40,6 +41,7 @@
         </nav>
            <!-- Main container for the area beneath the navbar-->
             <div class="row row-container">
+                <!-- Left hand panel side container: Prev Search-->
                 <!-- Left hand panel side container: Prev Search-->
                 <div class="columns small-12 medium-7 row-container" id="leftView">
                     <div class="app-feature-section medium-6 prevSearchContainer" >
@@ -83,11 +85,11 @@
                         </div>
                         <div class="row columns">
                             <label>Genre
-                            <select name="genre" type="text">
+                            <select name="genre" id="genre-select" type="text">
                                 <option>Any</option>
                                 <option value="action">Action</option>
                                 <option value="drama">Drama</option>
-                                <option value="comdey">Comedy</option>
+                                <option value="comedy">Comedy</option>
                                 <option value="family">Family</option>
                                 <option value="sci-fi">Science Fiction</option>
                                 <option value="thriller">Thriller</option>
@@ -99,19 +101,19 @@
                         </div>
                         <div class="row columns">
                             <label>Actor/Actress
-                            <input type="text" name="actor" placeholder="Actor/Actress">
+                            <input type="text" name="actor" id="actor" placeholder="Actor/Actress">
                             </label>
                         </div>
                         <div class="row">
                             <label class="columns small-12">Running Time</label>
                             <div class="columns small-3">
-                            <input type="number" min="0" name="min" placeholder="Min">
+                            <input type="number" min="0" name="min" id="minMins" placeholder="Min">
                             </div>
                             <div class="columns small-3 runningTimeLabel">
                                 <label class=" text-left middle" for="min">minutes</label>
                             </div>
                             <div class="columns small-3">
-                            <input type="number" min="0" name="max" placeholder="Max">
+                            <input type="number" min="0" name="max" id="maxMins" placeholder="Max">
                             </div>
                             <divl class="columns small-3 runningTimeLabel">
                                 <label class=" text-left middle " for="max">minutes</label>
@@ -120,12 +122,12 @@
                         <div class="row columns small-6">
                             <label>Minimum Rotten Tomatoes Rating
                                 <div class="input-group">
-                                <input type="number" class="input-group-field" name="rating" max="100" min="0" placeholder="Rating%">
+                                <input type="number" class="input-group-field" id="rating" name="rating" max="100" min="0" placeholder="Rating%">
                                     <span class="input-group-label">%</span>
                                 </div>                           
                             </label>
                         </div>
-                        <button type="button" class="primary button expanded search-button">
+                        <button type="button" onclick="search()" class="primary button expanded search-button">
                             Search
                         </button>
                     </form>
@@ -158,6 +160,8 @@
           
       <script src ="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>   
       <script src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script> 
+      <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src ="assets/js/youtube.js"></script>
       <script src="./assets/js/script.js"></script>
 </body>
