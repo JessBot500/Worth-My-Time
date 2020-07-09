@@ -291,7 +291,7 @@ function loadPrevSearch() {
 
     }
 
-    function saveNewSearch() {
+   /* function saveNewSearch() {
         var checkType = "";
         var movieCheck = document.getElementById("movieType").checked;
         var showCheck = document.getElementById("showType").checked;
@@ -341,11 +341,11 @@ function loadPrevSearch() {
         console.log("recent search is: ", prevSearchObj);
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
-
+*/
     function search() {
         console.log("you clicked search")
-        saveNewSearch();
-        loadPrevSearch();
+        //saveNewSearch();
+       // loadPrevSearch();
 
         var genreSelector = document.querySelector('#genre-select');
 
@@ -381,16 +381,27 @@ function loadPrevSearch() {
         if (output === "horror") {
             genre = 27
         }
-
+        var rating = document.querySelector("#rating").value
+        var ratingMath = (rating / 10)
+        var minMins = document.querySelector("#minMins").value
+        var maxMins = document.querySelector("#maxMins").value
+        
         fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
             API +
             "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
             genre +
+            "&vote_average.gte=" +
+            ratingMath +
+            "&with_runtime.lte=" +
+            maxMins +
+            "&with_runtime.gte=" +
+            minMins +
             "&page=1")
             .then(function (movieSearch) { return movieSearch.json() })
             .then(function (movieSearch) {
-
+                
                 console.log(movieSearch)
+                console.log(ratingMath)
 
 
 
