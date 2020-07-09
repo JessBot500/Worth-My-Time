@@ -35,14 +35,12 @@
             <div id="topbar-responsive" class="topbar-responsive-links">
                 <div class="top-bar-right">
                     <ul class="menu simple vertical medium-horizontal">
-                        <form id="search-form">
-                            <li><input type="search" class="search-field" placeholder="Search" id="movie-title">
-                                <button type="submit" class="button search" onclick="movie()">Search</button></li>
-                        </form>
-
+                        <li><input type="search" class="search-field" placeholder="Search">
+                            <button type="button" class="button search" onclick="switchSingleView()">Search</button>
+                        </li>
                         <li>
-                            <button type="button" class="button hollow topbar-responsive-button"
-                                onclick="listWatchedMovies()">My Watched List</button>
+                            <button type="button" class="button hollow topbar-responsive-button">My Watched
+                                List</button>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +48,6 @@
         </nav>
         <!-- Main container for the area beneath the navbar-->
         <div class="row row-container">
-            <!-- Left hand panel side container: Prev Search-->
             <!-- Left hand panel side container: Prev Search-->
             <div class="columns small-12 medium-7 row-container" id="leftView">
                 <div class="app-feature-section medium-6 prevSearchContainer">
@@ -91,7 +88,7 @@
             <div class="columns small-12 medium-5" id="rightView">
                 <div class="translucent-form-overlay">
                     <form>
-                        <h3>Search for Something Worth My Time</h3>
+                        <h3>Search for Something Worth Your Time</h3>
                         <div class="row columns">
                             <fieldset class="fieldset">
                                 <legend class="form-legend">Type: </legend>
@@ -103,11 +100,11 @@
                         </div>
                         <div class="row columns">
                             <label>Genre
-                                <select name="genre" id="genre-select" type="text">
+                                <select name="genre" type="text">
                                     <option>Any</option>
                                     <option value="action">Action</option>
                                     <option value="drama">Drama</option>
-                                    <option value="comedy">Comedy</option>
+                                    <option value="comdey">Comedy</option>
                                     <option value="family">Family</option>
                                     <option value="sci-fi">Science Fiction</option>
                                     <option value="thriller">Thriller</option>
@@ -119,19 +116,19 @@
                         </div>
                         <div class="row columns">
                             <label>Actor/Actress
-                                <input type="text" name="actor" id="actor" placeholder="Actor/Actress">
+                                <input type="text" name="actor" placeholder="Actor/Actress">
                             </label>
                         </div>
                         <div class="row">
                             <label class="columns small-12">Running Time</label>
                             <div class="columns small-3">
-                                <input type="number" min="0" name="min" id="minMins" placeholder="Min">
+                                <input type="number" min="0" name="min" placeholder="Min">
                             </div>
                             <div class="columns small-3 runningTimeLabel">
                                 <label class=" text-left middle" for="min">minutes</label>
                             </div>
                             <div class="columns small-3">
-                                <input type="number" min="0" name="max" id="maxMins" placeholder="Max">
+                                <input type="number" min="0" name="max" placeholder="Max">
                             </div>
                             <divl class="columns small-3 runningTimeLabel">
                                 <label class=" text-left middle " for="max">minutes</label>
@@ -140,8 +137,8 @@
                         <div class="row columns small-6">
                             <label>Minimum Rating
                                 <div class="input-group">
-                                    <input type="number" class="input-group-field" id="rating" name="rating" max="100"
-                                        min="0" placeholder="Rating">
+                                    <input type="number" class="input-group-field" name="rating" max="100" min="0"
+                                        placeholder="Rating%">
                                     <span class="input-group-label">%</span>
                                 </div>
                             </label>
@@ -153,7 +150,7 @@
                 </div>
             </div>
             <div id="singleView" class="columns small-12 medium-12">
-                <div class="card-user-profile small-12 medium-6 singlePosterView">
+                <div class="card-user-profile">
                     <img class="card-user-profile-img" id="moviePoster"
                         src="https://images.pexels.com/photos/5439/earth-space.jpg?h=350&auto=compress&cs=tinysrgb"
                         alt="picture of space" />
@@ -161,17 +158,8 @@
                         <div class="card-user-profile-avatar">
                             <h4 id="singleRating">94%</h4>
                         </div>
-                        <div class="row">
-                            <div class="columns medium-10 small-10">
-                                <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p><span
-                                    id="genre">Unknown Genre</span>
-                                <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
-                            </div>
-                            <div class="columns medium-2 small-2">
-                                <span class="secondary label" id="type">Unknown</span>
-                            </div>
-                        </div>
-
+                        <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p>
+                        <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
                         <p class="card-user-profile-info" id="synopsis">The Yeti, once better known as the Abominable
                             Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It
                             sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.
@@ -179,100 +167,22 @@
                     </div>
 
                     <div class="card-user-profile-actions">
-                        <a href="#" id="watch-trailer" class="card-user-profile-button button hollow"
-                            onclick="youtubeSearch()">Watch Trailer</a>
-                        <a href="#" class="card-user-profile-button button hollow secondary"
-                            onclick="saveWatchedMovie()">I'll watch this!</a>
+                        <a href="#" class="card-user-profile-button button hollow">Watch Trailer</a>
+                        <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
                     </div>
                 </div>
 
-            </div>
-            <div id="viewWatchedList" class="columns small-12 medium-12">
-                <div class="card-user-profile small-12 medium-6 singlePosterView">
-                    <img class="card-user-profile-img" id="watchedPoster"
-                        src="https://images.pexels.com/photos/5439/earth-space.jpg?h=350&auto=compress&cs=tinysrgb"
-                        alt="picture of space" />
-                    <div class="card-user-profile-content card-section">
-                        <div class="card-user-profile-avatar">
-                            <h4 id="watchedRating">94%</h4>
-                        </div>
-                        <div class="row">
-                            <div class="columns medium-10 small-10">
-                                <p class="card-user-profile-name" id="watchedTitle">Abominable Snowman</p><span id="watchedGenre">Unknown Genre</span>
-                                <p class="card-user-profile-status" id="watchedTime">Yeti Web Designer</p>
-                            </div>
-                            <div class="columns medium-2 small-2">
-                                <span class="secondary label" id="watchedType">Unknown</span>
-                            </div>
-                            <p class="card-user-profile-info" id="watchedSynopsis">The Yeti, once better known as the
-                                Abominable Snowman, is a mysterious bipedal creature said to live in the mountains of
-                                Asia. It sometimes leaves tracks in snow, but is also said to dwell below the Himalayan
-                                snow line.</p>
-                        </div>
-
-                        <div class="card-user-profile-actions">
-                            <a href="#" id="watch-trailer" class="card-user-profile-button button hollow">Watch
-                                Trailer</a>
-                            <a href="#" class="card-user-profile-button button hollow secondary">I'll watch this!</a>
-                        </div>
-                    </div>
 
 
-
-                </div>
-            </div>
-            <div id="resultListView" class="columns small-12 medium-12">
-                <div class="people-you-might-know">
-                    <div class="add-people-header">
-                        <h6 class="header-title" id="listHeaderTitle">
-                            These Might Be Worth Your Time
-                        </h6>
-                    </div>
-                    <div class="row add-people-section" id="movieList">
-                        <div class="small-12 medium-6 columns about-people">
-                            <div class="about-people-avatar">
-                                <img class="avatar-image movie-poster" src="https://i.imgur.com/UPVxPjb.jpg" alt="Kishore Kumar">
-                            </div>
-                            <div class="about-people-author">
-                                <p class="author-name movie-title" id="listMovieTitle">
-                                    Kishore Kumar
-                                </p>
-                                <p class="author-location movie-runTime" id="listRunningTime">
-                                    Mumbai, India
-                                </p>
-                                <p class="author-mutual movie-synopsis" id="listSynopsis">
-                                    <strong>Shahrukh Khan</strong> is a mutual friend.
-                                </p>
-                            </div>    
-                        </div> 
-                        <div class="small-12 medium-6 columns add-friend">
-                            <div class="add-friend-action">
-                              <button class="button primary small">
-                                Watch Trailer
-                              </button>
-                              <button class="button secondary small">
-                                I'll Watch This!
-                              </button>
-                            </div>
-                        </div>
-
-                        <div class="view-more-people">
-                            <p class="view-more-text">
-                                <a href="#" class="view-more-link">View More..</a>
-                            </p>
-                        </div>
-                </div>
             </div>
         </div>
+    </div>
 
 
-        <script src="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>
-        <script
-            src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script>
-        <!-- jQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="assets/js/youtube.js"></script>
-        <script src="./assets/js/script.js"></script>
+    <script src="https://get.foundation/building-blocks/assets/js/app.js?rev=@@hash"></script>
+    <script
+        src="https://get.foundation/building-blocks/building-block/searchbar-expand-on-click/searchbar-expand-on-click.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>

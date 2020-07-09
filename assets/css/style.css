@@ -226,6 +226,7 @@
 
 
 .topbar-responsive {
+<<<<<<< HEAD
   background: #2c3840;
   padding: 1rem 1.5rem;
 }
@@ -253,6 +254,26 @@
 }
 
 @media screen and (max-width: 39.9375em) {
+=======
+    background: #2c3840;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .topbar-responsive .topbar-responsive-logo {
+    color: #fefefe;
+    vertical-align: middle;
+  }
+  
+  .topbar-responsive .menu {
+    background: #2c3840;
+  }
+  
+  .topbar-responsive .menu li:last-of-type {
+    margin-right: 0;
+  }
+  
+>>>>>>> f4e242303a26bd7ed47b32123f2fa4d17c36c94a
   .topbar-responsive .menu a {
     padding: 0.875rem 0;
   }
@@ -514,7 +535,7 @@
     width: 0;
     height: 40px;
     margin-left: 1rem;
-    padding: 0;
+    padding: 2;
     border-radius: 3px;
     border: none;
     transition: all 0.5s ease;
