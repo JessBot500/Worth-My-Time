@@ -1,6 +1,8 @@
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
+var listViewTrailer = document.querySelector("#listview-trailer")
+
 var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [{
     title: "Shrek",
     type: "Movie",
@@ -31,7 +33,7 @@ function loadPrevSearch() {
             RunningTime: 120,
             Rating: 75
         };
-        console.log("currentprevSearch is: ", prevSearchObj);
+        //console.log("currentprevSearch is: ", prevSearchObj);
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
         document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
         document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
@@ -42,7 +44,7 @@ function loadPrevSearch() {
 
 function loadWatchedMovies(){
     
-    console.log("loading watched movie list");
+    //console.log("loading watched movie list");
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
@@ -53,7 +55,7 @@ function loadWatchedMovies(){
         $("#viewWatchedList").css("display", "block");
     }
     var latest = watchedMovies.length -1;
-    console.group(watchedMovies[0]);
+    //console.group(watchedMovies[0]);
     $("#watchedPoster").attr("src",watchedMovies[latest].posterURL);
     document.getElementById("watchedTitle").innerHTML = watchedMovies[latest].title;
     document.getElementById("watchedType").innerHTML = watchedMovies[latest].type;
@@ -74,7 +76,7 @@ function saveWatchedMovie(){
     }
 
     if(!exists){
-        console.log("This movie doesn't exist yet in our watched list!")
+        //console.log("This movie doesn't exist yet in our watched list!")
         var newMovie = {
             title: newTitle,
             type: document.getElementById("type").innerHTML,
@@ -85,13 +87,13 @@ function saveWatchedMovie(){
             rating: document.getElementById("singleRating").innerHTML
         }
     
-        console.log(newMovie);
+        //console.log(newMovie);
         
         watchedMovies.push(newMovie);
         localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
     }
     else{
-        console.log("ahhh, we already watched this one!")
+        //console.log("ahhh, we already watched this one!")
     }
     
     loadWatchedMovies();
@@ -138,7 +140,7 @@ function saveWatchedMovie(){
             }
         
             if(!exists){
-                console.log("This movie doesn't exist yet in our watched list!")
+                //console.log("This movie doesn't exist yet in our watched list!")
                 var newMovie = {
                     title: titleVal,
                     type: "Movie",
@@ -149,17 +151,17 @@ function saveWatchedMovie(){
                     rating: ratingVal
                 }
             
-                console.log(newMovie);
+                //console.log(newMovie);
                 
                 watchedMovies.push(newMovie);
                 localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
             }
             else{
-                console.log("ahhh, we already watched this one!")
+                //console.log("ahhh, we already watched this one!")
             }
             
             if ($("#resultListView").css("display") != "none") {
-                console.log("Going throught these changes");
+               //console.log("Going throught these changes");
                 $("#leftView").css("display", "block");
                 $("#rightView").css("display", "block");
                 $("#viewWatchedList").css("display", "none");
@@ -171,7 +173,7 @@ function saveWatchedMovie(){
     }
 
     function switchSingleView(movieDiv){
-        console.log("clicked on a specific movie");
+        //onsole.log("clicked on a specific movie");
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
         var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
         var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
@@ -200,6 +202,71 @@ function saveWatchedMovie(){
     }
 
 
+    // youtube search api
+    var youtubeSearch = function(title, listTitle) {
+        fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
+            "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+            
+            // tester alt key
+            //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+
+            // extra tester
+            //"x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
+        }
+        })
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    console.log(data);
+                    // display trailer
+                    watchTrailerEl.addEventListener("click", function(event) {
+                        event.preventDefault();
+    
+                        for (var i = 0; i < data.items.length; i++) {
+                            var trailerUrl = data.items[0].url
+                            open(trailerUrl, "_blank");
+                             console.log(trailerUrl);
+    
+                        }
+                    });
+                    // listViewTrailer.addEventListener("click", function(event){
+                    //     event.preventDefault();
+                    //     console.log("watch trailer clicked")
+                    //     for (var i = 0; i < data.items.length; i++) {
+                    //         var trailerUrl = data.items[0].url
+                    //         open(trailerUrl, "_blank");
+                    //          console.log(trailerUrl);
+    
+                    //     }
+                    // });
+                })
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    };
+    
+    // search function to link to api
+    var searchSubmitHandler = function (event) {
+        event.preventDefault();
+
+        // get input value
+        var searchWord = searchInputEl.value.trim();
+        if (searchWord) {
+            //youtubeSearch(searchWord)
+            multiMovie(searchWord);
+            //movie(searchWord)
+            // switchSingleView(searchWord);
+            searchInputEl.value = "";
+        }
+
+    }
+
+
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
@@ -211,7 +278,7 @@ function saveWatchedMovie(){
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
-        console.log("Title is read as ", title);
+        //console.log("Title is read as ", title);
         var poster = document.querySelector('#moviePoster');
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
@@ -221,10 +288,10 @@ function saveWatchedMovie(){
 
                 console.log(response);
 
-                console.log("Total number of related results is: ", response.results.length);
+                //console.log("Total number of related results is: ", response.results.length);
 
                 var id = (response.results[0].id);
-                console.log("id is :", id);
+                //console.log("id is :", id);
 
 
                 fetch("https://api.themoviedb.org/3/movie/"
@@ -235,7 +302,7 @@ function saveWatchedMovie(){
                     .then(function (detail) { return detail.json() })
                     .then(function (detail) {
 
-                        console.log("Detail info ", detail);
+                       // console.log("Detail info ", detail);
 
                         var title = (detail.title)
                         var genreEl = document.getElementById("genre");
@@ -244,7 +311,7 @@ function saveWatchedMovie(){
                         document.getElementById("synopsis").innerHTML = detail.overview;
                         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
                         document.getElementById("type").innerHTML = "Movie";
-                        console.log(detail.genres);
+                        //console.log(detail.genres);
                         var genreList = detail.genres;
                         var innerGenreList = '';
                         for(var i = 0; i < genreList.length; i++){
@@ -255,6 +322,8 @@ function saveWatchedMovie(){
 
                         genreEl.innerHTML = innerGenreList;
                         console.log(title);
+
+                        //youtubeSearch(title);
 
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
                         poster.src = ""
@@ -353,7 +422,8 @@ function saveWatchedMovie(){
                                 +  '<button class="button primary small">Watch Trailer</button>'
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
-
+                                 
+                            youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -536,10 +606,10 @@ function saveWatchedMovie(){
             searchInputEl.value = "";
         }
 
-    }
+    // }
 
 
-    searchBar.addEventListener("submit", searchSubmitHandler);
+    // searchBar.addEventListener("submit", searchSubmitHandler);
 
     function search() {
         console.log("you clicked search")
@@ -620,7 +690,7 @@ function saveWatchedMovie(){
                 console.log(ratingMath)
                 console.log(actorId)
 
-                console.log(movieSearch)
+    //             console.log(movieSearch)
 
 
             })})
@@ -629,3 +699,4 @@ function saveWatchedMovie(){
     topFive();
     requiredChecbox();
     loadPrevSearch();
+    }
