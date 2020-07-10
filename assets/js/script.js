@@ -208,7 +208,7 @@ function saveWatchedMovie(){
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+            "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
             
             // tester alt key
             //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
@@ -221,7 +221,6 @@ function saveWatchedMovie(){
             if (response.ok) {
                 response.json().then(function(data) {
                     console.log(data);
-                    console.log(listTitle);
                     // display trailer
                     watchTrailerEl.addEventListener("click", function(event) {
                         event.preventDefault();
@@ -441,7 +440,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                                youtubeSearch(title);
+                            youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
