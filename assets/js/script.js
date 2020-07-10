@@ -608,6 +608,7 @@ function saveWatchedMovie(){
             // switchSingleView(searchWord);
             searchInputEl.value = "";
         }
+    }
 
     }
 
@@ -704,3 +705,4 @@ function saveWatchedMovie(){
     topFive();
     requiredChecbox();
     loadPrevSearch();
+
