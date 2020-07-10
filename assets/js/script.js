@@ -543,8 +543,8 @@ function saveWatchedMovie(){
 
     function search() {
         console.log("you clicked search")
-        //saveNewSearch();
-       // loadPrevSearch();
+        saveNewSearch();
+       loadPrevSearch();
 
         var genreSelector = document.querySelector('#genre-select');
 
