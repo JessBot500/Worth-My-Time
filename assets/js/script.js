@@ -201,7 +201,7 @@ function saveWatchedMovie(){
         }
     }
 
-/*
+
     // youtube search api
     var youtubeSearch = function(title, listTitle) {
         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
@@ -269,7 +269,7 @@ function saveWatchedMovie(){
 
     }
 
-*/
+
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
@@ -439,10 +439,10 @@ function saveWatchedMovie(){
     }
     
     function listWatchedMovies(){
-        //$("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
-        //$("#viewWatchedList").css("display", "none");
-        //$("#singleView").css("display", "none");
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
 
         document.getElementById('listHeaderTitle').innerHTML = "Watched List";
@@ -454,7 +454,7 @@ function saveWatchedMovie(){
                             + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
                             + ' src="'+watchedMovies[i].posterURL+'"></div><div class="about-people-author">'
                             + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
-                            + watchedMovies[i].rating + '</p></span>'
+                            + watchedMovies[i].rating + '%</p></span>'
                             +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
                             + '<p class="author-location movie-runTime">'+watchedMovies[i].runningTime+' mins</p>'
                             + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>';
@@ -610,8 +610,6 @@ function saveWatchedMovie(){
         }
     }
 
-    
-
 
     // }
 
@@ -705,4 +703,3 @@ function saveWatchedMovie(){
     topFive();
     requiredChecbox();
     loadPrevSearch();
-
