@@ -426,7 +426,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            youtubeSearch(title);
+                           // youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -597,18 +597,7 @@ function saveWatchedMovie(){
     };
     */
     // search function to link to api
-    var searchSubmitHandler = function (event) {
-        event.preventDefault();
-
-        // get input value
-        var searchWord = searchInputEl.value.trim();
-        if (searchWord) {
-            youtubeSearch(searchWord)
-            movie(searchWord)
-            // switchSingleView(searchWord);
-            searchInputEl.value = "";
-        }
-    }
+    
 
 
     // }
