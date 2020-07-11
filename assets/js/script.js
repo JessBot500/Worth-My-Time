@@ -1,4 +1,3 @@
-  
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
@@ -202,9 +201,9 @@ function saveWatchedMovie(){
         }
     }
 
-/*
+
     // youtube search api
-    var youtubeSearch = function(title, listTitle) {
+    /*var youtubeSearch = function(title, listTitle) {
         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
         "method": "GET",
         "headers": {
@@ -253,7 +252,7 @@ function saveWatchedMovie(){
             console.log(error);
         })
     };
-    
+    */
     // search function to link to api
     var searchSubmitHandler = function (event) {
         event.preventDefault();
@@ -270,11 +269,11 @@ function saveWatchedMovie(){
 
     }
 
-*/
+
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
-        event.preventDefault();
+
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
@@ -427,7 +426,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            //youtubeSearch(title);
+                           // youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -440,10 +439,10 @@ function saveWatchedMovie(){
     }
     
     function listWatchedMovies(){
-        //$("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
-        //$("#viewWatchedList").css("display", "none");
-        //$("#singleView").css("display", "none");
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
 
         document.getElementById('listHeaderTitle').innerHTML = "Watched List";
@@ -561,19 +560,77 @@ function saveWatchedMovie(){
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 
+    // youtube search api
+    /*var youtubeSearch = function(searchWord) {
+        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
+            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+            
+            // tester alt key
+            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+        }
+        })
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    // console.log(data);
+    
+                    // display trailer
+                    watchTrailerEl.addEventListener("click", function(event) {
+                        event.preventDefault();
+    
+                        for (var i = 0; i < data.items.length; i++) {
+                            var trailerUrl = data.items[0].url
+                            open(trailerUrl, "_blank");
+                            // console.log(trailerUrl);
+    
+                        }
+                    });
+                })
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    };
+    */
+    // search function to link to api
+    
+
+
+    // }
+
+    // searchBar.addEventListener("submit", searchSubmitHandler);
+
     function search() {
+        console.log("you clicked search")
+        document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "block");
         var rating = document.querySelector("#rating").value
         var ratingMath = (rating / 10)
         var minMins = document.querySelector("#minMins").value
         var maxMins = document.querySelector("#maxMins").value
-        var actor = document.querySelector('#actor').value
-        console.log("you clicked search")
-        saveNewSearch();
-       loadPrevSearch();
-
+        var actor = document.querySelector("#actor").value
+        var innerResultString = "";
+        var movieListEl = document.getElementById("movieList");
         var genreSelector = document.querySelector('#genre-select');
 
         var output = genreSelector.value;
+        saveNewSearch();
+       loadPrevSearch();
+
+       var exists = false;
+       var titleArray = [];
+        for(var i =0; i < watchedMovies.length; i++){
+            titleArray.push(watchedMovies[i].title);
+        }
+
         console.log(output)
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
@@ -606,12 +663,7 @@ function saveWatchedMovie(){
             genre = 27
         }
         
-        
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        console.log("https://api.themoviedb.org/3/search/person?api_key=" +
-        API +
-        "&search_type=ngram&query=" +
-        actor)
         fetch("https://api.themoviedb.org/3/search/person?api_key=" +
         API +
         "&search_type=ngram&query=" +
@@ -621,18 +673,24 @@ function saveWatchedMovie(){
             .then(function (actorSearch) {
                 
                 console.log(actorSearch)
-                
-
-           
 
                 var actorId = (actorSearch.results[0].id)
+                console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                API +
+                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                genre +
+                "&with_runtime.lte=" +
+                maxMins +
+                "&with_runtime.gte=" +
+                minMins +
+                "&with_people=" +
+                actorId +
+                "&page=1")
         
                 fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
                 API +
                 "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
                 genre +
-                "&vote_average.gte=" +
-                ratingMath +
                 "&with_runtime.lte=" +
                 maxMins +
                 "&with_runtime.gte=" +
@@ -642,13 +700,74 @@ function saveWatchedMovie(){
                 "&page=1")
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
-                
-                console.log(ratingMath)
-                console.log(actorId)
 
                 console.log(movieSearch)
+                
 
+                var innerResultString = "";
+                var movieListEl = document.getElementById("movieList");
+                for(var i = 0; i< movieSearch.results.length; i++){
+                    var id = movieSearch.results[i].id;
+                    fetch("https://api.themoviedb.org/3/movie/"
+                        + id
+                        + "?api_key="
+                        + API)
 
+                        .then(function (detail) { return detail.json() }
+                    )
+                    .then(function (detail) {
+
+                        console.log("Detail info ", detail);
+
+                        var title = (detail.title)
+                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
+                        if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.runtime>=minMins && detail.vote_average >= ratingMath){                            
+                        
+                            var posterURL = detail.poster_path;
+                            var reportedRuntime = detail.runtime;
+                            if(posterURL === null){
+                                posterURL = "https://placehold.it/75";
+                            }
+                            else{
+                                posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
+                            }
+                            if(reportedRuntime === null || reportedRuntime === 0){
+                                reportedRuntime = "No Runtime Recorded";
+                            }
+                            var genreList = detail.genres;
+                                var innerGenreList = '';
+                                for(var i = 0; i < genreList.length; i++){
+                                    innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                                    innerGenreList += genreList[i].name;
+                                    innerGenreList += '</span>';
+                                }
+
+                                var reportedRating = ((detail.vote_average) * 10);
+                                if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
+                                    reportedRating = "No Reported Rating";
+                                }
+
+                                
+                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                + ' src="'+posterURL+'"></div><div class="about-people-author">'
+                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
+                                + reportedRating + '%</p></span>'
+                                +  '<span class="movie-genres">' + innerGenreList + '</span>'
+                                + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
+                                + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
+                                + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
+                                +  '<button class="button primary small">Watch Trailer</button>'
+                                +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
+                                +  '</div></div>';
+                                 
+                               //youtubeSearch(title);
+                                
+
+                            movieListEl.innerHTML = innerResultString;
+                        }
+                    })
+                }
             })})
     }
 
