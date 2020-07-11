@@ -706,6 +706,17 @@ function saveWatchedMovie(){
 
                 var innerResultString = "";
                 var movieListEl = document.getElementById("movieList");
+                console.log("Movie result set is showing as : ", movieSearch.results.length)
+                if(movieSearch.results.length === 0){
+                    
+                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
+                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
+                                + '<div class="about-people-author">'
+                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
+                                +  '<button class="button primary small" href="./index.html">Try Again</button>'
+                                +  '</div></div>';
+                                movieListEl.innerHTML = innerResultString;
+                }
                 for(var i = 0; i< movieSearch.results.length; i++){
                     var id = movieSearch.results[i].id;
                     fetch("https://api.themoviedb.org/3/movie/"
@@ -720,7 +731,7 @@ function saveWatchedMovie(){
                         console.log("Detail info ", detail);
 
                         var title = (detail.title)
-                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
+                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title), "runtime is: ", detail.runtime, "our voters say it's: ", detail.vote_average);
                         if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.runtime>=minMins && detail.vote_average >= ratingMath){                            
                         
                             var posterURL = detail.poster_path;
@@ -766,9 +777,34 @@ function saveWatchedMovie(){
 
                             movieListEl.innerHTML = innerResultString;
                         }
+                        
+                        console.log("Our current index is: ", i, "and our last index is ", movieSearch.results.length-1)
+                        
                     })
+                    if(i === (movieSearch.results.length-1) ){
+                        console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
+                        console.log("Our innerstring result is : ", innerResultString)
+                        if( innerResultString === ""){
+                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
+                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
+                            + '<div class="about-people-author">'
+                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
+                            +  '<button class="button primary small" onclick="returnToOriginalView()">Try Again</button>'
+                            +  '</div></div>';
+                            movieListEl.innerHTML = innerResultString;
+                        }
+                    }
                 }
             })})
+    }
+
+    // Restore to original view without running refresh on the page
+    function returnToOriginalView(){
+        $("#leftView").css("display", "block");
+        $("#rightView").css("display", "block");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "none");
     }
 
     // Function to run search based on prev saved Search
