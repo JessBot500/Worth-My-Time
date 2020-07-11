@@ -771,6 +771,176 @@ function saveWatchedMovie(){
             })})
     }
 
+    // Function to run search based on prev saved Search
+    function runPrevSearch() {
+        console.log("you clicked previous search")
+        document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "block");
+        // var prevSearchObj = JSON.parse(localStorage.getItem('prevSearch')) || {};
+        // //console.log("currentprevSearch is: ", prevSearchObj);
+        // document.getElementById("prevType").innerHTML = prevSearchObj.Type;
+        // document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
+        // document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
+        // document.getElementById("prevTime").innerHTML = prevSearchObj.RunningTime + " mins";
+        // document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
+        var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
+        var ratingMath = (rating / 10)
+        var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
+        console.log(maxMins)
+        var actor = document.querySelector("#prevActor").innerHTML
+        var innerResultString = "";
+        var movieListEl = document.getElementById("movieList");
+        var output = document.querySelector('#prevGenre').innerHTML.toLowerCase()
+       // var output = genreSelector.value;
+       // saveNewSearch();
+       //loadPrevSearch();
+
+       var exists = false;
+       var titleArray = [];
+        for(var i =0; i < watchedMovies.length; i++){
+            titleArray.push(watchedMovies[i].title);
+        }
+
+        console.log(output)
+
+        var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        var genre = 0
+        if (output === "action") {
+            genre = 28
+        }
+        if (output === "drama") {
+            genre = 18
+        }
+        if (output === "comedy") {
+            genre = 35
+        }
+        if (output === "family") {
+            genre = 10751
+        }
+        if (output === "sci-fi") {
+            genre = 878
+        }
+        if (output === "thriller") {
+            genre = 53
+        }
+        if (output === "adventure") {
+            genre = 12
+        }
+        if (output === "romance") {
+            genre = 10749
+        }
+        if (output === "horror") {
+            genre = 27
+        }
+        var innerResultString = "";
+                var movieListEl = document.getElementById("movieList");
+        
+        var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        fetch("https://api.themoviedb.org/3/search/person?api_key=" +
+        API +
+        "&search_type=ngram&query=" +
+        actor)
+
+            .then(function (actorSearch) { return actorSearch.json() })
+            .then(function (actorSearch) {
+                
+                console.log(actorSearch)
+
+                var actorId = (actorSearch.results[0].id)
+                console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                API +
+                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                genre +
+                "&with_runtime.lte=" +
+                maxMins +
+                "&with_people=" +
+                actorId +
+                "&page=1")
+        
+                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                API +
+                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                genre +
+                "&with_runtime.lte=" +
+                maxMins +
+                "&with_people=" +
+                actorId +
+                "&page=1")
+                .then(function (movieSearch) { return movieSearch.json() })
+                .then(function (movieSearch) {
+
+                console.log(movieSearch)
+                
+
+                
+                for(var i = 0; i< movieSearch.results.length; i++){
+                    var id = movieSearch.results[i].id;
+                    fetch("https://api.themoviedb.org/3/movie/"
+                        + id
+                        + "?api_key="
+                        + API)
+
+                        .then(function (detail) { return detail.json() }
+                    )
+                    .then(function (detail) {
+
+                        console.log("Detail info ", detail);
+
+                        var title = (detail.title)
+                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
+                        if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.vote_average >= ratingMath){                            
+                            console.log("we made it into the loop")
+                            var posterURL = detail.poster_path;
+                            var reportedRuntime = detail.runtime;
+                            if(posterURL === null || posterURL === undefined){
+                                posterURL = "https://placehold.it/75";
+                            }
+                            else{
+                                posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
+                            }
+                            if(reportedRuntime === null || reportedRuntime === 0){
+                                reportedRuntime = "No Runtime Recorded";
+                            }
+                            var genreList = detail.genres;
+                                var innerGenreList = '';
+                                for(var i = 0; i < genreList.length; i++){
+                                    innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+                                    innerGenreList += genreList[i].name;
+                                    innerGenreList += '</span>';
+                                }
+
+                                var reportedRating = ((detail.vote_average) * 10);
+                                if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
+                                    reportedRating = "No Reported Rating";
+                                }
+
+                                
+                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                + ' src="'+posterURL+'"></div><div class="about-people-author">'
+                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
+                                + reportedRating + '%</p></span>'
+                                +  '<span class="movie-genres">' + innerGenreList + '</span>'
+                                + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
+                                + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
+                                + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
+                                +  '<button class="button primary small">Watch Trailer</button>'
+                                +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
+                                +  '</div></div>';
+                                 
+                               //youtubeSearch(title);
+                               movieListEl.innerHTML = innerResultString;
+                            
+                        }
+                    })
+                }
+            })})
+    }
+
     topFive();
     requiredChecbox();
     loadPrevSearch();
