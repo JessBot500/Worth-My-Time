@@ -1,3 +1,4 @@
+  
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
@@ -201,7 +202,7 @@ function saveWatchedMovie(){
         }
     }
 
-
+/*
     // youtube search api
     var youtubeSearch = function(title, listTitle) {
         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
@@ -269,11 +270,11 @@ function saveWatchedMovie(){
 
     }
 
-
+*/
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
-
+        event.preventDefault();
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
@@ -426,7 +427,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            youtubeSearch(title);
+                            //youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -439,10 +440,10 @@ function saveWatchedMovie(){
     }
     
     function listWatchedMovies(){
-        $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
-        $("#viewWatchedList").css("display", "none");
-        $("#singleView").css("display", "none");
+        //$("#leftView").css("display", "none");
+        //$("#rightView").css("display", "none");
+        //$("#viewWatchedList").css("display", "none");
+        //$("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
 
         document.getElementById('listHeaderTitle').innerHTML = "Watched List";
@@ -560,62 +561,12 @@ function saveWatchedMovie(){
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 
-    // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-            // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    // console.log(data);
-    
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
-    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
-    
-                        }
-                    });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
-    // search function to link to api
-    var searchSubmitHandler = function (event) {
-        event.preventDefault();
-
-        // get input value
-        var searchWord = searchInputEl.value.trim();
-        if (searchWord) {
-            youtubeSearch(searchWord)
-            movie(searchWord)
-            // switchSingleView(searchWord);
-            searchInputEl.value = "";
-        }
-    }
-
-
-    // }
-
-    // searchBar.addEventListener("submit", searchSubmitHandler);
-
     function search() {
+        var rating = document.querySelector("#rating").value
+        var ratingMath = (rating / 10)
+        var minMins = document.querySelector("#minMins").value
+        var maxMins = document.querySelector("#maxMins").value
+        var actor = document.querySelector('#actor').value
         console.log("you clicked search")
         saveNewSearch();
        loadPrevSearch();
@@ -654,12 +605,13 @@ function saveWatchedMovie(){
         if (output === "horror") {
             genre = 27
         }
-        var rating = document.querySelector("#rating").value
-        var ratingMath = (rating / 10)
-        var minMins = document.querySelector("#minMins").value
-        var maxMins = document.querySelector("#maxMins").value
-        var actor = document.querySelector("#actor").value
+        
+        
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        console.log("https://api.themoviedb.org/3/search/person?api_key=" +
+        API +
+        "&search_type=ngram&query=" +
+        actor)
         fetch("https://api.themoviedb.org/3/search/person?api_key=" +
         API +
         "&search_type=ngram&query=" +
@@ -694,7 +646,7 @@ function saveWatchedMovie(){
                 console.log(ratingMath)
                 console.log(actorId)
 
-    //             console.log(movieSearch)
+                console.log(movieSearch)
 
 
             })})
