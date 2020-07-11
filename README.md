@@ -1,26 +1,33 @@
 # Worth My Time
 
- * Introduction
+ **Introduction
+  
   - 
   
- * Requirements
-  - CSS framework
-  - Deploy to Gihub
-  - 2 server-side APIs
-  - Modals
-  - Responsiveness
-  - Polished UI
-  - Clean repository
-  - Quality README
+  **CSS framework:
   
- * Recommended modules
+    -Foundations
+  
+  
+  **Server-side APIs: 
+  
+  -
   -
   
- * Installation
-  -
   
- * Configuration
-  -
+  **Modals
   
- * Troubleshooting
-  -
+  
+  
+  
+  **Responsiveness
+  
+  
+  
+  
+  **Polished UI
+  
+  
+  
+  
+  **Clean repository  
