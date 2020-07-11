@@ -720,7 +720,19 @@ function saveWatchedMovie(){
 
                 console.log(movieSearch)
 
-
+                var innerResultString = "";
+                var movieListEl = document.getElementById("movieList");
+                for(var i = 0; i< movieSearch.results.length; i++){
+                    innerResultString += '<div class="small-12 medium-12 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                    + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                    + ' src="'+"https://image.tmdb.org/t/p/w780//"+movieSearch.results[i].poster_path+'"></div><div class="about-people-author">'
+                                    + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+movieSearch.results[i].title+'</p><p class="secondary movie-rating label">'
+                                    + movieSearch.results[i].vote_average + '%</p></span>'
+                                    +  '<span class="movie-genres">' + '</span>'
+                                    + '<p class="author-location movie-runTime">'+' mins</p>'
+                                    + '<p class="author-mutual movie-synopsis">'+'</p></div></div>';
+                }
+                                movieListEl.innerHTML = innerResultString;
             })})
     }
 
