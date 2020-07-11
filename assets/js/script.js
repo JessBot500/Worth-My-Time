@@ -714,7 +714,7 @@ function saveWatchedMovie(){
                 "&page=1")
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
-                
+                console.log("Movie search result: ", movieSearch)
                 console.log(ratingMath)
                 console.log(actorId)
 
