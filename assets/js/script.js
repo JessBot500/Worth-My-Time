@@ -616,6 +616,11 @@ function saveWatchedMovie(){
     // searchBar.addEventListener("submit", searchSubmitHandler);
 
     function search() {
+        var rating = document.querySelector("#rating").value
+        var ratingMath = (rating / 10)
+        var minMins = document.querySelector("#minMins").value
+        var maxMins = document.querySelector("#maxMins").value
+        var actor = document.querySelector('#actor').value
         console.log("you clicked search")
         saveNewSearch();
        loadPrevSearch();
@@ -654,12 +659,13 @@ function saveWatchedMovie(){
         if (output === "horror") {
             genre = 27
         }
-        var rating = document.querySelector("#rating").value
-        var ratingMath = (rating / 10)
-        var minMins = document.querySelector("#minMins").value
-        var maxMins = document.querySelector("#maxMins").value
-        var actor = document.querySelector("#actor").value
+        
+        
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        console.log("https://api.themoviedb.org/3/search/person?api_key=" +
+        API +
+        "&search_type=ngram&query=" +
+        actor)
         fetch("https://api.themoviedb.org/3/search/person?api_key=" +
         API +
         "&search_type=ngram&query=" +
