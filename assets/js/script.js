@@ -203,7 +203,7 @@ function saveWatchedMovie(){
 
 
     // youtube search api
-    var youtubeSearch = function(title, listTitle) {
+    /*var youtubeSearch = function(title, listTitle) {
         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
         "method": "GET",
         "headers": {
@@ -252,7 +252,7 @@ function saveWatchedMovie(){
             console.log(error);
         })
     };
-    
+    */
     // search function to link to api
     var searchSubmitHandler = function (event) {
         event.preventDefault();
@@ -426,7 +426,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            youtubeSearch(title);
+                            //youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -718,7 +718,7 @@ function saveWatchedMovie(){
                 console.log(ratingMath)
                 console.log(actorId)
 
-    //             console.log(movieSearch)
+                console.log(movieSearch)
 
 
             })})
