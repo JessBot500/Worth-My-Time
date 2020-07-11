@@ -673,9 +673,6 @@ function saveWatchedMovie(){
             .then(function (actorSearch) {
                 
                 console.log(actorSearch)
-                
-
-           
 
                 var actorId = (actorSearch.results[0].id)
                 console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
@@ -724,7 +721,7 @@ function saveWatchedMovie(){
 
                         var title = (detail.title)
                         console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
-                        if(titleArray.indexOf(title) < 0){                            
+                        if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.runtime>=minMins && detail.vote_average >= ratingMath){                            
                         
                             var posterURL = detail.poster_path;
                             var reportedRuntime = detail.runtime;
