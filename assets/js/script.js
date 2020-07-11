@@ -621,6 +621,12 @@ function saveWatchedMovie(){
         var minMins = document.querySelector("#minMins").value
         var maxMins = document.querySelector("#maxMins").value
         var actor = document.querySelector('#actor').value
+        document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
+        $("#resultListView").css("display", "block");
         console.log("you clicked search")
         saveNewSearch();
        loadPrevSearch();
@@ -680,8 +686,7 @@ function saveWatchedMovie(){
            
 
                 var actorId = (actorSearch.results[0].id)
-        
-                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
                 API +
                 "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
                 genre +
@@ -694,8 +699,22 @@ function saveWatchedMovie(){
                 "&with_people=" +
                 actorId +
                 "&page=1")
+                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                API +
+                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                genre +
+                "&with_runtime.lte=" +
+                maxMins +
+                "&with_runtime.gte=" +
+                minMins +
+                "&with_people=" +
+                actorId +
+                "&page=1")
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
+                    console.log(movieSearch)
+                    
+
                 
                 console.log(ratingMath)
                 console.log(actorId)
