@@ -773,20 +773,12 @@ function saveWatchedMovie(){
 
     // Function to run search based on prev saved Search
     function runPrevSearch() {
-        console.log("you clicked previous search")
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
-        // var prevSearchObj = JSON.parse(localStorage.getItem('prevSearch')) || {};
-        // //console.log("currentprevSearch is: ", prevSearchObj);
-        // document.getElementById("prevType").innerHTML = prevSearchObj.Type;
-        // document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
-        // document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
-        // document.getElementById("prevTime").innerHTML = prevSearchObj.RunningTime + " mins";
-        // document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
         var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
         var ratingMath = (rating / 10)
         var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
@@ -795,17 +787,13 @@ function saveWatchedMovie(){
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
         var output = document.querySelector('#prevGenre').innerHTML.toLowerCase()
-       // var output = genreSelector.value;
-       // saveNewSearch();
-       //loadPrevSearch();
+
 
        var exists = false;
        var titleArray = [];
         for(var i =0; i < watchedMovies.length; i++){
             titleArray.push(watchedMovies[i].title);
         }
-
-        console.log(output)
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var genre = 0
@@ -848,19 +836,9 @@ function saveWatchedMovie(){
             .then(function (actorSearch) { return actorSearch.json() })
             .then(function (actorSearch) {
                 
-                console.log(actorSearch)
 
                 var actorId = (actorSearch.results[0].id)
-                console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
-                API +
-                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-                genre +
-                "&with_runtime.lte=" +
-                maxMins +
-                "&with_people=" +
-                actorId +
-                "&page=1")
-        
+
                 fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
                 API +
                 "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
@@ -871,10 +849,7 @@ function saveWatchedMovie(){
                 actorId +
                 "&page=1")
                 .then(function (movieSearch) { return movieSearch.json() })
-                .then(function (movieSearch) {
-
-                console.log(movieSearch)
-                
+                .then(function (movieSearch) {                
 
                 
                 for(var i = 0; i< movieSearch.results.length; i++){
@@ -888,10 +863,8 @@ function saveWatchedMovie(){
                     )
                     .then(function (detail) {
 
-                        console.log("Detail info ", detail);
 
                         var title = (detail.title)
-                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
                         if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.vote_average >= ratingMath){                            
                             console.log("we made it into the loop")
                             var posterURL = detail.poster_path;
