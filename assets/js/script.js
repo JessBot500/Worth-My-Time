@@ -201,6 +201,38 @@ function saveWatchedMovie(){
         }
     }
 
+    // new youtube api on click for single view
+    
+    function youtubeSearch(title) {
+        watchTrailerEl.addEventListener("click", function displayTrailer() {
+            console.log(title);
+            fetch("https://youtube-search-results.p.rapidapi.com/youtube-search/?q=" + title + "%252official%252trailer", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "youtube-search-results.p.rapidapi.com",
+                    "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+                    
+                    // tester
+                    //"x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
+                }
+            })
+            .then(function(response) {
+                response.json().then(function(data){
+                    console.log(data);
+                    
+                        for (var i = 0; i < data.items.length; i++) {
+                            var trailerUrl = data.items[0].link;
+                            open(trailerUrl, "_blank");
+                            
+                        }
+                    
+                })
+            })
+    
+        })
+    }
+
+
 /*
     // youtube search api
     var youtubeSearch = function(title, listTitle) {
@@ -252,8 +284,8 @@ function saveWatchedMovie(){
             console.log(error);
         })
     };
-    
-    // search function to link to api
+    */
+    //search function to link to api
     var searchSubmitHandler = function (event) {
         event.preventDefault();
 
@@ -269,7 +301,7 @@ function saveWatchedMovie(){
 
     }
 
-*/
+
     searchBar.addEventListener("submit", searchSubmitHandler);
 
     function movie() {
