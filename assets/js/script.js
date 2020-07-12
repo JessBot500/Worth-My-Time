@@ -399,7 +399,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            //youtubeSearch(title);
+                            document.getElementById("movieList").style.cursor = "pointer";
                                 
 
                             movieListEl.innerHTML = innerResultString;
