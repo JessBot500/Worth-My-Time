@@ -838,10 +838,10 @@ function saveWatchedMovie(){
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
         var innerResultString = "";
-            var movieListEl = document.getElementById("movieList");
+        var movieListEl = document.getElementById("movieList");
 
 
-        if(document.querySelector("#prevTime").innerHTML.slice(0, -4).trim() === "undefined"){
+        if(document.querySelector("#prevActor").innerHTML.slice(0, -4).trim() === "undefined"){
             document.getElementById('listHeaderTitle').innerHTML = "Sorry, it looks like you're missing some information to run this search.";
             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                 + '<div class="about-people-author">'
@@ -908,16 +908,17 @@ function saveWatchedMovie(){
                     
 
                     var actorId = (actorSearch.results[0].id)
-
-                    fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-                    API +
-                    "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-                    genre +
-                    "&with_runtime.lte=" +
-                    maxMins +
-                    "&with_people=" +
-                    actorId +
-                    "&page=1")
+                    var apiFetchString = "https://api.themoviedb.org/3/discover/movie?api_key=" +
+                        API + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
+                    if(genre != 0){
+                        apiFetchString += "&with_genres=" + genre
+                    }
+                    if(maxMins != "" || maxMins != "undefined"){
+                        apiFetchString += "&with_runtime.lte=" + maxMins 
+                    }
+                    apiFetchString += "&with_people=" + actorId + "&page=1" 
+                    
+                    fetch(apiFetchString)
                     .then(function (movieSearch) { return movieSearch.json() })
                     .then(function (movieSearch) {                
                         if(movieSearch.results.length === 0){
@@ -944,7 +945,16 @@ function saveWatchedMovie(){
 
 
                             var title = (detail.title)
-                            if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.vote_average >= ratingMath){                            
+                            var maxTCondition = false;
+                            var voteCondition = false;
+                            if(maxMins === "" || maxMins === "undefinted"){
+                                maxTCondition = true
+                            }
+
+                            if(ratingMath === "" || ratingMath === "undefined"){
+                                voteCondition = true
+                            }
+                            if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                            
                                 console.log("we made it into the loop")
                                 var posterURL = detail.poster_path;
                                 var reportedRuntime = detail.runtime;
