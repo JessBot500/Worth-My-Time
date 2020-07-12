@@ -3,36 +3,14 @@ var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
 var listViewTrailer = document.querySelector("#listview-trailer")
 
-var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [{
-    title: "Shrek",
-    type: "Movie",
-    genre: "Animated",
-    synopsis: "It ain't easy bein' green -- especially if you're a likable (albeit smelly) ogre named Shrek. On a mission to retrieve a gorgeous princess from the clutches of a fire-breathing dragon, Shrek teams up with an unlikely compatriot -- a wisecracking donkey.",
-    runningTime: 90,
-    posterURL: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
-    rating: "56%"
-}];
+var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [];
 
 
 // static movie selection data object
-var currentMovie = {
-    title: "Shrek",
-    type: "Movie",
-    genre: "Animated",
-    synopsis: "It ain't easy bein' green -- especially if you're a likable (albeit smelly) ogre named Shrek. On a mission to retrieve a gorgeous princess from the clutches of a fire-breathing dragon, Shrek teams up with an unlikely compatriot -- a wisecracking donkey.",
-    runningTime: 90,
-    posterURL: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
-    rating: "56%"
-}
+
 
 function loadPrevSearch() {
-        var prevSearchObj = JSON.parse(localStorage.getItem('prevSearch')) || {
-            Type: "Movie / Show",
-            Genre: "Action",
-            Actor: "None",
-            RunningTime: 120,
-            Rating: 75
-        };
+        var prevSearchObj = JSON.parse(localStorage.getItem('prevSearch')) || {};
         //console.log("currentprevSearch is: ", prevSearchObj);
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
         document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
@@ -368,6 +346,7 @@ function saveWatchedMovie(){
 
                 console.log("Total number of related results is: ", response.results.length);
                 if(response.results.length === 0){
+                    console.log("we're saying that there's no results for this movie search")
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                         innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
@@ -441,10 +420,9 @@ function saveWatchedMovie(){
                             movieListEl.innerHTML = innerResultString;
                         }
                     })
-                    if(i === (response.results.length-1) ){
-                        console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
-                        console.log("Our innerstring result is : ", innerResultString)
-                        if( innerResultString === ""){
+                    console.log("inner result string is: ", innerResultString)
+                    if(i === (response.results.length-1)  && movieListEl.innerHTML === ""){
+                        
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
@@ -452,7 +430,6 @@ function saveWatchedMovie(){
                                 +  '</div></div>'
                                 +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
-                        }
                     }
                 }
                 
@@ -471,17 +448,26 @@ function saveWatchedMovie(){
 
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
-        for(var i = 0; i< watchedMovies.length; i++){
-            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem" onclick="switchSingleView(this)">'
-                            + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
-                            + ' src="'+watchedMovies[i].posterURL+'"></div><div class="about-people-author">'
-                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
-                            + watchedMovies[i].rating + '%</p></span>'
-                            +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
-                            + '<p class="author-location movie-runTime">'+watchedMovies[i].runningTime+' mins</p>'
-                            + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>';
+        if(watchedMovies.length === 0){
+            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                + '<div class="about-people-author">'
+                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">It doesn'+"'"+'t look like you have any saved movies in your watch list. Click below to run a search.</p></span>'                           
+                +  '</div></div>'
+                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try a Search</button>';
         }
-                        movieListEl.innerHTML = innerResultString;
+        else{
+            for(var i = 0; i< watchedMovies.length; i++){
+                innerResultString += '<div class="small-12 medium-12 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                + ' src="'+watchedMovies[i].posterURL+'"></div><div class="about-people-author">'
+                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+watchedMovies[i].title+'</p><p class="secondary movie-rating label">'
+                                + watchedMovies[i].rating + '%</p></span>'
+                                +  '<span class="movie-genres">' + watchedMovies[i].genre + '</span>'
+                                + '<p class="author-location movie-runTime">'+watchedMovies[i].runningTime+' mins</p>'
+                                + '<p class="author-mutual movie-synopsis">'+watchedMovies[i].synopsis+'</p></div></div>';
+            }
+        }
+        movieListEl.innerHTML = innerResultString;
 
     }
 
@@ -800,10 +786,9 @@ function saveWatchedMovie(){
                             movieListEl.innerHTML = innerResultString;
                         }                        
                     })
-                    if(i === (movieSearch.results.length-1) ){
+                    if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === ""){
                         console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
                         console.log("Our innerstring result is : ", innerResultString)
-                        if( innerResultString === ""){
                         document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                         innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
@@ -811,7 +796,6 @@ function saveWatchedMovie(){
                             +  '</div></div>'
                             +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
-                        }
                     }
                 }
             })})
@@ -981,7 +965,7 @@ function saveWatchedMovie(){
                             
                         }
                     })
-                    if(i === (movieSearch.results.length-1) ){
+                    if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === "" ){
                         console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
                         console.log("Our innerstring result is : ", innerResultString)
                         if( innerResultString === ""){
