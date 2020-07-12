@@ -757,7 +757,7 @@ translucent-form-overlay {
 
 
 .singlePosterView {
-    border: white solid;
+    border: rgba(19,19,19) solid 3px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
@@ -874,4 +874,75 @@ translucent-form-overlay {
   }
   
   
+.center {
+  margin-right: auto;
+  margin-left:auto;
+}
 
+.card-user-profile-avatar .translucentBackground{
+  background-color: rgba(19,19,19);
+  color: white;
+  border: white solid 2px;
+  box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
+}
+
+.movie-poster{
+  box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
+}
+
+.alert-box {
+  padding-right: 3.25rem;
+  width: 100%;
+}
+
+.alert-box.callout {
+  color: #fefefe;
+  font-weight: bold;
+}
+
+.alert-box.alert {
+  border: 3px solid #cc4b37;
+  border-radius: 5px;
+  background-color: rgba(204, 75, 55, 0.2);
+}
+
+.alert-box.warning {
+  border: 3px solid #ffae00;
+  border-radius: 5px;
+  background-color: rgba(255, 174, 0, 0.2);
+}
+
+.alert-box.success {
+  border: 3px solid #3adb76;
+  border-radius: 5px;
+  background-color: rgba(58, 219, 118, 0.2);
+}
+
+.alert-box.info {
+  border: 3px solid #1779ba;
+  border-radius: 5px;
+  background-color: rgba(23, 121, 186, 0.2);
+}
+
+.alert-box i {
+  border: 2px solid #fefefe;
+  border-radius: 50%;
+  padding: .3em .325em;
+  margin-right: 0.5rem;
+}
+
+.alert-box .close-button {
+  color: rgba(254, 254, 254, 0.5);
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 1rem;
+  font-weight: bold;
+}
+
+#actorAlert{
+  display: none;
+}

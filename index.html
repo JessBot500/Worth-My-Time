@@ -37,7 +37,7 @@
                     <ul class="menu simple vertical medium-horizontal">
                         <form id="search-form">
                             <li><input type="search" class="search-field" placeholder="Search" id="movie-title">
-                                <a href="#"><button type="submit" class="button search" onclick="movie()">Search</button></a></li>
+                                <a href="#"><button type="submit" class="button search">Search</button></a></li>
                         </form>
 
                         <li>
@@ -81,7 +81,7 @@
                                 <p id="prevRating" class="formValue"></p>
                             </div>
                         </div>
-                        <button type="button" class="primary button expanded search-button">
+                        <button type="button" class="primary button expanded search-button" onclick="runPrevSearch()">
                             Repeat Previous Search
                         </button>
                     </div>
@@ -117,9 +117,15 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="row columns">
+                        <div class="row columns"> 
+                            <div data-closable class="alert-box callout alert" id="actorAlert">
+                                <i class="fa fa-ban"></i> Missing Actor/Actress value. Please enter missing information.
+                              <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                  <span aria-hidden="true">&CircleTimes;</span>
+                                </button>
+                              </div>             
                             <label>Actor/Actress
-                                <input type="text" name="actor" id="actor" placeholder="Actor/Actress">
+                                <input type="text" name="actor" id="actor" placeholder="Actor/Actress" required>
                             </label>
                         </div>
                         <div class="row">
@@ -146,7 +152,7 @@
                                 </div>
                             </label>
                         </div>
-                        <button type="button" onclick="search()" class="primary button expanded search-button">
+                        <button type="submit"  class="primary button expanded search-button" id="userSubmitBtn" onclick="userSubmitHandler(event)">
                             Search
                         </button>
                     </form>
@@ -159,7 +165,7 @@
                         alt="picture of space" />
                     <div class="card-user-profile-content card-section">
                         <div class="card-user-profile-avatar">
-                            <h4 id="singleRating">94%</h4>
+                            <h4 id="singleRating" class="translucentBackground">94%</h4>
                         </div>
                         <div class="row">
                             <div class="columns medium-10 small-10">
