@@ -18,7 +18,8 @@ function loadPrevSearch() {
 
 //provide the list for the movies that are in the "my watched list" button
 function loadWatchedMovies(){
-//modify how the single movie view and watched list are displayed
+    watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [];
+    //console.log("loading watched movie list");
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
@@ -63,8 +64,10 @@ function saveWatchedMovie(){
         watchedMovies.push(newMovie);
         localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
     }
-    
-    loadWatchedMovies();
+    else{
+        //console.log("ahhh, we already watched this one!")
+    }
+    listWatchedMovies();
 }
 
 function requiredActor(){
@@ -96,6 +99,7 @@ function requiredChecbox() {
         var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
         var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
         var genresVal = movieDiv.querySelector('.movie-genres');
+        
         if(genresVal === "" || genresVal === null || genresVal === undefined)
             genresVal = "";
         else
@@ -130,6 +134,7 @@ function requiredChecbox() {
                 $("#viewWatchedList").css("display", "none");
                 $("#resultListView").css("display", "none");
                 $("#singleView").css("display", "none");
+                returnUserFormtoOrginal();
             }
 
         
@@ -170,11 +175,8 @@ function requiredChecbox() {
         
         //runs api when "watch trailer" clicked
         watchTrailerEl.addEventListener("click", function displayTrailer() {
-<<<<<<< HEAD
             
             //api variables and url
-=======
->>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
             var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + youtubeApiKey;
@@ -183,10 +185,7 @@ function requiredChecbox() {
             fetch(url)
             .then(response => response.json())
             .then(data => {
-<<<<<<< HEAD
                 //display embedded youtube video
-=======
->>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
                 document.getElementById("moviePoster").style.display = "none";
                 document.getElementById("singleRating").style.display = "none";
                 var iframe = document.getElementById("ytplayer");
@@ -405,7 +404,6 @@ function requiredChecbox() {
                 + '<div class="about-people-author">'
                 + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">It doesn'+"'"+'t look like you have any saved movies in your watch list. Try running a search with the form above.</p></span>'                           
                 +  '</div></div>'
-               // +  '<button class="button primary small center" onclick="returnToOriginalView()">Try a Search</button>';
         }
         else{
             for(var i = 0; i< watchedMovies.length; i++){
@@ -537,6 +535,7 @@ function requiredChecbox() {
     function returnUserFormtoOrginal(){
         //var translucentForm = document.getElementById("translucentForm");
         var userForm = document.getElementById("rightView");
+        userForm.setAttribute("class", "columns small-12 medium-5");
         var innerString = '<div class="translucent-form-overlay" >'
             + '<form><h5>Search for Something Worth My Time</h5>'
             + '<div class="row columns">'
@@ -758,7 +757,6 @@ function requiredChecbox() {
     function runPrevSearch() {
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
