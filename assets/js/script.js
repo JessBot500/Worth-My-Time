@@ -399,7 +399,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            //youtubeSearch(title);
+                            document.getElementById("movieList").style.cursor = "pointer";
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -412,10 +412,10 @@ function saveWatchedMovie(){
     }
     
     function listWatchedMovies(){
-        //$("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
-        //$("#viewWatchedList").css("display", "none");
-        //$("#singleView").css("display", "none");
+        $("#leftView").css("display", "none");
+        $("#rightView").css("display", "none");
+        $("#viewWatchedList").css("display", "none");
+        $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
 
         document.getElementById('listHeaderTitle').innerHTML = "Watched List";
