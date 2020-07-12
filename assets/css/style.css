@@ -885,3 +885,7 @@ translucent-form-overlay {
   border: white solid 2px;
   box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
 }
+
+.movie-poster{
+  box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
+}
