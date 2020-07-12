@@ -201,90 +201,110 @@ function saveWatchedMovie(){
         }
     }
 
-    // new youtube api on click for single view
-    
+    // // new youtube api on click for single view
     function youtubeSearch(title) {
+        
         watchTrailerEl.addEventListener("click", function displayTrailer() {
             console.log(title);
-            fetch("https://youtube-search-results.p.rapidapi.com/youtube-search/?q=" + title + "%252official%252trailer", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "youtube-search-results.p.rapidapi.com",
-                    "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-                    
-                    // tester
-                    //"x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
-                }
-            })
-            .then(function(response) {
-                response.json().then(function(data){
-                    console.log(data);
-                    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].link;
-                            open(trailerUrl, "_blank");
-                            
-                        }
-                    
-                })
-            })
-    
+            var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
+            //url from YouTube docs modified for my random term and API key,
+            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&maxResults=1&q=" + title + "trailer" + "&key=" + youtubeApiKey;
+            //fetch function following the aforementioned process
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data.items[0].id.videoId);
+                document.getElementById("moviePoster").style.display = "none";
+                document.getElementById("singleRating").style.display = "none";
+                var iframe = document.getElementById("ytplayer");
+                iframe.style.display = "block";
+                iframe.height = "400";
+                iframe.src = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
+            });
         })
     }
-
-
-/*
-    // youtube search api
-    var youtubeSearch = function(title, listTitle) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+    
+    // function youtubeSearch(title) {
+    //     watchTrailerEl.addEventListener("click", function displayTrailer() {
+    //         console.log(title);
+    //         fetch("https://youtube-search-results.p.rapidapi.com/youtube-search/?q=" + title + "%252official%252trailer", {
+    //             "method": "GET",
+    //             "headers": {
+    //                 "x-rapidapi-host": "youtube-search-results.p.rapidapi.com",
+    //                 //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+                    
+    //                 // tester
+    //                 //"x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
+    //                 // "x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
+    //             }
+                
+    //         })
+    //         .then(function(response) {
+    //             response.json().then(function(data){
+    //                     for (var i = 0; i < data.items.length; i++) {
+    //                         var trailerUrl = data.items[0].link;
+    //                         open(trailerUrl, "_blank");
             
-            // tester alt key
-            //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+    //                     }
+                    
+    //             })
+    //         })
+    
+    //     })
+    // }
 
-            // extra tester
-            //"x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
 
-            // tester 
-            "x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    console.log(data);
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
+
+    // // youtube search api
+    // var youtubeSearch = function(title) {
+    //     watchTrailerEl.addEventListener("click", function displayTrailer() {
+    //         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
+    //     "method": "GET",
+    //     "headers": {
+    //         "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
+    //         //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
+            
+    //         // tester alt key
+    //         //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
+
+    //         // extra tester
+    //         //"x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
+
+    //         // tester 
+    //         "x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
+    //     }
+    //     })
+    //     .then(function(response) {
+    //         if (response.ok) {
+    //             response.json().then(function(data) {
+    //                 console.log(data);
+
+    //                 // display trailer
+    //                     for (var i = 0; i < data.items.length; i++) {
+    //                         var trailerUrl = data.items[0].url
+    //                         open(trailerUrl, "_blank");
+    //                          console.log(trailerUrl);
     
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                             console.log(trailerUrl);
+    //                     }
+    //                 // listViewTrailer.addEventListener("click", function(event){
+    //                 //     event.preventDefault();
+    //                 //     console.log("watch trailer clicked")
+    //                 //     for (var i = 0; i < data.items.length; i++) {
+    //                 //         var trailerUrl = data.items[0].url
+    //                 //         open(trailerUrl, "_blank");
+    //                 //          console.log(trailerUrl);
     
-                        }
-                    });
-                    // listViewTrailer.addEventListener("click", function(event){
-                    //     event.preventDefault();
-                    //     console.log("watch trailer clicked")
-                    //     for (var i = 0; i < data.items.length; i++) {
-                    //         var trailerUrl = data.items[0].url
-                    //         open(trailerUrl, "_blank");
-                    //          console.log(trailerUrl);
+    //                 //     }
+    //                 // });
+    //             })
+    //         }
+    //     })
+    //     .catch(function(error){
+    //         console.log(error);
+    //     })
+    //     })
+    // };
     
-                    //     }
-                    // });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
     //search function to link to api
     var searchSubmitHandler = function (event) {
         event.preventDefault();
@@ -313,7 +333,7 @@ function saveWatchedMovie(){
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
-        //console.log("Title is read as ", title);
+        console.log("Title is read as ", title);
         var poster = document.querySelector('#moviePoster');
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
@@ -358,7 +378,7 @@ function saveWatchedMovie(){
                         genreEl.innerHTML = innerGenreList;
                         console.log(title);
 
-                        //youtubeSearch(title);
+                        youtubeSearch(title);
 
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
                         poster.src = ""
@@ -383,7 +403,7 @@ function saveWatchedMovie(){
         titleArray.push(watchedMovies[i].title);
     }
 
-        console.log("TitleArray is: ", titleArray);
+        //console.log("TitleArray is: ", titleArray);
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
         console.log("Title is read as ", title);
@@ -402,7 +422,7 @@ function saveWatchedMovie(){
                 
                 for(var i = 0; i < response.results.length; i++){
                     var id = (response.results[i].id);
-                    console.log("id is :", id);
+                    //console.log("id is :", id);
 
 
                     fetch("https://api.themoviedb.org/3/movie/"
@@ -414,7 +434,7 @@ function saveWatchedMovie(){
                     )
                     .then(function (detail) {
 
-                        console.log("Detail info ", detail);
+                        //console.log("Detail info ", detail);
 
                         var title = (detail.title)
                         console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
@@ -458,7 +478,7 @@ function saveWatchedMovie(){
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                            youtubeSearch(title);
+                            //youtubeSearch(title);
                                 
 
                             movieListEl.innerHTML = innerResultString;
@@ -513,8 +533,8 @@ function saveWatchedMovie(){
                 for (i = 0; i < 5; i++) {
 
                     var randomNum = Math.floor(Math.random() * 20)
-                    console.log(randomNum)
-                    console.log([top.results[randomNum].poster_path]);
+                    //console.log(randomNum)
+                    //console.log([top.results[randomNum].poster_path]);
 
                     var posterPath = (top.results[randomNum].poster_path)
 
@@ -532,7 +552,7 @@ function saveWatchedMovie(){
                 $("#poster4").attr("src", posterArray[3])
                 $("#poster5").attr("src", posterArray[4])
 
-                console.log(posterArray);
+                //console.log(posterArray);
 
 
 
@@ -628,19 +648,19 @@ function saveWatchedMovie(){
         })
     };
     */
-    // search function to link to api
-    var searchSubmitHandler = function (event) {
-        event.preventDefault();
+    // // search function to link to api
+    // var searchSubmitHandler = function (event) {
+    //     event.preventDefault();
 
-        // get input value
-        var searchWord = searchInputEl.value.trim();
-        if (searchWord) {
-            youtubeSearch(searchWord)
-            movie(searchWord)
-            // switchSingleView(searchWord);
-            searchInputEl.value = "";
-        }
-    }
+    //     // get input value
+    //     var searchWord = searchInputEl.value.trim();
+    //     if (searchWord) {
+    //         //youtubeSearch(searchWord)
+    //         movie(searchWord)
+    //         // switchSingleView(searchWord);
+    //         searchInputEl.value = "";
+    //     }
+    // }
 
     
 
@@ -650,14 +670,14 @@ function saveWatchedMovie(){
     // searchBar.addEventListener("submit", searchSubmitHandler);
 
     function search() {
-        console.log("you clicked search")
+        //console.log("you clicked search")
         saveNewSearch();
        loadPrevSearch();
 
         var genreSelector = document.querySelector('#genre-select');
 
         var output = genreSelector.value;
-        console.log(output)
+        //console.log(output)
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var genre = 0
@@ -702,7 +722,7 @@ function saveWatchedMovie(){
             .then(function (actorSearch) { return actorSearch.json() })
             .then(function (actorSearch) {
                 
-                console.log(actorSearch)
+                //console.log(actorSearch)
                 
 
            
@@ -725,8 +745,8 @@ function saveWatchedMovie(){
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
                 
-                console.log(ratingMath)
-                console.log(actorId)
+                //console.log(ratingMath)
+                //console.log(actorId)
 
     //             console.log(movieSearch)
 
