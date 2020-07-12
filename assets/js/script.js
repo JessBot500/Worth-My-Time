@@ -185,20 +185,22 @@ function requiredChecbox() {
         }
     }
 
-    // // new youtube api on click for single view
+    // new youtube api on click for single view
     function youtubeSearch(title) {
         
+        //runs api when "watch trailer" clicked
         watchTrailerEl.addEventListener("click", function displayTrailer() {
-            //console.log(title);
+            
+            //api variables and url
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
-            //url from YouTube docs modified for my random term and API key,
-            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + secondApi;
-            //fetch function following the aforementioned process
+            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + youtubeApiKey;
+           
+            //fetch function
             fetch(url)
             .then(response => response.json())
             .then(data => {
-                //console.log(data.items[0].id.videoId);
+                //display embedded youtube video
                 document.getElementById("moviePoster").style.display = "none";
                 document.getElementById("singleRating").style.display = "none";
                 var iframe = document.getElementById("ytplayer");
