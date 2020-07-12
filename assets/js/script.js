@@ -206,7 +206,7 @@ function saveWatchedMovie(){
     function youtubeSearch(title) {
         
         watchTrailerEl.addEventListener("click", function displayTrailer() {
-            console.log(title);
+            //console.log(title);
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
             //url from YouTube docs modified for my random term and API key,
@@ -222,89 +222,12 @@ function saveWatchedMovie(){
                 iframe.style.display = "block";
                 iframe.height = "400";
                 iframe.src = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
+            })
+            .catch(function(error){
+                console.log(error);
             });
         })
     }
-    // function youtubeSearch(title) {
-    //     watchTrailerEl.addEventListener("click", function displayTrailer() {
-    //         console.log(title);
-    //         fetch("https://youtube-search-results.p.rapidapi.com/youtube-search/?q=" + title + "%252official%252trailer", {
-    //             "method": "GET",
-    //             "headers": {
-    //                 "x-rapidapi-host": "youtube-search-results.p.rapidapi.com",
-    //                 //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-                    
-    //                 // tester
-    //                 //"x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
-    //                 // "x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
-    //             }
-                
-    //         })
-    //         .then(function(response) {
-    //             response.json().then(function(data){
-    //                     for (var i = 0; i < data.items.length; i++) {
-    //                         var trailerUrl = data.items[0].link;
-    //                         open(trailerUrl, "_blank");
-            
-    //                     }
-                    
-    //             })
-    //         })
-    
-    //     })
-    // }
-
-
-
-    // // youtube search api
-    // var youtubeSearch = function(title) {
-    //     watchTrailerEl.addEventListener("click", function displayTrailer() {
-    //         fetch("https://youtube-search1.p.rapidapi.com/" + title +"%2520trailer", {
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-    //         //"x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-    //         // tester alt key
-    //         //"x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-
-    //         // extra tester
-    //         //"x-rapidapi-key": "30cbf41bccmsh0e61e2e933ebbb5p1d9226jsnc0af32aa7e8e"
-
-    //         // tester 
-    //         "x-rapidapi-key": "946db3c543msh83584d1e45dd04ep19e350jsnfe507a3c9d71"
-    //     }
-    //     })
-    //     .then(function(response) {
-    //         if (response.ok) {
-    //             response.json().then(function(data) {
-    //                 console.log(data);
-
-    //                 // display trailer
-    //                     for (var i = 0; i < data.items.length; i++) {
-    //                         var trailerUrl = data.items[0].url
-    //                         open(trailerUrl, "_blank");
-    //                          console.log(trailerUrl);
-    
-    //                     }
-    //                 // listViewTrailer.addEventListener("click", function(event){
-    //                 //     event.preventDefault();
-    //                 //     console.log("watch trailer clicked")
-    //                 //     for (var i = 0; i < data.items.length; i++) {
-    //                 //         var trailerUrl = data.items[0].url
-    //                 //         open(trailerUrl, "_blank");
-    //                 //          console.log(trailerUrl);
-    
-    //                 //     }
-    //                 // });
-    //             })
-    //         }
-    //     })
-    //     .catch(function(error){
-    //         console.log(error);
-    //     })
-    //     })
-    // };
     
     //search function to link to api
     var searchSubmitHandler = function (event) {
@@ -313,7 +236,6 @@ function saveWatchedMovie(){
         // get input value
         var searchWord = searchInputEl.value.trim();
         if (searchWord) {
-            //youtubeSearch(searchWord)
             multiMovie(searchWord);
             //movie(searchWord)
             // switchSingleView(searchWord);
@@ -321,7 +243,6 @@ function saveWatchedMovie(){
         }
 
     }
-
 
     searchBar.addEventListener("submit", searchSubmitHandler);
 
@@ -611,63 +532,6 @@ function saveWatchedMovie(){
         console.log("recent search is: ", prevSearchObj);
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
-
-    // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-            // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    // console.log(data);
-    
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
-    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
-    
-                        }
-                    });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
-    // // search function to link to api
-    // var searchSubmitHandler = function (event) {
-    //     event.preventDefault();
-
-    //     // get input value
-    //     var searchWord = searchInputEl.value.trim();
-    //     if (searchWord) {
-    //         //youtubeSearch(searchWord)
-    //         movie(searchWord)
-    //         // switchSingleView(searchWord);
-    //         searchInputEl.value = "";
-    //     }
-    // }
-
-    
-
-
-    // }
-
-    // searchBar.addEventListener("submit", searchSubmitHandler);
 
     function search() {
         //console.log("you clicked search")
