@@ -1,5 +1,4 @@
 var searchBar = document.querySelector("#search-form");
-var userSearchBtn = document.getElementById("userSubmitBtn");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
 var listViewTrailer = document.querySelector("#listview-trailer")
@@ -268,7 +267,6 @@ function requiredActor(){
 
 
     searchBar.addEventListener("submit", searchSubmitHandler);
-    //userSearchBtn.addEventListener("submit", userSubmitHandler(event));
 
 
     function movie() {
