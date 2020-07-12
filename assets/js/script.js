@@ -18,12 +18,8 @@ function loadPrevSearch() {
 
 //provide the list for the movies that are in the "my watched list" button
 function loadWatchedMovies(){
-<<<<<<< HEAD
     watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [];
     //console.log("loading watched movie list");
-=======
-//modify how the single movie view and watched list are displayed
->>>>>>> 249aee02bb4794e818fb1aa16d61c94959db981b
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
@@ -68,15 +64,10 @@ function saveWatchedMovie(){
         watchedMovies.push(newMovie);
         localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
     }
-<<<<<<< HEAD
     else{
         //console.log("ahhh, we already watched this one!")
     }
     listWatchedMovies();
-=======
-    
-    loadWatchedMovies();
->>>>>>> 249aee02bb4794e818fb1aa16d61c94959db981b
 }
 
 function requiredActor(){
@@ -184,11 +175,8 @@ function requiredChecbox() {
         
         //runs api when "watch trailer" clicked
         watchTrailerEl.addEventListener("click", function displayTrailer() {
-<<<<<<< HEAD
             
             //api variables and url
-=======
->>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
             var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + youtubeApiKey;
@@ -197,10 +185,7 @@ function requiredChecbox() {
             fetch(url)
             .then(response => response.json())
             .then(data => {
-<<<<<<< HEAD
                 //display embedded youtube video
-=======
->>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
                 document.getElementById("moviePoster").style.display = "none";
                 document.getElementById("singleRating").style.display = "none";
                 var iframe = document.getElementById("ytplayer");
