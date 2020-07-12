@@ -194,6 +194,7 @@ function saveWatchedMovie(){
             $("#moviePoster").attr('src', imgURL);
             document.getElementById("singleRating").innerHTML = ratingVal;
             document.getElementById("movieTitle").innerHTML = titleVal;
+            youtubeSearch(titleVal);
             document.getElementById("runningTime").innerHTML = runtimeVal;
             document.getElementById("synopsis").innerHTML = synopsisVal;
             document.getElementById("type").innerHTML = "Movie";
@@ -209,7 +210,7 @@ function saveWatchedMovie(){
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
             //url from YouTube docs modified for my random term and API key,
-            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&maxResults=1&q=" + title + "trailer" + "&key=" + secondApi;
+            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + secondApi;
             //fetch function following the aforementioned process
             fetch(url)
             .then(response => response.json())
@@ -224,7 +225,6 @@ function saveWatchedMovie(){
             });
         })
     }
-    youtubeSearch("frozen")
     // function youtubeSearch(title) {
     //     watchTrailerEl.addEventListener("click", function displayTrailer() {
     //         console.log(title);
@@ -379,7 +379,6 @@ function saveWatchedMovie(){
                         genreEl.innerHTML = innerGenreList;
                         console.log(title);
 
-                        youtubeSearch(title);
 
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
                         poster.src = ""
