@@ -21,7 +21,7 @@ function loadPrevSearch() {
 
 
 function loadWatchedMovies(){
-    
+    watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [];
     //console.log("loading watched movie list");
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
@@ -73,8 +73,7 @@ function saveWatchedMovie(){
     else{
         //console.log("ahhh, we already watched this one!")
     }
-    
-    loadWatchedMovies();
+    listWatchedMovies();
 }
 
 function requiredActor(){
@@ -109,6 +108,7 @@ function requiredChecbox() {
         var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
         var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
         var genresVal = movieDiv.querySelector('.movie-genres');
+        
         if(genresVal === "" || genresVal === null || genresVal === undefined)
             genresVal = "";
         else
@@ -150,6 +150,7 @@ function requiredChecbox() {
                 $("#viewWatchedList").css("display", "none");
                 $("#resultListView").css("display", "none");
                 $("#singleView").css("display", "none");
+                returnUserFormtoOrginal();
             }
 
         
@@ -596,6 +597,7 @@ function requiredChecbox() {
     function returnUserFormtoOrginal(){
         //var translucentForm = document.getElementById("translucentForm");
         var userForm = document.getElementById("rightView");
+        userForm.setAttribute("class", "columns small-12 medium-5");
         var innerString = '<div class="translucent-form-overlay" >'
             + '<form><h5>Search for Something Worth My Time</h5>'
             + '<div class="row columns">'

@@ -1,231 +1,6 @@
 * {box-sizing:border-box}
-
-* {box-sizing:border-box}
-
-.hero-section {
-    background: url("https://static.pexels.com/photos/248064/pexels-photo-248064.jpeg") 50% no-repeat;
-    background-size: cover;
-    height: 60vh;
-    text-align: center;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  
-  .hero-section .hero-section-text {
-    color: #fefefe;
-    text-shadow: 1px 1px 2px #0a0a0a;
-  }
     
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  align-items: center;
-  position: center;
-  display: block;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-  align-items: center;
-  position: center;
-  align-content: center;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: 50%;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-.product-feature-section {
-  background: #e6e6e6;
-  padding: 1rem;
-}
-
-.product-feature-section-outer {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  max-width: 100%;
-  margin: 0 auto;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-@media print, screen and (min-width: 40em) {
-  .product-feature-section-outer {
-    max-width: 75%;
-  }
-}
-
-.product-feature-section-headline {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.product-feature-section-inner {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.product-feature-section-feature {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  padding: 1rem;
-  -webkit-flex: 1 0 50%;
-      -ms-flex: 1 0 50%;
-          flex: 1 0 50%;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.product-feature-section-feature.top-left {
-  border-right: 1px solid #cacaca;
-  border-bottom: 1px solid #cacaca;
-}
-
-.product-feature-section-feature.top-right {
-  border-bottom: 1px solid #cacaca;
-}
-
-.product-feature-section-feature.bottom-left {
-  border-right: 1px solid #cacaca;
-}
-
-.product-feature-section-feature .feature-title {
-  margin-bottom: 0;
-  line-height: 16px;
-  font-size: 0.875rem;
-}
-
-.product-feature-section-feature .feature-desc {
-  margin-bottom: 0;
-}
-
-.product-feature-section-feature .fa {
-  margin-right: 1.25rem;
-  font-size: 2rem;
-}
-
-@media print, screen and (min-width: 40em) {
-  .product-feature-section-feature {
-    padding: 2rem;
-    -webkit-flex: 1 0 50%;
-        -ms-flex: 1 0 50%;
-            flex: 1 0 50%;
-    -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-  }
-}
-
-
+/* Top Navigation Bar Styles  start*/
 .topbar-responsive {
   background: #2c3840;
   padding: 1rem 1.5rem;
@@ -309,31 +84,6 @@
     }
 }
 
-
-/* @media screen and (max-width: 39.9375em) {
-  .topbar-responsive {
-    padding: 0.75rem;
-  }
-  .topbar-responsive .top-bar-title {
-    position: relative;
-    width: 100%;
-  }
-  .topbar-responsive .top-bar-title span {
-    position: absolute;
-    right: 0;
-    border: 1px solid #fefefe;
-    border-radius: 5px;
-    padding: 0.25rem 0.45rem;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-  }
-  .topbar-responsive .top-bar-title span .menu-icon {
-    margin-bottom: 4px;
-  }
-} */
-
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
@@ -342,6 +92,9 @@
     opacity: 1;
   }
 }
+/* Top Navigation bar style end */
+
+/* Styles applied to the user's search form start*/
  .translucent-form-overlay {
     max-width: 500px;
     width: 100%;
@@ -392,8 +145,9 @@
   .runningTimeLabel {
     padding-left: 2px;
   }
+/*Styles applied to the user's search form End*/
 
-
+/* Hero styles that helped set up the background for the page: start */
 .hero-full-screen {
     height: 100vh;
     display: -webkit-flex;
@@ -409,7 +163,6 @@
         -ms-flex-pack: justify;
             justify-content: space-between;
             background: url("../images/movie-poster2.jpg") center center no-repeat;
-    /*background: url("https://images.pexels.com/photos/378273/pexels-photo-378273.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb") center center no-repeat;*/
     background-size: cover;
     background-repeat: inherit;
     object-fit: cover;
@@ -466,7 +219,10 @@
     color: #fefefe;
     font-weight: bold;
   }
+
+  /* hero styles that helped set up background for the page: end */
   
+  /* secondary top-bar styles applied to navigation bar: start */
   .top-bar::after, .top-bar::before{
     content: none;
   }
@@ -485,7 +241,9 @@
   .hero-full-screen .top-bar{
     background: rgba(54, 54, 54, 0.8);
   }
+  /* secondary top-bar styles applied to navigation bar: end */
 
+  /* Style applied to container used to hold details from user's previous search: Start */
   .prevSearchContainer{
     padding-left: 35px;
     background: rgba(19, 19, 19);
@@ -499,15 +257,16 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+ 
 
   .app-feature-section-main-header{
       width: 100%;
   }
+ /*Style applied to container used to hold details from user's previous search: End */
 
-
-.searchbar {
+/* .searchbar {
     margin: 1rem;
-  }
+  } */
   
   .search-field {
     width: 0;
@@ -520,12 +279,12 @@
     margin-right: 5px;
   }
   
-  .expand-search {
+  /* .expand-search {
     width: 80%;
     max-width: calc(80% - 3rem);
     border: 1px solid #c9c9c9;
     padding: .5rem;
-  }
+  } */
   
   svg {
     width: 20px;
@@ -538,10 +297,11 @@
       margin-right: 5px;
   }
   
-  .search{
+  /* .search{
       border-radius: 3px;
-  }
+  } */
 
+/* Card style used for movie profile: start */
 .card-user-profile {
     position: relative;
     z-index: 0;
@@ -649,24 +409,13 @@
     letter-spacing: 1px;
     opacity: 0.8;
   }
-
-  /* .card-user-profile-status{
-      display: inline;
-  } */
+  /* Card style used for movie profile: start */
   
-#singleView, #viewWatchedList{
+  /* used to initial secondary views/display as hidden */
+#singleView, #viewWatchedList, #resultListView, #actorAlert{
     display: none;
 }  
 
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 @-webkit-keyframes slideDown {
   0% {
@@ -690,18 +439,6 @@
   }
 }
 
-/*  @media screen and (max-width: 39.9375em) {
-  .topbar-responsive-links {
-    -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-    -webkit-animation-duration: 0.5s;
-            animation-duration: 0.5s;
-    width: 100%;
-    -webkit-animation: fadeIn 1s ease-in;
-            animation: fadeIn 1s ease-in;
-  }
-} */
-
 @media screen and (min-width: 39.9375em){
     .menu-icon{
         width: 0%;
@@ -714,9 +451,9 @@ translucent-form-overlay {
     background-color: rgba(54, 54, 54, 0.8);
     padding: 20px;
     color: #fefefe;
-}
+} 
 
-.translucent-form-overlay .columns.row {
+ .translucent-form-overlay .columns.row {
   display: block;
 }
 
@@ -749,11 +486,12 @@ translucent-form-overlay {
     height: auto;
 }
 
+/* Used to overwrite running time label padding */
 .runningTimeLabel {
   padding-left: 2px;
 }
 
-
+/* Used to apply style to poster in single view*/
 .singlePosterView {
     border: rgba(19,19,19) solid 3px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -763,7 +501,7 @@ translucent-form-overlay {
     font-size: .8rem;
 }
 
-
+/* "People-you-might-know based style used to display movie lists: Start */
 .people-you-might-know {
     background-color: #fefefe;
     padding: 1rem 0 0;
@@ -846,9 +584,7 @@ translucent-form-overlay {
     }
   }
 
-  #resultListView{
-      display: none;
-  }
+  
   
   .people-you-might-know .add-people-section .add-friend .add-friend-action {
     margin-top: 0.7rem;
@@ -870,24 +606,25 @@ translucent-form-overlay {
   .people-you-might-know .view-more-people .view-more-text .view-more-link:hover, .people-you-might-know .view-more-people .view-more-text .view-more-link:focus {
     text-decoration: underline;
   }
-  
+
+  .card-user-profile-avatar .translucentBackground{
+    background-color: rgba(19,19,19);
+    color: white;
+    border: white solid 2px;
+    box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
+  }
+  /* style used for displaying movie lists : End */
   
 .center {
   margin-right: auto;
   margin-left:auto;
 }
 
-.card-user-profile-avatar .translucentBackground{
-  background-color: rgba(19,19,19);
-  color: white;
-  border: white solid 2px;
-  box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
-}
-
 .movie-poster{
   box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
 }
 
+/* alert box styles used for reference for incorrect user form submission : start */
 .alert-box {
   padding-right: 3.25rem;
   width: 100%;
@@ -941,6 +678,4 @@ translucent-form-overlay {
   font-weight: bold;
 }
 
-#actorAlert{
-  display: none;
-}
+/* alert box styles used for reference for incorrect user form submission : end */
