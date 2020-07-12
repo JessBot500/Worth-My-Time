@@ -337,7 +337,7 @@ function requiredChecbox() {
 
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
+        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
@@ -366,12 +366,13 @@ function requiredChecbox() {
                 console.log("Total number of related results is: ", response.results.length);
                 if(response.results.length === 0){
                     console.log("we're saying that there's no results for this movie search")
+                    moveUserSearchForm();
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                         innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
-                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Please search for a different title, or use search form above.</p></span>'                           
                             +  '</div></div>'
-                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+                           // +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                 }
                 
@@ -441,7 +442,7 @@ function requiredChecbox() {
                     })
                     console.log("inner result string is: ", innerResultString)
                     if(i === (response.results.length-1)  && movieListEl.innerHTML === ""){
-                        
+                            moveUserSearchForm();
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
@@ -459,10 +460,11 @@ function requiredChecbox() {
     
     function listWatchedMovies(){
         $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
+        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
+        moveUserSearchForm();
 
         document.getElementById('listHeaderTitle').innerHTML = "Watched List";
 
@@ -471,9 +473,9 @@ function requiredChecbox() {
         if(watchedMovies.length === 0){
             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                 + '<div class="about-people-author">'
-                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">It doesn'+"'"+'t look like you have any saved movies in your watch list. Click below to run a search.</p></span>'                           
+                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">It doesn'+"'"+'t look like you have any saved movies in your watch list. Try running a search with the form above.</p></span>'                           
                 +  '</div></div>'
-                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try a Search</button>';
+               // +  '<button class="button primary small center" onclick="returnToOriginalView()">Try a Search</button>';
         }
         else{
             for(var i = 0; i< watchedMovies.length; i++){
@@ -593,7 +595,7 @@ function requiredChecbox() {
         var userForm = document.getElementById("rightView");
         userForm.setAttribute("class", "columns small-12 medium-12");
         userForm.style.marginTop = "-2.5rem";
-        var innerString = '<div class="translucent-form-overlay" style="padding-top: 2px;border: white solid; max-width: 100%;/* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */margin-bottom: 5px;">'
+        var innerString = '<div class="translucent-form-overlay" style="padding-top: 2px;border: white solid; max-width: 100%; box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); background-color: rgba(19,19,19);margin-bottom: 5px;">'
             + '<form><h5>Search for Something Worth My Time</h5><div class="row columns"><div class="columns medium-2 small-12">'
             + '<fieldset class="fieldset" style="padding-bottom: 2px;padding-top: 2px; padding:.2rem;"><legend class="form-legend">Type: </legend><input id="movieType" name="type" type="checkbox" required=""><label for="movieType">Movie</label>'
             + '<input id="showType" name="type" type="checkbox" required=""><label for="showType">Show</label></fieldset></div>'
@@ -618,7 +620,8 @@ function requiredChecbox() {
     function returnUserFormtoOrginal(){
         //var translucentForm = document.getElementById("translucentForm");
         var userForm = document.getElementById("rightView");
-        var innerString = '<h5>Search for Something Worth My Time</h5>'
+        var innerString = '<div class="translucent-form-overlay" >'
+            + '<form><h5>Search for Something Worth My Time</h5>'
             + '<div class="row columns">'
             + '<fieldset class="fieldset"><legend class="form-legend">Type: </legend><input id="movieType" name="type" type="checkbox" required><label for="movieType">Movie</label>'
             + '<input id="showType" name="type" type="checkbox" required><label for="showType">Show</label></fieldset>'
@@ -790,7 +793,7 @@ function requiredChecbox() {
 
                 console.log("Movie result set is showing as : ", movieSearch.results.length)
                 if(movieSearch.results.length === 0){
-                    
+                    moveUserSearchForm();
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                     innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                         + '<div class="about-people-author">'
@@ -873,6 +876,7 @@ function requiredChecbox() {
                         }                        
                     })
                     if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === ""){
+                        moveUserSearchForm();
                         console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
                         console.log("Our innerstring result is : ", innerResultString)
                         document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
@@ -904,6 +908,7 @@ function requiredChecbox() {
         document.getElementById("maxMins").value = "";
         document.getElementById("minMins").value = "";
         document.getElementById("rating").value = "";
+        returnUserFormtoOrginal();
     }
 
     // Function to run search based on prev saved Search
