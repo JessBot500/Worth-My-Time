@@ -757,7 +757,7 @@ translucent-form-overlay {
 
 
 .singlePosterView {
-    border: white solid;
+    border: rgba(19,19,19) solid 3px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
