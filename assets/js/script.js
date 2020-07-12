@@ -82,7 +82,7 @@ function requiredActor(){
     console.log(requiredActor)
 }
 
-    function requiredChecbox() {
+function requiredChecbox() {
 
         var requiredCheckboxes = $(':checkbox[required]');
 
@@ -96,7 +96,7 @@ function requiredActor(){
                 requiredCheckboxes.attr('required', 'required');
             }
         });
-    }
+}
 
 
 
@@ -454,6 +454,7 @@ function requiredActor(){
                 
                 
             })
+
     }
     
     function listWatchedMovies(){
@@ -587,6 +588,61 @@ function requiredActor(){
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 
+    function moveUserSearchForm(){
+        var translucentForm = document.getElementById("translucentForm");
+        var userForm = document.getElementById("rightView");
+        userForm.setAttribute("class", "columns small-12 medium-12");
+        userForm.style.marginTop = "-2.5rem";
+        var innerString = '<div class="translucent-form-overlay" style="padding-top: 2px;border: white solid; max-width: 100%;/* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */margin-bottom: 5px;">'
+            + '<form><h5>Search for Something Worth My Time</h5><div class="row columns"><div class="columns medium-2 small-12">'
+            + '<fieldset class="fieldset" style="padding-bottom: 2px;padding-top: 2px; padding:.2rem;"><legend class="form-legend">Type: </legend><input id="movieType" name="type" type="checkbox" required=""><label for="movieType">Movie</label>'
+            + '<input id="showType" name="type" type="checkbox" required=""><label for="showType">Show</label></fieldset></div>'
+            + '<div class="columns medium-2 small-12"><label>Genre<select name="genre" id="genre-select" type="text"><option>Any</option><option value="action">Action</option>'
+            + '<option value="drama">Drama</option><option value="comedy">Comedy</option><option value="family">Family</option><option value="sci-fi">Science Fiction</option>'
+            + '<option value="thriller">Thriller</option><option value="adventure">Adventure</option><option value="romance">Romance</option><option value="horror">Horror</option>'
+            + '</select></label></div><div class="columns medium-2 small-12"><div data-closable="" class="alert-box callout alert" id="actorAlert" style="display: none; z-index: 10;">'
+            + '<i class="fa fa-ban"></i> Missing Actor/Actress value. Please enter missing information.<button class="close-button" aria-label="Dismiss alert" type="button" data-close="">'
+            + '<span aria-hidden="true">⊗</span></button></div><label>Actor/Actress'
+            + '<input type="text" name="actor" id="actor" placeholder="Actor/Actress" required=""></label></div><div class="columns medium-4 small-12">'
+            + '<label class="columns small-12 medium-12">Running Time</label><div class="columns small-3 medium-3"><input type="number" min="0" name="min" id="minMins" placeholder="Min">'
+            + '</div><div class="columns small-3 medium-2 runningTimeLabel"><label class=" text-left middle" for="min">minutes</label>'
+            + '</div><div class="columns small-3 medium-3"><input type="number" min="0" name="max" id="maxMins" placeholder="Max"></div>'
+            + '<div class="columns small-3 medium-2 runningTimeLabel" style="float: left"><label class=" text-left middle"  for="max">minutes</label></div></div>'
+            + '<div class="columns small-6 medium-2"><label>Minimum Rating<div class="input-group">'
+            + '<input type="number" class="input-group-field" id="rating" name="rating" max="100" min="0" placeholder="Rating"><span class="input-group-label">%</span>'
+            + '</div></label></div><button type="submit" class="primary button expanded search-button" id="userSubmitBtn" onclick="userSubmitHandler(event)">'
+            + 'Search</button></div></form></div>';
+
+        userForm.innerHTML = innerString;
+    }
+    function returnUserFormtoOrginal(){
+        //var translucentForm = document.getElementById("translucentForm");
+        var userForm = document.getElementById("rightView");
+        var innerString = '<h5>Search for Something Worth My Time</h5>'
+            + '<div class="row columns">'
+            + '<fieldset class="fieldset"><legend class="form-legend">Type: </legend><input id="movieType" name="type" type="checkbox" required><label for="movieType">Movie</label>'
+            + '<input id="showType" name="type" type="checkbox" required><label for="showType">Show</label></fieldset>'
+            + '</div>'
+            + '<div class="row columns">'
+            + '<label>Genre'
+            + '<select name="genre" id="genre-select" type="text">'
+            + '<option>Any</option><option value="action">Action</option><option value="drama">Drama</option><option value="comedy">Comedy</option>'
+            +  '<option value="family">Family</option><option value="sci-fi">Science Fiction</option><option value="thriller">Thriller</option>'
+            +  '<option value="adventure">Adventure</option><option value="romance">Romance</option><option value="horror">Horror</option></select>'
+            + '</label></div><div class="row columns"><div data-closable class="alert-box callout alert" id="actorAlert">'
+            + '<i class="fa fa-ban"></i> Missing Actor/Actress value. Please enter missing information.<button class="close-button" aria-label="Dismiss alert" type="button" data-close>'
+            + '<span aria-hidden="true">&CircleTimes;</span></button></div><label>Actor/Actress'
+            + '<input type="text" name="actor" id="actor" placeholder="Actor/Actress" required></label></div><div class="row">'
+            + '<label class="columns small-12">Running Time</label><div class="columns small-3"><input type="number" min="0" name="min" id="minMins" placeholder="Min">'
+            + '</div><div class="columns small-3 runningTimeLabel"><label class=" text-left middle" for="min">minutes</label></div>'
+            + '<div class="columns small-3"><input type="number" min="0" name="max" id="maxMins" placeholder="Max"></div><divl class="columns small-3 runningTimeLabel">'
+            + '<label class=" text-left middle " for="max">minutes</label></divl></div><div class="row columns small-6"><label>Minimum Rating'
+            + '<div class="input-group"><input type="number" class="input-group-field" id="rating" name="rating" max="100" min="0" placeholder="Rating">'
+            + '<span class="input-group-label">%</span></div></label></div>'
+            + '<button type="submit"  class="primary button expanded search-button" id="userSubmitBtn" onclick="userSubmitHandler(event)">Search</button>';
+        userForm.innerHTML = innerString;
+    }
+
     // youtube search api
     /*var youtubeSearch = function(searchWord) {
         fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
@@ -635,7 +691,7 @@ function requiredActor(){
         console.log("you clicked search")
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
+        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
@@ -830,6 +886,8 @@ function requiredActor(){
                 }
             })
         })
+        moveUserSearchForm();
+
     }
 
     // Restore to original view without running refresh on the page
@@ -852,7 +910,7 @@ function requiredActor(){
     function runPrevSearch() {
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
+        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
@@ -878,7 +936,7 @@ function requiredActor(){
             var innerResultString = "";
             var movieListEl = document.getElementById("movieList");
             var output = document.querySelector('#prevGenre').innerHTML.toLowerCase()
-
+            moveUserSearchForm();
 
             var exists = false;
             var titleArray = [];
