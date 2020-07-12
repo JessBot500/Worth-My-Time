@@ -337,7 +337,7 @@ function requiredChecbox() {
 
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
+        $("#rightView").css("display", "block");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
@@ -355,6 +355,7 @@ function requiredChecbox() {
         var poster = document.querySelector('#moviePoster');
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
+        moveUserSearchForm();
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
             + API + "&query=" + title)
@@ -365,10 +366,11 @@ function requiredChecbox() {
 
                 console.log("Total number of related results is: ", response.results.length);
                 if(response.results.length === 0){
-                    console.log("we're saying that there's no results for this movie search")
                     moveUserSearchForm();
-                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
-                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                    console.log("we're saying that there's no results for this movie search")
+                    var header = document.getElementById('listHeaderTitle');
+                    header.innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                    innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
                             + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Please search for a different title, or use search form above.</p></span>'                           
                             +  '</div></div>'
@@ -591,6 +593,7 @@ function requiredChecbox() {
     }
 
     function moveUserSearchForm(){
+        $("#righView").css("display", "block");
         var translucentForm = document.getElementById("translucentForm");
         var userForm = document.getElementById("rightView");
         userForm.setAttribute("class", "columns small-12 medium-12");
