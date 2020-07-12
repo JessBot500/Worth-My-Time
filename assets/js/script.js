@@ -1,4 +1,5 @@
 var searchBar = document.querySelector("#search-form");
+var userSearchBtn = document.getElementById("userSubmitBtn");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
 var listViewTrailer = document.querySelector("#listview-trailer")
@@ -75,6 +76,11 @@ function saveWatchedMovie(){
     }
     
     loadWatchedMovies();
+}
+
+function requiredActor(){
+    var requiredActor = $("#actor");
+    console.log(requiredActor)
 }
 
     function requiredChecbox() {
@@ -247,8 +253,23 @@ function saveWatchedMovie(){
 
     }
 
+    function userSubmitHandler(event){
+        event.preventDefault();
+        var actorAvail = document.getElementById("actor").value
+        console.log("We're capturing this even through event listener");
+        if(actorAvail){
+            console.log("we're seeing that there's actor information available")
+            search();
+        }
+        else{
+            $("#actorAlert").css("display", "block");
+        }
+    }
+
 
     searchBar.addEventListener("submit", searchSubmitHandler);
+    //userSearchBtn.addEventListener("submit", userSubmitHandler(event));
+
 
     function movie() {
 

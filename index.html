@@ -117,9 +117,15 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="row columns">
+                        <div class="row columns"> 
+                            <div data-closable class="alert-box callout alert" id="actorAlert">
+                                <i class="fa fa-ban"></i> Missing Actor/Actress value. Please enter missing information.
+                              <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                  <span aria-hidden="true">&CircleTimes;</span>
+                                </button>
+                              </div>             
                             <label>Actor/Actress
-                                <input type="text" name="actor" id="actor" placeholder="Actor/Actress">
+                                <input type="text" name="actor" id="actor" placeholder="Actor/Actress" required>
                             </label>
                         </div>
                         <div class="row">
@@ -146,7 +152,7 @@
                                 </div>
                             </label>
                         </div>
-                        <button type="button" onclick="search()" class="primary button expanded search-button">
+                        <button type="submit"  class="primary button expanded search-button" id="userSubmitBtn" onclick="userSubmitHandler(event)">
                             Search
                         </button>
                     </form>
