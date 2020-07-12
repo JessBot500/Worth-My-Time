@@ -456,6 +456,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
@@ -497,10 +498,6 @@
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     margin-top: 10px;
     margin-bottom: 10px;
-  }
-
-  .button{
-      margin-top: 5px;
   }
 
   .app-feature-section-main-header{
@@ -710,6 +707,7 @@
         width: 0%;
     }
 }
+
 translucent-form-overlay {
     max-width: 500px;
     width: 100%;
