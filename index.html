@@ -22,6 +22,8 @@
 </head>
 
 <body>
+
+    <!-- Nav Bar -->
     <div class="hero-full-screen">
         <nav class="top-bar topbar-responsive">
             <div class="top-bar-title">
@@ -35,6 +37,7 @@
             <div id="topbar-responsive" class="topbar-responsive-links">
                 <div class="top-bar-right">
                     <ul class="menu simple vertical medium-horizontal">
+                        <!-- search bar -->
                         <form id="search-form">
                             <li><input type="search" class="search-field" placeholder="Search" id="movie-title">
                                 <a href="#"><button type="submit" class="button search">Search</button></a></li>
@@ -50,7 +53,6 @@
         </nav>
         <!-- Main container for the area beneath the navbar-->
         <div class="row row-container">
-            <!-- Left hand panel side container: Prev Search-->
             <!-- Left hand panel side container: Prev Search-->
             <div class="columns small-12 medium-7 row-container" id="leftView">
                 <div class="app-feature-section medium-6 prevSearchContainer">
@@ -87,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Right hand panel side container: Form-->
+            <!-- Right hand panel side container: Search Form-->
             <div class="columns small-12 medium-5" id="rightView">
                 <div class="translucent-form-overlay" id="translucentForm">
                     <form id="userSearchForm">
@@ -166,23 +168,20 @@
                     <div class="card-user-profile-content card-section">
                         <iframe hidden class="iframeClass" width="400" id="ytplayer" allowfullscreen="allowfullscreen"></iframe>
                         <div class="card-user-profile-avatar">
-                            <h4 id="singleRating" class="translucentBackground">94%</h4>
+                            <h4 id="singleRating" class="translucentBackground"></h4>
                         </div>
                         <div class="row">
                             <div class="columns medium-10 small-10">
-                                <p class="card-user-profile-name" id="movieTitle">Abominable Snowman</p><span
-                                    id="genre">Unknown Genre</span>
-                                <p class="card-user-profile-status" id="runningTime">Yeti Web Designer</p>
+                                <p class="card-user-profile-name" id="movieTitle"></p><span
+                                    id="genre"></span>
+                                <p class="card-user-profile-status" id="runningTime"></p>
                             </div>
                             <div class="columns medium-2 small-2">
-                                <span class="secondary label" id="type">Unknown</span>
+                                <span class="secondary label" id="type"></span>
                             </div>
                         </div>
 
-                        <p class="card-user-profile-info" id="synopsis">The Yeti, once better known as the Abominable
-                            Snowman, is a mysterious bipedal creature said to live in the mountains of Asia. It
-                            sometimes leaves tracks in snow, but is also said to dwell below the Himalayan snow line.
-                        </p>
+                        <p class="card-user-profile-info" id="synopsis"></p>
                     </div>
 
                     <div class="card-user-profile-actions">
