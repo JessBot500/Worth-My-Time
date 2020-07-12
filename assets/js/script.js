@@ -1,17 +1,14 @@
+//establish variables for search bar, search field, and watch/list trailer
 var searchBar = document.querySelector("#search-form");
 var searchInputEl = document.querySelector(".search-field");
 var watchTrailerEl = document.querySelector("#watch-trailer");
 var listViewTrailer = document.querySelector("#listview-trailer")
-
+//establish variable for watched movies using localStorage
 var watchedMovies = JSON.parse(localStorage.getItem('watchedMovieList')) || [];
 
-
-// static movie selection data object
-
-
+//display our previous search by recieving the innerHTML from the user's search form
 function loadPrevSearch() {
         var prevSearchObj = JSON.parse(localStorage.getItem('prevSearch')) || {};
-        //console.log("currentprevSearch is: ", prevSearchObj);
         document.getElementById("prevType").innerHTML = prevSearchObj.Type;
         document.getElementById("prevGenre").innerHTML = prevSearchObj.Genre;
         document.getElementById("prevActor").innerHTML = prevSearchObj.Actor;
@@ -19,10 +16,9 @@ function loadPrevSearch() {
         document.getElementById("prevRating").innerHTML = prevSearchObj.Rating + "%";
     }
 
-
+//provide the list for the movies that are in the "my watched list" button
 function loadWatchedMovies(){
-    
-    //console.log("loading watched movie list");
+//modify how the single movie view and watched list are displayed
     if ($("#singleView").css("display") != "none") {
         $("#singleView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
@@ -32,8 +28,8 @@ function loadWatchedMovies(){
         $("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "block");
     }
+//provide data of the movies that had their "I'll Watch This!" button clicked
     var latest = watchedMovies.length -1;
-    //console.group(watchedMovies[0]);
     $("#watchedPoster").attr("src",watchedMovies[latest].posterURL);
     document.getElementById("watchedTitle").innerHTML = watchedMovies[latest].title;
     document.getElementById("watchedType").innerHTML = watchedMovies[latest].type;
@@ -42,7 +38,7 @@ function loadWatchedMovies(){
     document.getElementById("watchedTime").innerHTML = watchedMovies[latest].runningTime + " mins";
     document.getElementById("watchedSynopsis").innerHTML = watchedMovies[latest].synopsis;
 }
-
+//establish data of the movies that had their "I'll Watch This!" button clicked
 function saveWatchedMovie(){
     var newTitle = document.getElementById("movieTitle").innerHTML;
     var exists = false;
@@ -54,7 +50,6 @@ function saveWatchedMovie(){
     }
 
     if(!exists){
-        //console.log("This movie doesn't exist yet in our watched list!")
         var newMovie = {
             title: newTitle,
             type: document.getElementById("type").innerHTML,
@@ -64,14 +59,9 @@ function saveWatchedMovie(){
             posterURL: $("#moviePoster").attr("src"),
             rating: document.getElementById("singleRating").innerHTML
         }
-    
-        //console.log(newMovie);
         
         watchedMovies.push(newMovie);
         localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
-    }
-    else{
-        //console.log("ahhh, we already watched this one!")
     }
     
     loadWatchedMovies();
@@ -79,9 +69,8 @@ function saveWatchedMovie(){
 
 function requiredActor(){
     var requiredActor = $("#actor");
-    console.log(requiredActor)
 }
-
+//requires user to click on either movie or show checkbox
 function requiredChecbox() {
 
         var requiredCheckboxes = $(':checkbox[required]');
@@ -98,9 +87,7 @@ function requiredChecbox() {
         });
 }
 
-
-
-    // searchExpand();
+//generates a list view based on the search bar in the nav
     function saveListMovie(movieBtn){
        var movieDiv = movieBtn.parentElement.parentElement.previousSibling;
        var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
@@ -123,7 +110,6 @@ function requiredChecbox() {
             }
         
             if(!exists){
-                //console.log("This movie doesn't exist yet in our watched list!")
                 var newMovie = {
                     title: titleVal,
                     type: "Movie",
@@ -133,18 +119,12 @@ function requiredChecbox() {
                     posterURL: imgURL,
                     rating: ratingVal
                 }
-            
-                //console.log(newMovie);
-                
+
                 watchedMovies.push(newMovie);
                 localStorage.setItem("watchedMovieList", JSON.stringify(watchedMovies));
             }
-            else{
-                //console.log("ahhh, we already watched this one!")
-            }
-            
+
             if ($("#resultListView").css("display") != "none") {
-               //console.log("Going throught these changes");
                 $("#leftView").css("display", "block");
                 $("#rightView").css("display", "block");
                 $("#viewWatchedList").css("display", "none");
@@ -156,7 +136,7 @@ function requiredChecbox() {
     }
 
     function switchSingleView(movieDiv){
-        //onsole.log("clicked on a specific movie");
+
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
         var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
         var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
@@ -190,8 +170,11 @@ function requiredChecbox() {
         
         //runs api when "watch trailer" clicked
         watchTrailerEl.addEventListener("click", function displayTrailer() {
+<<<<<<< HEAD
             
             //api variables and url
+=======
+>>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
             var youtubeApiKey = "AIzaSyAHIW59r1-23MReIhfH7LZ9YF4_zgb3tDQ";
             var secondApi = "AIzaSyAqdJJd0sWPq6BmHwH8GTvUaZ4Lk-ejKGk"
             var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=1&q=" + title + "trailer" + "&key=" + youtubeApiKey;
@@ -200,7 +183,10 @@ function requiredChecbox() {
             fetch(url)
             .then(response => response.json())
             .then(data => {
+<<<<<<< HEAD
                 //display embedded youtube video
+=======
+>>>>>>> 5278276a3a9b0dd526a1e87a51ce3bbf7a5a3b19
                 document.getElementById("moviePoster").style.display = "none";
                 document.getElementById("singleRating").style.display = "none";
                 var iframe = document.getElementById("ytplayer");
@@ -208,9 +194,6 @@ function requiredChecbox() {
                 iframe.height = "400";
                 iframe.src = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
             })
-            .catch(function(error){
-                console.log(error);
-            });
         })
     }
     
@@ -232,9 +215,7 @@ function requiredChecbox() {
     function userSubmitHandler(event){
         event.preventDefault();
         var actorAvail = document.getElementById("actor").value
-        console.log("We're capturing this even through event listener");
         if(actorAvail){
-            console.log("we're seeing that there's actor information available")
             search();
         }
         else{
@@ -255,21 +236,13 @@ function requiredChecbox() {
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
-        console.log("Title is read as ", title);
         var poster = document.querySelector('#moviePoster');
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
             + API + "&query=" + title)
             .then(function (response) { return response.json() })
             .then(function (response) {
-
-                console.log(response);
-
-                //console.log("Total number of related results is: ", response.results.length);
-
                 var id = (response.results[0].id);
-                //console.log("id is :", id);
-
 
                 fetch("https://api.themoviedb.org/3/movie/"
                     + id
@@ -279,8 +252,6 @@ function requiredChecbox() {
                     .then(function (detail) { return detail.json() })
                     .then(function (detail) {
 
-                       // console.log("Detail info ", detail);
-
                         var title = (detail.title)
                         var genreEl = document.getElementById("genre");
                         document.getElementById("movieTitle").innerHTML = title;
@@ -288,7 +259,6 @@ function requiredChecbox() {
                         document.getElementById("synopsis").innerHTML = detail.overview;
                         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
                         document.getElementById("type").innerHTML = "Movie";
-                        //console.log(detail.genres);
                         var genreList = detail.genres;
                         var innerGenreList = '';
                         for(var i = 0; i < genreList.length; i++){
@@ -298,9 +268,6 @@ function requiredChecbox() {
                         }
 
                         genreEl.innerHTML = innerGenreList;
-                        console.log(title);
-
-
                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
                         poster.src = ""
                         poster.src = imgUrl
@@ -324,10 +291,8 @@ function requiredChecbox() {
         titleArray.push(watchedMovies[i].title);
     }
 
-        //console.log("TitleArray is: ", titleArray);
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
-        console.log("Title is read as ", title);
         var poster = document.querySelector('#moviePoster');
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
@@ -338,12 +303,8 @@ function requiredChecbox() {
             .then(function (response) { return response.json() })
             .then(function (response) {
 
-                console.log(response);
-
-                console.log("Total number of related results is: ", response.results.length);
                 if(response.results.length === 0){
                     moveUserSearchForm();
-                    console.log("we're saying that there's no results for this movie search")
                     var header = document.getElementById('listHeaderTitle');
                     header.innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                     innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
@@ -356,9 +317,6 @@ function requiredChecbox() {
                 
                 for(var i = 0; i < response.results.length; i++){
                     var id = (response.results[i].id);
-                    //console.log("id is :", id);
-
-
                     fetch("https://api.themoviedb.org/3/movie/"
                         + id
                         + "?api_key="
@@ -367,11 +325,7 @@ function requiredChecbox() {
                         .then(function (detail) { return detail.json() }
                     )
                     .then(function (detail) {
-
-                        //console.log("Detail info ", detail);
-
                         var title = (detail.title)
-                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title));
                         if(titleArray.indexOf(title) < 0){                            
                         
                             var posterURL = detail.poster_path;
@@ -417,7 +371,6 @@ function requiredChecbox() {
                             movieListEl.innerHTML = innerResultString;
                         }
                     })
-                    console.log("inner result string is: ", innerResultString)
                     if(i === (response.results.length-1)  && movieListEl.innerHTML === ""){
                             moveUserSearchForm();
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
@@ -480,17 +433,12 @@ function requiredChecbox() {
 
             .then(function (top) { return top.json() })
             .then(function (top) {
-
-                console.log(top);
                 var posterArray = []
 
 
                 for (i = 0; i < 5; i++) {
 
                     var randomNum = Math.floor(Math.random() * 20)
-                    //console.log(randomNum)
-                    //console.log([top.results[randomNum].poster_path]);
-
                     var posterPath = (top.results[randomNum].poster_path)
 
                     if (posterArray.includes(posterPath)) {
@@ -500,18 +448,11 @@ function requiredChecbox() {
 
 
                 }
-
                 $("#poster1").attr("src", posterArray[0])
                 $("#poster2").attr("src", posterArray[1])
                 $("#poster3").attr("src", posterArray[2])
                 $("#poster4").attr("src", posterArray[3])
                 $("#poster5").attr("src", posterArray[4])
-
-                //console.log(posterArray);
-
-
-
-
             })
 
     }
@@ -562,8 +503,6 @@ function requiredChecbox() {
             RunningTime: runningTselect,
             Rating: ratingSelect
         }
-
-        console.log("recent search is: ", prevSearchObj);
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
 
@@ -624,55 +563,9 @@ function requiredChecbox() {
         userForm.innerHTML = innerString;
     }
 
-    // youtube search api
-    /*var youtubeSearch = function(searchWord) {
-        fetch("https://youtube-search1.p.rapidapi.com/" + searchWord +"%2520trailer", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "youtube-search1.p.rapidapi.com",
-            // "x-rapidapi-key": "d8dba0f9admsh1a0fa6f762481c0p1728bbjsn3f5abe0fbc8f"
-            
-            // tester alt key
-            "x-rapidapi-key": "ef2575cbcemsh2f0a67b88b9428cp1d1bafjsn5f5e11164e06"
-        }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    // console.log(data);
-    
-                    // display trailer
-                    watchTrailerEl.addEventListener("click", function(event) {
-                        event.preventDefault();
-    
-                        for (var i = 0; i < data.items.length; i++) {
-                            var trailerUrl = data.items[0].url
-                            open(trailerUrl, "_blank");
-                            // console.log(trailerUrl);
-    
-                        }
-                    });
-                })
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    };
-    */
-    // search function to link to api
-    
-
-
-    // }
-
-    // searchBar.addEventListener("submit", searchSubmitHandler);
-
     function search() {
-        console.log("you clicked search")
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
@@ -694,8 +587,6 @@ function requiredChecbox() {
         for(var i =0; i < watchedMovies.length; i++){
             titleArray.push(watchedMovies[i].title);
         }
-
-        console.log(output)
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var genre = 0
@@ -736,20 +627,7 @@ function requiredChecbox() {
             .then(function (actorSearch) { return actorSearch.json() })
             .then(function (actorSearch) {
                 
-                console.log(actorSearch)
-
                 var actorId = (actorSearch.results[0].id)
-                console.log("https://api.themoviedb.org/3/discover/movie?api_key=" +
-                API +
-                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-                genre +
-                "&with_runtime.lte=" +
-                maxMins +
-                "&with_runtime.gte=" +
-                minMins +
-                "&with_people=" +
-                actorId +
-                "&page=1")
                 var apiFetchString = "https://api.themoviedb.org/3/discover/movie?api_key=" +
                     API + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
                 if(genre != 0){
@@ -766,10 +644,6 @@ function requiredChecbox() {
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
 
-                console.log(movieSearch)
-                
-
-                console.log("Movie result set is showing as : ", movieSearch.results.length)
                 if(movieSearch.results.length === 0){
                     moveUserSearchForm();
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
@@ -791,10 +665,7 @@ function requiredChecbox() {
                     )
                     .then(function (detail) {
 
-                        console.log("Detail info ", detail);
-
                         var title = (detail.title)
-                        console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title), "runtime is: ", detail.runtime, "our voters say it's: ", detail.vote_average);
                         var maxTCondition = false;
                         var minTCondition = false;
                         var voteCondition = false;
@@ -846,16 +717,11 @@ function requiredChecbox() {
                                 +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
                                 +  '</div></div>';
                                  
-                               //youtubeSearch(title);
-                                
-                            console.log("Inner result string is: ", innerResultString)
                             movieListEl.innerHTML = innerResultString;
                         }                        
                     })
                     if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === ""){
                         moveUserSearchForm();
-                        console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
-                        console.log("Our innerstring result is : ", innerResultString)
                         document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                         innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
@@ -913,7 +779,6 @@ function requiredChecbox() {
             var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
             var ratingMath = (rating / 10)
             var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
-            console.log(maxMins)
             var actor = document.querySelector("#prevActor").innerHTML
             var innerResultString = "";
             var movieListEl = document.getElementById("movieList");
@@ -1013,8 +878,7 @@ function requiredChecbox() {
                             if(ratingMath === "" || ratingMath === "undefined"){
                                 voteCondition = true
                             }
-                            if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                            
-                                console.log("we made it into the loop")
+                            if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                           
                                 var posterURL = detail.poster_path;
                                 var reportedRuntime = detail.runtime;
                                 if(posterURL === null || posterURL === undefined){
@@ -1058,8 +922,6 @@ function requiredChecbox() {
                             }
                         })
                         if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === "" ){
-                            console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
-                            console.log("Our innerstring result is : ", innerResultString)
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
