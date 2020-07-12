@@ -368,12 +368,12 @@ function saveWatchedMovie(){
 
                 console.log("Total number of related results is: ", response.results.length);
                 if(response.results.length === 0){
-                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
-                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
+                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
-                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
-                            +  '<button class="button primary small" onclick="returnToOriginalView()">Try Again</button>'
-                            +  '</div></div>';
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            +  '</div></div>'
+                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                 }
                 
@@ -445,12 +445,12 @@ function saveWatchedMovie(){
                         console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
                         console.log("Our innerstring result is : ", innerResultString)
                         if( innerResultString === ""){
-                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
-                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
-                            + '<div class="about-people-author">'
-                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
-                            +  '<button class="button primary small" onclick="returnToOriginalView()">Try Again</button>'
-                            +  '</div></div>';
+                            document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                                + '<div class="about-people-author">'
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                +  '</div></div>'
+                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                         }
                     }
@@ -731,12 +731,12 @@ function saveWatchedMovie(){
                 console.log("Movie result set is showing as : ", movieSearch.results.length)
                 if(movieSearch.results.length === 0){
                     
-                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
-                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
-                                + '<div class="about-people-author">'
-                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
-                                +  '<button class="button primary small" href="./index.html">Try Again</button>'
-                                +  '</div></div>';
+                    document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                            + '<div class="about-people-author">'
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            +  '</div></div>'
+                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                                 movieListEl.innerHTML = innerResultString;
                 }
                 for(var i = 0; i< movieSearch.results.length; i++){
@@ -804,12 +804,12 @@ function saveWatchedMovie(){
                         console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
                         console.log("Our innerstring result is : ", innerResultString)
                         if( innerResultString === ""){
-                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time.";
-                        innerResultString += '<div class="small-12 medium-9 columns about-people movieItem">'
+                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
-                            + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">We recommend you try an alternate search. Click below to run a different search.</p></span>'
-                            +  '<button class="button primary small" onclick="returnToOriginalView()">Try Again</button>'
-                            +  '</div></div>';
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            +  '</div></div>'
+                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                         }
                     }
@@ -824,6 +824,13 @@ function saveWatchedMovie(){
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "none");
+        document.getElementById("movieType").checked = false;
+        document.getElementById("showType").checked = false;
+        document.getElementById("genre-select").value = "Any";
+        document.getElementById("actor").value = "";
+        document.getElementById("maxMins").value = "";
+        document.getElementById("minMins").value = "";
+        document.getElementById("rating").value = "";
     }
 
     // Function to run search based on prev saved Search
@@ -905,7 +912,16 @@ function saveWatchedMovie(){
                 "&page=1")
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {                
-
+                    if(movieSearch.results.length === 0){
+                    
+                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                                + '<div class="about-people-author">'
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                +  '</div></div>'
+                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+                                    movieListEl.innerHTML = innerResultString;
+                    }
                 
                 for(var i = 0; i< movieSearch.results.length; i++){
                     var id = movieSearch.results[i].id;
@@ -965,6 +981,19 @@ function saveWatchedMovie(){
                             
                         }
                     })
+                    if(i === (movieSearch.results.length-1) ){
+                        console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
+                        console.log("Our innerstring result is : ", innerResultString)
+                        if( innerResultString === ""){
+                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                            + '<div class="about-people-author">'
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            +  '</div></div>'
+                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+                            movieListEl.innerHTML = innerResultString;
+                        }
+                    }
                 }
             })})
     }

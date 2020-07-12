@@ -874,4 +874,7 @@ translucent-form-overlay {
   }
   
   
-
+.center {
+  margin-right: auto;
+  margin-left:auto;
+}
