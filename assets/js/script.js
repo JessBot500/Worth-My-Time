@@ -404,7 +404,6 @@ function requiredChecbox() {
                 + '<div class="about-people-author">'
                 + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">It doesn'+"'"+'t look like you have any saved movies in your watch list. Try running a search with the form above.</p></span>'                           
                 +  '</div></div>'
-               // +  '<button class="button primary small center" onclick="returnToOriginalView()">Try a Search</button>';
         }
         else{
             for(var i = 0; i< watchedMovies.length; i++){
@@ -758,7 +757,6 @@ function requiredChecbox() {
     function runPrevSearch() {
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
-        //$("#rightView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
