@@ -764,14 +764,14 @@ function requiredChecbox() {
         var movieListEl = document.getElementById("movieList");
 
 
-        if(document.querySelector("#prevActor").innerHTML.slice(0, -4).trim() === "undefined"){
+        if(document.querySelector("#prevActor").innerHTML === "undefined"){
             document.getElementById('listHeaderTitle').innerHTML = "Sorry, it looks like you're missing some information to run this search.";
             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                 + '<div class="about-people-author">'
-                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use form above to run a search.</p></span>'                           
                 +  '</div></div>'
-                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
             movieListEl.innerHTML = innerResultString;
+            moveUserSearchForm();
         }
         else{
             var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
