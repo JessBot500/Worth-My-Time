@@ -694,36 +694,35 @@ function saveWatchedMovie(){
                 "&with_people=" +
                 actorId +
                 "&page=1")
-        
-                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-                API +
-                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-                genre +
-                "&with_runtime.lte=" +
-                maxMins +
-                "&with_runtime.gte=" +
-                minMins +
-                "&with_people=" +
-                actorId +
-                "&page=1")
+                var apiFetchString = "https://api.themoviedb.org/3/discover/movie?api_key=" +
+                    API + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
+                if(genre != 0){
+                    apiFetchString += "&with_genres=" + genre
+                }
+                if(maxMins != "" || maxMins != "undefined"){
+                    apiFetchString += "&with_runtime.lte=" + maxMins 
+                }
+                if(minMins != "" || minMins != "undefined"){
+                    apiFetchString += "&with_runtime.gte=" + minMins 
+                }
+                apiFetchString += "&with_people=" + actorId + "&page=1"           
+                fetch(apiFetchString)   
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
 
                 console.log(movieSearch)
                 
 
-                var innerResultString = "";
-                var movieListEl = document.getElementById("movieList");
                 console.log("Movie result set is showing as : ", movieSearch.results.length)
                 if(movieSearch.results.length === 0){
                     
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
-                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
-                            + '<div class="about-people-author">'
-                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
-                            +  '</div></div>'
-                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
-                                movieListEl.innerHTML = innerResultString;
+                    innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                        + '<div class="about-people-author">'
+                        + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                        +  '</div></div>'
+                        +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+                    movieListEl.innerHTML = innerResultString;
                 }
                 for(var i = 0; i< movieSearch.results.length; i++){
                     var id = movieSearch.results[i].id;
@@ -740,7 +739,19 @@ function saveWatchedMovie(){
 
                         var title = (detail.title)
                         console.log("reported index showing possibility of already being watched is: ",titleArray.indexOf(title), "runtime is: ", detail.runtime, "our voters say it's: ", detail.vote_average);
-                        if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.runtime>=minMins && detail.vote_average >= ratingMath){                            
+                        var maxTCondition = false;
+                        var minTCondition = false;
+                        var voteCondition = false;
+                        if(maxMins === "" || maxMins === "undefinted"){
+                            maxTCondition = true
+                        }
+                        if(minMins === "" || minMins === "undefined"){
+                            minTCondition = true
+                        }
+                        if(ratingMath === "" || ratingMath === "undefined"){
+                            voteCondition = true
+                        }
+                        if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.runtime>=minMins || minTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                            
                         
                             var posterURL = detail.poster_path;
                             var reportedRuntime = detail.runtime;
@@ -782,7 +793,7 @@ function saveWatchedMovie(){
                                  
                                //youtubeSearch(title);
                                 
-
+                            console.log("Inner result string is: ", innerResultString)
                             movieListEl.innerHTML = innerResultString;
                         }                        
                     })
@@ -795,10 +806,11 @@ function saveWatchedMovie(){
                             + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
                             +  '</div></div>'
                             +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
-                            movieListEl.innerHTML = innerResultString;
+                        movieListEl.innerHTML = innerResultString;
                     }
                 }
-            })})
+            })
+        })
     }
 
     // Restore to original view without running refresh on the page
@@ -825,115 +837,127 @@ function saveWatchedMovie(){
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
-        var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
-        var ratingMath = (rating / 10)
-        var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
-        console.log(maxMins)
-        var actor = document.querySelector("#prevActor").innerHTML
         var innerResultString = "";
-        var movieListEl = document.getElementById("movieList");
-        var output = document.querySelector('#prevGenre').innerHTML.toLowerCase()
+            var movieListEl = document.getElementById("movieList");
 
 
-       var exists = false;
-       var titleArray = [];
-        for(var i =0; i < watchedMovies.length; i++){
-            titleArray.push(watchedMovies[i].title);
+        if(document.querySelector("#prevTime").innerHTML.slice(0, -4).trim() === "undefined"){
+            document.getElementById('listHeaderTitle').innerHTML = "Sorry, it looks like you're missing some information to run this search.";
+            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                + '<div class="about-people-author">'
+                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                +  '</div></div>'
+                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+            movieListEl.innerHTML = innerResultString;
         }
+        else{
+            var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
+            var ratingMath = (rating / 10)
+            var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
+            console.log(maxMins)
+            var actor = document.querySelector("#prevActor").innerHTML
+            var innerResultString = "";
+            var movieListEl = document.getElementById("movieList");
+            var output = document.querySelector('#prevGenre').innerHTML.toLowerCase()
 
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        var genre = 0
-        if (output === "action") {
-            genre = 28
-        }
-        if (output === "drama") {
-            genre = 18
-        }
-        if (output === "comedy") {
-            genre = 35
-        }
-        if (output === "family") {
-            genre = 10751
-        }
-        if (output === "sci-fi") {
-            genre = 878
-        }
-        if (output === "thriller") {
-            genre = 53
-        }
-        if (output === "adventure") {
-            genre = 12
-        }
-        if (output === "romance") {
-            genre = 10749
-        }
-        if (output === "horror") {
-            genre = 27
-        }
-        var innerResultString = "";
-                var movieListEl = document.getElementById("movieList");
-        
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        fetch("https://api.themoviedb.org/3/search/person?api_key=" +
-        API +
-        "&search_type=ngram&query=" +
-        actor)
 
-            .then(function (actorSearch) { return actorSearch.json() })
-            .then(function (actorSearch) {
-                
+            var exists = false;
+            var titleArray = [];
+            for(var i =0; i < watchedMovies.length; i++){
+                titleArray.push(watchedMovies[i].title);
+            }
 
-                var actorId = (actorSearch.results[0].id)
+            var API = "2215e66d3770fa7ff283fdf766c88f8c"
+            var genre = 0
+            if (output === "action") {
+                genre = 28
+            }
+            if (output === "drama") {
+                genre = 18
+            }
+            if (output === "comedy") {
+                genre = 35
+            }
+            if (output === "family") {
+                genre = 10751
+            }
+            if (output === "sci-fi") {
+                genre = 878
+            }
+            if (output === "thriller") {
+                genre = 53
+            }
+            if (output === "adventure") {
+                genre = 12
+            }
+            if (output === "romance") {
+                genre = 10749
+            }
+            if (output === "horror") {
+                genre = 27
+            }
+                        
+            var API = "2215e66d3770fa7ff283fdf766c88f8c"
+            fetch("https://api.themoviedb.org/3/search/person?api_key=" +
+            API +
+            "&search_type=ngram&query=" +
+            actor)
 
-                fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
-                API +
-                "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
-                genre +
-                "&with_runtime.lte=" +
-                maxMins +
-                "&with_people=" +
-                actorId +
-                "&page=1")
-                .then(function (movieSearch) { return movieSearch.json() })
-                .then(function (movieSearch) {                
-                    if(movieSearch.results.length === 0){
+                .then(function (actorSearch) { return actorSearch.json() })
+                .then(function (actorSearch) {
                     
-                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+
+                    var actorId = (actorSearch.results[0].id)
+
+                    fetch("https://api.themoviedb.org/3/discover/movie?api_key=" +
+                    API +
+                    "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=" +
+                    genre +
+                    "&with_runtime.lte=" +
+                    maxMins +
+                    "&with_people=" +
+                    actorId +
+                    "&page=1")
+                    .then(function (movieSearch) { return movieSearch.json() })
+                    .then(function (movieSearch) {                
+                        if(movieSearch.results.length === 0){
+                        
+                            document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
                                 + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
                                 +  '</div></div>'
                                 +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
-                                    movieListEl.innerHTML = innerResultString;
-                    }
-                
-                for(var i = 0; i< movieSearch.results.length; i++){
-                    var id = movieSearch.results[i].id;
-                    fetch("https://api.themoviedb.org/3/movie/"
-                        + id
-                        + "?api_key="
-                        + API)
+                            movieListEl.innerHTML = innerResultString;
+                        }
+                    
+                        for(var i = 0; i< movieSearch.results.length; i++){
+                            var id = movieSearch.results[i].id;
+                            fetch("https://api.themoviedb.org/3/movie/"
+                                + id
+                                + "?api_key="
+                                + API)
 
-                        .then(function (detail) { return detail.json() }
-                    )
-                    .then(function (detail) {
+                            .then(function (detail) { return detail.json() }
+                        )
+                        .then(function (detail) {
 
 
-                        var title = (detail.title)
-                        if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.vote_average >= ratingMath){                            
-                            console.log("we made it into the loop")
-                            var posterURL = detail.poster_path;
-                            var reportedRuntime = detail.runtime;
-                            if(posterURL === null || posterURL === undefined){
-                                posterURL = "https://placehold.it/75";
-                            }
-                            else{
-                                posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
-                            }
-                            if(reportedRuntime === null || reportedRuntime === 0){
-                                reportedRuntime = "No Runtime Recorded";
-                            }
-                            var genreList = detail.genres;
+                            var title = (detail.title)
+                            if(titleArray.indexOf(title) < 0 && detail.runtime<=maxMins && detail.vote_average >= ratingMath){                            
+                                console.log("we made it into the loop")
+                                var posterURL = detail.poster_path;
+                                var reportedRuntime = detail.runtime;
+                                if(posterURL === null || posterURL === undefined){
+                                    posterURL = "https://placehold.it/75";
+                                }
+                                else{
+                                    posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
+                                }
+                                if(reportedRuntime === null || reportedRuntime === 0){
+                                    reportedRuntime = "No Runtime Recorded";
+                                }
+                                var genreList = detail.genres;
                                 var innerGenreList = '';
                                 for(var i = 0; i < genreList.length; i++){
                                     innerGenreList += '<span class="primary badge" id="genre'+i+'">';
@@ -946,40 +970,42 @@ function saveWatchedMovie(){
                                     reportedRating = "No Reported Rating";
                                 }
 
+                                    
+                                innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
+                                    + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
+                                    + ' src="'+posterURL+'"></div><div class="about-people-author">'
+                                    + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
+                                    + reportedRating + '%</p></span>'
+                                    +  '<span class="movie-genres">' + innerGenreList + '</span>'
+                                    + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
+                                    + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
+                                    + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
+                                    +  '<button class="button primary small">Watch Trailer</button>'
+                                    +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
+                                    +  '</div></div>';
+                                    
+                                //youtubeSearch(title);
+                                movieListEl.innerHTML = innerResultString;
                                 
-                            innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
-                                + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
-                                + ' src="'+posterURL+'"></div><div class="about-people-author">'
-                                + '<span class="columns medium-12"><p class="author-name movie-title columns medium-8">'+title+'</p><p class="secondary movie-rating label">'
-                                + reportedRating + '%</p></span>'
-                                +  '<span class="movie-genres">' + innerGenreList + '</span>'
-                                + '<p class="author-location movie-runTime">'+reportedRuntime+' mins</p>'
-                                + '<p class="author-mutual movie-synopsis">'+detail.overview+'</p></div></div>'
-                                + '<div class="small-12 medium-3 columns add-friend"><div class="add-friend-action">'
-                                +  '<button class="button primary small">Watch Trailer</button>'
-                                +  '<button class="button secondary small" onclick="saveListMovie(this)">'+"I'll Watch This!</button>"
-                                +  '</div></div>';
-                                 
-                               //youtubeSearch(title);
-                               movieListEl.innerHTML = innerResultString;
+                            }
+                        })
+                        if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === "" ){
+                            console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
+                            console.log("Our innerstring result is : ", innerResultString)
+                            document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
+                            innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
+                                + '<div class="about-people-author">'
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                +  '</div></div>'
+                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
+                                movieListEl.innerHTML = innerResultString;
                             
                         }
-                    })
-                    if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === "" ){
-                        console.log("reached the end of movieresult list, that value is ", i, "or otherwise known as ", movieSearch.results.length-1)
-                        console.log("Our innerstring result is : ", innerResultString)
-                        if( innerResultString === ""){
-                        document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
-                        innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
-                            + '<div class="about-people-author">'
-                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
-                            +  '</div></div>'
-                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
-                            movieListEl.innerHTML = innerResultString;
-                        }
                     }
-                }
-            })})
+                })})
+            }
+
+        
     }
 
     topFive();
