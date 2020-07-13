@@ -73,22 +73,7 @@ function saveWatchedMovie(){
 function requiredActor(){
     var requiredActor = $("#actor");
 }
-//requires user to click on either movie or show checkbox
-function requiredChecbox() {
 
-        var requiredCheckboxes = $(':checkbox[required]');
-
-        requiredCheckboxes.change(function () {
-
-            if (requiredCheckboxes.is(':checked')) {
-                requiredCheckboxes.removeAttr('required');
-            }
-
-            else {
-                requiredCheckboxes.attr('required', 'required');
-            }
-        });
-}
 
 //generates a list view based on the search bar in the nav
     function saveListMovie(movieBtn){
@@ -139,26 +124,32 @@ function requiredChecbox() {
 
         
     }
-
+//displays a single movie with its poster image and details
     function switchSingleView(movieDiv){
 
+        //Setting variable data from element of movie selected for single view
         var imgURL = movieDiv.querySelector('.movie-poster').getAttribute('src');
         var ratingVal = movieDiv.querySelector('.movie-rating').innerHTML;
         var titleVal = movieDiv.querySelector('.movie-title').innerHTML;
         var runtimeVal = movieDiv.querySelector('.movie-runTime').innerHTML;
         var synopsisVal = movieDiv.querySelector('.movie-synopsis').innerHTML;
         var genresVal = movieDiv.querySelector('.movie-genres');
+
+        // If there are no genres for the movie
         if(genresVal === "" || genresVal === null || genresVal === undefined)
             genresVal = "";
         else
             genresVal = genresVal.innerHTML;
 
+            // Checks to see if the previous search container or movie list container is displayed before switching to single view
         if ($("#leftView").css("display") != "none" || $("#resultListView").css("display") != "none") {
             $("#leftView").css("display", "none");
             $("#rightView").css("display", "none");
             $("#viewWatchedList").css("display", "none");
             $("#resultListView").css("display", "none");
             $("#singleView").css("display", "block");
+
+            // setting singleview innter html values pertaining to the movie selected
             $("#moviePoster").attr('src', imgURL);
             document.getElementById("singleRating").innerHTML = ratingVal;
             document.getElementById("movieTitle").innerHTML = titleVal;
@@ -210,10 +201,11 @@ function requiredChecbox() {
         }
 
     }
-
+    //provide alert if user doesn't select an actor/actress
     function userSubmitHandler(event){
         event.preventDefault();
         var actorAvail = document.getElementById("actor").value
+        // Will not run search until user enters a value for actor/actress
         if(actorAvail){
             search();
         }
@@ -225,59 +217,60 @@ function requiredChecbox() {
 
     searchBar.addEventListener("submit", searchSubmitHandler);
 
+// //provides the details for a specific movie with the tmdb api
+//     function movie() {
 
-    function movie() {
+//         $("#leftView").css("display", "none");
+//         $("#rightView").css("display", "none");
+//         $("#viewWatchedList").css("display", "none");
+//         $("#singleView").css("display", "block");
 
-        $("#leftView").css("display", "none");
-        $("#rightView").css("display", "none");
-        $("#viewWatchedList").css("display", "none");
-        $("#singleView").css("display", "block");
+//         var API = "2215e66d3770fa7ff283fdf766c88f8c"
+//         var title = document.querySelector('#movie-title').value;
+//         var poster = document.querySelector('#moviePoster');
 
-        var API = "2215e66d3770fa7ff283fdf766c88f8c"
-        var title = document.querySelector('#movie-title').value;
-        var poster = document.querySelector('#moviePoster');
+//         fetch("https://api.themoviedb.org/3/search/movie?api_key="
+//             + API + "&query=" + title)
+//             .then(function (response) { return response.json() })
+//             .then(function (response) {
+//                 var id = (response.results[0].id);
 
-        fetch("https://api.themoviedb.org/3/search/movie?api_key="
-            + API + "&query=" + title)
-            .then(function (response) { return response.json() })
-            .then(function (response) {
-                var id = (response.results[0].id);
+//                 fetch("https://api.themoviedb.org/3/movie/"
+//                     + id
+//                     + "?api_key="
+//                     + API)
 
-                fetch("https://api.themoviedb.org/3/movie/"
-                    + id
-                    + "?api_key="
-                    + API)
+//                     .then(function (detail) { return detail.json() })
+//                     .then(function (detail) {
 
-                    .then(function (detail) { return detail.json() })
-                    .then(function (detail) {
+//                         var title = (detail.title)
+//                         var genreEl = document.getElementById("genre");
+//                         document.getElementById("movieTitle").innerHTML = title;
+//                         document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
+//                         document.getElementById("synopsis").innerHTML = detail.overview;
+//                         document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
+//                         document.getElementById("type").innerHTML = "Movie";
+//                         var genreList = detail.genres;
+//                         var innerGenreList = '';
+//                         for(var i = 0; i < genreList.length; i++){
+//                             innerGenreList += '<span class="primary badge" id="genre'+i+'">';
+//                             innerGenreList += genreList[i].name;
+//                             innerGenreList += '</span>';
+//                         }
 
-                        var title = (detail.title)
-                        var genreEl = document.getElementById("genre");
-                        document.getElementById("movieTitle").innerHTML = title;
-                        document.getElementById("runningTime").innerHTML = detail.runtime + " mins";
-                        document.getElementById("synopsis").innerHTML = detail.overview;
-                        document.getElementById("singleRating").innerHTML = ((detail.vote_average) * 10) + "%"
-                        document.getElementById("type").innerHTML = "Movie";
-                        var genreList = detail.genres;
-                        var innerGenreList = '';
-                        for(var i = 0; i < genreList.length; i++){
-                            innerGenreList += '<span class="primary badge" id="genre'+i+'">';
-                            innerGenreList += genreList[i].name;
-                            innerGenreList += '</span>';
-                        }
+//                         genreEl.innerHTML = innerGenreList;
+//                         var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
+//                         poster.src = ""
+//                         poster.src = imgUrl
 
-                        genreEl.innerHTML = innerGenreList;
-                        var imgUrl = "https://image.tmdb.org/t/p/w780//" + (detail.poster_path)
-                        poster.src = ""
-                        poster.src = imgUrl
-
-                     })
-            })
-    }
-
+//                      })
+//             })
+//     }
+//displays the data from a string generated by the tmdb api
     function multiMovie() {
-
+        // set header title for container to display the resulting list of movies
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
+        //Allows for only search form and result list containers to be visible
         $("#leftView").css("display", "none");
         $("#rightView").css("display", "block");
         $("#viewWatchedList").css("display", "none");
@@ -286,22 +279,26 @@ function requiredChecbox() {
 
         var exists = false;
         var titleArray = [];
-    for(var i =0; i < watchedMovies.length; i++){
-        titleArray.push(watchedMovies[i].title);
-    }
+        //Creating array for list of movies already watched
+        for(var i =0; i < watchedMovies.length; i++){
+            titleArray.push(watchedMovies[i].title);
+        }
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
         var title = document.querySelector('#movie-title').value;
         var poster = document.querySelector('#moviePoster');
+        // String variable to be used as innerhtml string to create movielist
         var innerResultString = "";
+        //container element for list of movies
         var movieListEl = document.getElementById("movieList");
+        //Alternates format of user search form to horizontal near the top navbar
         moveUserSearchForm();
 
         fetch("https://api.themoviedb.org/3/search/movie?api_key="
             + API + "&query=" + title)
             .then(function (response) { return response.json() })
             .then(function (response) {
-
+                // condition if there are no results
                 if(response.results.length === 0){
                     moveUserSearchForm();
                     var header = document.getElementById('listHeaderTitle');
@@ -310,10 +307,9 @@ function requiredChecbox() {
                             + '<div class="about-people-author">'
                             + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Please search for a different title, or use search form above.</p></span>'                           
                             +  '</div></div>'
-                           // +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                 }
-                
+                //for loop to run nested API call for movie title entered
                 for(var i = 0; i < response.results.length; i++){
                     var id = (response.results[i].id);
                     fetch("https://api.themoviedb.org/3/movie/"
@@ -329,17 +325,20 @@ function requiredChecbox() {
                         
                             var posterURL = detail.poster_path;
                             var reportedRuntime = detail.runtime;
+                            //assign default poster if there is none in api result
                             if(posterURL === null){
                                 posterURL = "https://placehold.it/75";
                             }
                             else{
                                 posterURL = "https://image.tmdb.org/t/p/w780//"+posterURL;
                             }
+                            //assign default value if there is no runtime listed in api result
                             if(reportedRuntime === null || reportedRuntime === 0){
                                 reportedRuntime = "No Runtime Recorded";
                             }
                             var genreList = detail.genres;
                                 var innerGenreList = '';
+                                // loop through to display all genres movie is catagorized as
                                 for(var i = 0; i < genreList.length; i++){
                                     innerGenreList += '<span class="primary badge" id="genre'+i+'">';
                                     innerGenreList += genreList[i].name;
@@ -347,11 +346,12 @@ function requiredChecbox() {
                                 }
 
                                 var reportedRating = ((detail.vote_average) * 10);
+                                // assign default value if there is no rating from api call
                                 if (reportedRating === 0 || reportedRating === undefined || reportedRating === null){
                                     reportedRating = "No Reported Rating";
                                 }
 
-                                
+                            // create string of elements to be used for movie item with it's values inputted from api call
                             innerResultString += '<div class="small-12 medium-9 columns about-people movieItem" onclick="switchSingleView(this)">'
                                 + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
                                 + ' src="'+posterURL+'"></div><div class="about-people-author">'
@@ -366,18 +366,18 @@ function requiredChecbox() {
                                  
                             document.getElementById("movieList").style.cursor = "pointer";
                                 
-
+                            // assign inner html of string concatenated
                             movieListEl.innerHTML = innerResultString;
                         }
                     })
+                    // If you have reached the end of the results list and there are no movies that matched the necessary conditions, generate responding message to user
                     if(i === (response.results.length-1)  && movieListEl.innerHTML === ""){
                             moveUserSearchForm();
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
-                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use the form above to run a different search.</p></span>'                           
                                 +  '</div></div>'
-                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                     }
                 }
@@ -386,7 +386,7 @@ function requiredChecbox() {
             })
 
     }
-    
+//displays the list of movies that were marked with "I'll watch this!"
     function listWatchedMovies(){
         $("#leftView").css("display", "none");
         //$("#rightView").css("display", "none");
@@ -399,6 +399,7 @@ function requiredChecbox() {
 
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
+        // Message for user if they have not added any movies to watched list yet
         if(watchedMovies.length === 0){
             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                 + '<div class="about-people-author">'
@@ -406,6 +407,7 @@ function requiredChecbox() {
                 +  '</div></div>'
         }
         else{
+            // loop through movies saved in watched list to display each movieItem in a list
             for(var i = 0; i< watchedMovies.length; i++){
                 innerResultString += '<div class="small-12 medium-12 columns about-people movieItem" onclick="switchSingleView(this)">'
                                 + '<div class="about-people-avatar"><img class="avatar-image movie-poster"'
@@ -420,7 +422,7 @@ function requiredChecbox() {
         movieListEl.innerHTML = innerResultString;
 
     }
-
+//not currently used, generates 5 random top rated movies - Kept in code to be used with a future development feature
     function topFive() {
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
@@ -454,8 +456,9 @@ function requiredChecbox() {
             })
 
     }
-
+//saves the information that the user provides in the search form
     function saveNewSearch() {
+        //read values from the user's search form and assign them to variables
         var checkType = "";
         var movieCheck = document.getElementById("movieType").checked;
         var showCheck = document.getElementById("showType").checked;
@@ -463,6 +466,7 @@ function requiredChecbox() {
         var actorSelect = document.getElementById("actor").value;
         var runningTselect = document.getElementById("maxMins").value;
         var ratingSelect = document.getElementById("rating").value;
+        // Reset the form
         document.getElementById("movieType").checked = false;
         document.getElementById("showType").checked = false;
         document.getElementById("genre-select").value = "Any";
@@ -471,11 +475,11 @@ function requiredChecbox() {
         document.getElementById("minMins").value = "";
         document.getElementById("rating").value = "";
 
-
+        //Force the first letter of selected genre to be uppercase
         var upper = genreSelect.charAt(0).toUpperCase();
         genreSelect = genreSelect.slice(1);
         genreSelect = upper + genreSelect;
-
+        // check to see if both movie & show are checked
         if (movieCheck && showCheck) {
             checkType = "Movie / Show"
         }
@@ -488,12 +492,15 @@ function requiredChecbox() {
         if (actorSelect === "" || actorSelect === undefined) {
             actorSelect = "None";
         }
+        //assign default value if no runtime was specified
         if (runningTselect === null || runningTselect === undefined) {
             runningTselect = 0;
         }
+        //Assign default value if no rating was specified
         if (ratingSelect === null || ratingSelect === undefined) {
             ratingSelect = 0;
         }
+        // Create previous search object with values from the form
         prevSearchObj = {
             Type: checkType,
             Genre: genreSelect,
@@ -501,15 +508,20 @@ function requiredChecbox() {
             RunningTime: runningTselect,
             Rating: ratingSelect
         }
+        // Save previous search object in local storeage
         localStorage.setItem("prevSearch", JSON.stringify(prevSearchObj));
     }
-
+//condense the search form and move it to the top of the page once the user searches for a movie
     function moveUserSearchForm(){
+        //As a second defense, makes sure that the container with the search form will be visisble
         $("#righView").css("display", "block");
-        var translucentForm = document.getElementById("translucentForm");
+
         var userForm = document.getElementById("rightView");
+        // changes user search form classes to match for horizontal layout
         userForm.setAttribute("class", "columns small-12 medium-12");
+        //shift alignment of horizontal user search form
         userForm.style.marginTop = "-2.5rem";
+        //Creates string for innerhtml value with user's search form classes adapted to support horizontal layout
         var innerString = '<div class="translucent-form-overlay" style="padding-top: 2px;border: white solid; max-width: 100%; box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); background-color: rgba(19,19,19);margin-bottom: 5px;">'
             + '<form><h5>Search for Something Worth My Time</h5><div class="row columns"><div class="columns medium-2 small-12">'
             + '<fieldset class="fieldset" style="padding-bottom: 2px;padding-top: 2px; padding:.2rem;"><legend class="form-legend">Type: </legend><input id="movieType" name="type" type="checkbox" required=""><label for="movieType">Movie</label>'
@@ -532,8 +544,8 @@ function requiredChecbox() {
 
         userForm.innerHTML = innerString;
     }
+//turns the search form back into its original display size and position
     function returnUserFormtoOrginal(){
-        //var translucentForm = document.getElementById("translucentForm");
         var userForm = document.getElementById("rightView");
         userForm.setAttribute("class", "columns small-12 medium-5");
         var innerString = '<div class="translucent-form-overlay" >'
@@ -561,15 +573,17 @@ function requiredChecbox() {
             + '<button type="submit"  class="primary button expanded search-button" id="userSubmitBtn" onclick="userSubmitHandler(event)">Search</button>';
         userForm.innerHTML = innerString;
     }
-
+//searches for movies based off the user search form, using tmdb api
     function search() {
         document.getElementById('listHeaderTitle').innerHTML = "These Might Be Worth Your Time";
         $("#leftView").css("display", "none");
         $("#viewWatchedList").css("display", "none");
         $("#singleView").css("display", "none");
         $("#resultListView").css("display", "block");
+        // Grabs user's rating and then converts it into a comparable value with the voter average of the movies (scale of 1-10 is used)
         var rating = document.querySelector("#rating").value
         var ratingMath = (rating / 10)
+        //remaining values from user search form are assigned to variables
         var minMins = document.querySelector("#minMins").value
         var maxMins = document.querySelector("#maxMins").value
         var actor = document.querySelector("#actor").value
@@ -578,16 +592,20 @@ function requiredChecbox() {
         var genreSelector = document.querySelector('#genre-select');
 
         var output = genreSelector.value;
+        // save the user's search to be referenced for previous search
         saveNewSearch();
+        // load newly saved previous search data
        loadPrevSearch();
 
        var exists = false;
+       // create local array for movies listed in watch list
        var titleArray = [];
         for(var i =0; i < watchedMovies.length; i++){
             titleArray.push(watchedMovies[i].title);
         }
 
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        //condition to assign code values based on genre selected. This is done to handle the API call through the genre code value it expects
         var genre = 0
         if (output === "action") {
             genre = 28
@@ -618,6 +636,7 @@ function requiredChecbox() {
         }
         
         var API = "2215e66d3770fa7ff283fdf766c88f8c"
+        //api fetch based on the actor id
         fetch("https://api.themoviedb.org/3/search/person?api_key=" +
         API +
         "&search_type=ngram&query=" +
@@ -627,6 +646,7 @@ function requiredChecbox() {
             .then(function (actorSearch) {
                 
                 var actorId = (actorSearch.results[0].id)
+                //generate next api fetch string based on values available from user search form. This allows for not needing all values in form to be req'd
                 var apiFetchString = "https://api.themoviedb.org/3/discover/movie?api_key=" +
                     API + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
                 if(genre != 0){
@@ -642,17 +662,17 @@ function requiredChecbox() {
                 fetch(apiFetchString)   
                 .then(function (movieSearch) { return movieSearch.json() })
                 .then(function (movieSearch) {
-
+                    // If there are no results from the api pull, generate message to the user
                 if(movieSearch.results.length === 0){
                     moveUserSearchForm();
                     document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                     innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                         + '<div class="about-people-author">'
-                        + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                        + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use the form above to run a different search.</p></span>'                           
                         +  '</div></div>'
-                        +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                     movieListEl.innerHTML = innerResultString;
                 }
+                //loop through resulting list of movies from actor's results to grab details for each movie and generate movieItems for the list
                 for(var i = 0; i< movieSearch.results.length; i++){
                     var id = movieSearch.results[i].id;
                     fetch("https://api.themoviedb.org/3/movie/"
@@ -665,6 +685,7 @@ function requiredChecbox() {
                     .then(function (detail) {
 
                         var title = (detail.title)
+                        //Boolean conditions are used to circumvent the scenario where the user has not entered values for min/max runtime and voting value
                         var maxTCondition = false;
                         var minTCondition = false;
                         var voteCondition = false;
@@ -677,6 +698,7 @@ function requiredChecbox() {
                         if(ratingMath === "" || ratingMath === "undefined"){
                             voteCondition = true
                         }
+                        // Conditions to be matched based on user's entered details and if movie has already been marked as watched before displaying in list
                         if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.runtime>=minMins || minTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                            
                         
                             var posterURL = detail.poster_path;
@@ -719,14 +741,14 @@ function requiredChecbox() {
                             movieListEl.innerHTML = innerResultString;
                         }                        
                     })
+                    //Reaching case where none of the results were able to match necessary conditions. Generate a message for the user
                     if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === ""){
                         moveUserSearchForm();
                         document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                         innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                             + '<div class="about-people-author">'
-                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                            + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use the form above to run a different search.</p></span>'                           
                             +  '</div></div>'
-                            +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                         movieListEl.innerHTML = innerResultString;
                     }
                 }
@@ -763,7 +785,8 @@ function requiredChecbox() {
         var innerResultString = "";
         var movieListEl = document.getElementById("movieList");
 
-
+        //If the user tries to run a search for previous run search, when there is no data available to reference. (Usually only if no run has been searched yet)
+        // Generate a message for the user
         if(document.querySelector("#prevActor").innerHTML === "undefined"){
             document.getElementById('listHeaderTitle').innerHTML = "Sorry, it looks like you're missing some information to run this search.";
             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
@@ -774,6 +797,7 @@ function requiredChecbox() {
             moveUserSearchForm();
         }
         else{
+            //assign values from the form to variables to run API search 
             var rating = document.querySelector("#prevRating").innerHTML.slice(0, -1).trim()
             var ratingMath = (rating / 10)
             var maxMins = document.querySelector("#prevTime").innerHTML.slice(0, -4).trim()
@@ -830,6 +854,7 @@ function requiredChecbox() {
                     
 
                     var actorId = (actorSearch.results[0].id)
+                    //concatinating API fetch string based on available values
                     var apiFetchString = "https://api.themoviedb.org/3/discover/movie?api_key=" +
                         API + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
                     if(genre != 0){
@@ -843,14 +868,14 @@ function requiredChecbox() {
                     fetch(apiFetchString)
                     .then(function (movieSearch) { return movieSearch.json() })
                     .then(function (movieSearch) {                
+                        //Generate message for user if no values available
                         if(movieSearch.results.length === 0){
                         
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
-                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use the form above run a different search.</p></span>'                           
                                 +  '</div></div>'
-                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                             movieListEl.innerHTML = innerResultString;
                         }
                     
@@ -876,6 +901,7 @@ function requiredChecbox() {
                             if(ratingMath === "" || ratingMath === "undefined"){
                                 voteCondition = true
                             }
+                            //Conditions needing to be matched if movie is to be displayed in list
                             if(titleArray.indexOf(title) < 0 && (detail.runtime<=maxMins || maxTCondition) && (detail.vote_average >= ratingMath || voteCondition)){                           
                                 var posterURL = detail.poster_path;
                                 var reportedRuntime = detail.runtime;
@@ -919,13 +945,13 @@ function requiredChecbox() {
                                 
                             }
                         })
+                        //reached end of results and none of the movies matched the conditions. Generate a message for the user
                         if(i === (movieSearch.results.length-1) && movieListEl.innerHTML === "" ){
                             document.getElementById('listHeaderTitle').innerHTML = "We're sorry, but we don't see anything that might be worth your time with that criteria.";
                             innerResultString += '<div class="small-12 medium-12 columns about-people movieItem">'
                                 + '<div class="about-people-author">'
-                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Click below to run a different search.</p></span>'                           
+                                + '<span class="columns medium-12 center"><p class="author-name movie-title columns medium-12">We recommend you try an alternate search. Use the form above to run a different search.</p></span>'                           
                                 +  '</div></div>'
-                                +  '<button class="button primary small center" onclick="returnToOriginalView()">Try Again</button>';
                                 movieListEl.innerHTML = innerResultString;
                             
                         }
@@ -937,5 +963,4 @@ function requiredChecbox() {
     }
 
     topFive();
-    requiredChecbox();
     loadPrevSearch();
